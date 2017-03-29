@@ -3,6 +3,7 @@
 namespace Oshaman\Publication\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class HomeController extends MainController
 {
@@ -23,6 +24,7 @@ class HomeController extends MainController
      */
     public function index()
     {
+        
         $this->sidebar_vars = true;
         
         return $this->renderOutput();

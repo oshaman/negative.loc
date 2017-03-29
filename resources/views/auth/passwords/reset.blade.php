@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('topbar')
+    @include('layouts.topbar')
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -73,4 +77,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('footer')
+    @include('layouts.footer')
 @endsection

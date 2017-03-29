@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('topbar')
+    @include('layouts.topbar')
+@endsection
+
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -57,6 +62,10 @@
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a>
+                                
+                                <a class="btn btn-link" href="{{ route('register') }}">
+                                    Register
+                                </a>
                             </div>
                         </div>
                     </form>
@@ -65,4 +74,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('footer')
+    @include('layouts.footer')
 @endsection
