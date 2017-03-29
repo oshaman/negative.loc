@@ -1,87 +1,74 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<!--[if IE 6]><html id="ie6" lang="en"><![endif]-->
+<!--[if IE 7]><html id="ie7" lang="en"><![endif]-->
+<!--[if IE 8]><html id="ie8" lang="en"><![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!--><html lang="en"><!--<![endif]-->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <!-- Scripts -->
-    <script>
-        window.Laravel = {!! json_encode([
-            'csrfToken' => csrf_token(),
-        ]) !!};
-    </script>
+<title>Negative.In.Ua</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<link rel="shortcut icon" type="image/x-icon" href="{{ asset(config('settings.theme')) }}/images/favico.ico">
+<link rel="icon" type="image/x-icon" href="{{ asset(config('settings.theme')) }}/images/favico.ico">
+<!-- CSSs -->
+<link rel="stylesheet" href="{{ asset(config('settings.theme')) }}/css/reset.css" type="text/css" media="all">
+<link rel="stylesheet" href="{{ asset(config('settings.theme')) }}/css/style.css" type="text/css" media="all">
+<link rel="stylesheet" href="{{ asset(config('settings.theme')) }}/css/lessthen960.css" type="text/css" media="screen and (max-width: 960px)">
+<link rel="stylesheet" href="{{ asset(config('settings.theme')) }}/css/lessthen600.css" type="text/css" media="screen and (max-width: 600px)">
+<link rel="stylesheet" href="{{ asset(config('settings.theme')) }}/css/lessthen480.css" type="text/css" media="screen and (max-width: 480px)">
+<link rel="stylesheet" href="{{ asset(config('settings.theme')) }}/css/memento.css" type="text/css" media="all">
+<link rel="stylesheet" href="{{ asset(config('settings.theme')) }}/css/prettyPhoto.css" type="text/css" media="all">
+<link rel="stylesheet" href="{{ asset(config('settings.theme')) }}/css/buttons.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="{{ asset(config('settings.theme')) }}/css/buttons.css" type="text/css" media="all">
+<link rel="stylesheet" href="{{ asset(config('settings.theme')) }}/css/labels.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="{{ asset(config('settings.theme')) }}/css/wells.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="{{ asset(config('settings.theme')) }}/css/homes/default.css" type="text/css" media="all">
+<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Droid+Sans&subset=latin,cyrillic,greek' type="text/css" media="all">
+<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Shadows+Into+Light&subset=latin,cyrillic,greek' type="text/css" media="all">
+<link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Playfair+Display:italic' type="text/css" media="all">
+<link rel="stylesheet" href="{{ asset(config('settings.theme')) }}/css/fonts/socialico/stylesheet.css" type="text/css" media="all">
+<link rel="stylesheet" href="{{ asset(config('settings.theme')) }}/css/fonts/font-awesome/font-awesome.css" type="text/css" media="all">
+<!-- JAVASCRIPTs -->
+<script>var yiw_prettyphoto_style = 'pp_default';</script>
+<script src="{{ asset(config('settings.theme')) }}/js/jquery.js"></script>
+<script src="{{ asset(config('settings.theme')) }}/js/jquery.cycle.min.js"></script>
+<script src="{{ asset(config('settings.theme')) }}/js/jquery.easing.1.3.js"></script>
+<script src="{{ asset(config('settings.theme')) }}/js/jquery.prettyPhoto.js"></script>
+<script src="{{ asset(config('settings.theme')) }}/js/jquery.aw-showcase.js"></script>
+<script src="{{ asset(config('settings.theme')) }}/js/superfish.js"></script>
+<script src='{{ asset(config('settings.theme')) }}/js/buttons.min.js'></script>
+<script src='{{ asset(config('settings.theme')) }}/js/jquery.quicksand.js'></script>
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        @yield('content')
+<!-- BODY -->
+<body class="no_js responsive boxed-layout chrome">
+@yield('topbar')
+<div class="wrapper group">
+    @yield('header')
+    <div id="primary" class="layout-sidebar-right home-section">
+        <div class="inner group">
+    <!-- CONTENT -->
+    @yield('content')
+    <!-- SIDEBAR -->
+    @yield('sidebar')
+        </div>  
+    </div>  
+    <div class="clear"></div>
+</div>
+    <!-- FOOTER -->
+    @yield('footer')
+<div id="copyright" class="group">
+  <div class="inner group">
+    <div class="left">
+      <p> Copyright <a href="#">Company Name</a> 2045 - Design by: <a target="_blank" rel="nofollow" href="#"><strong>OShaman</strong></a> </p>
     </div>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <div class="right">
+        <a href="#" class="socials facebook" style="font-size:30px;" title="Facebook">F</a>
+        <a href="#" class="socials twitter" style="font-size:30px;" title="Twitter">L</a>
+        <a href="#" class="socials skype" style="font-size:30px;" title="Skype">H</a>
+        <a href="#" class="socials google" style="font-size:30px;" title="Google">G</a>
+        <a href="#" class="socials linkedin" style="font-size:30px;" title="Linkedin">I</a>
+        <a href="#" class="socials rss" style="font-size:30px;" title="RSS">R</a> </div>
+  </div>
+</div>
+<script src="{{ asset(config('settings.theme')) }}/js/jquery.custom.js"></script>
 </body>
 </html>

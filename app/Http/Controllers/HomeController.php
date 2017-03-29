@@ -4,7 +4,7 @@ namespace Oshaman\Publication\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController extends MainController
 {
     /**
      * Create a new controller instance.
@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $this->sidebar_vars = true;
+        
+        return $this->renderOutput();
     }
 }
