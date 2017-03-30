@@ -3,6 +3,7 @@
 namespace Oshaman\Publication\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Oshaman\Publication\Repositories\MenusRepository;
 use Menu;
 
 class MainController extends Controller
@@ -21,18 +22,18 @@ class MainController extends Controller
     
     protected $vars = array();
 
-    /* public function __construct(MenusRepository $m_rep) {
+    public function __construct(MenusRepository $m_rep) {
 		$this->m_rep = $m_rep;
-	} */
+	}
 	
 	
 	 protected function renderOutput() {
 		
 		
-		// $menu = $this->getMenu();
-		$menu = '';
+		$menu = $this->getMenu();
+		// dd($menu);
 		
-		//dd($menu);
+		// $menu = "";
 		
 		
 		$this->vars = array_add($this->vars, 'keywords', $this->keywords);
@@ -62,11 +63,10 @@ class MainController extends Controller
 		
 		return view($this->template)->with($this->vars);
 	}
-	/*
+	
 	public function getMenu() {
 		
 		$menu = $this->m_rep->get();
-		
 		
 		
 		$mBuilder = Menu::make('MyNav', function($m) use ($menu) {
@@ -74,19 +74,19 @@ class MainController extends Controller
 			foreach($menu as $item) {
 				
 				if($item->parent == 0) {
-					$m->add($item->title,$item->path)->id($item->id);
+					$m->add($item->title, array('url'  => $item->path, 'id' => $item->id, 'ico' => $item->ico))->append('<i class="' . $item->ico . '"></i>');
 				}
 				else {
 					if($m->find($item->parent)) {
-						$m->find($item->parent)->add($item->title,$item->path)->id($item->id);
+						$m->find($item->parent)->add($item->title, array('url'  => $item->path, 'id' => $item->id, 'ico' => $item->ico))->prepend('<i class="' . $item->ico . '"></i>');
 					}
 				}
 			}
 			
 		});
 		
-		//dd($mBuilder);
+		// dd($mBuilder);
 		
 		return $mBuilder;
-	} */	
+	}
 }

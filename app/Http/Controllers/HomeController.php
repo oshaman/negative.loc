@@ -3,7 +3,6 @@
 namespace Oshaman\Publication\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
 
 class HomeController extends MainController
 {
@@ -12,10 +11,13 @@ class HomeController extends MainController
      *
      * @return void
      */
-    public function __construct()
-    {
-        // $this->middleware('auth');
-    }
+    public function __construct() {
+    	
+    	parent::__construct(new \Oshaman\Publication\Repositories\MenusRepository(new \Oshaman\Publication\Menu));
+    	
+    	$this->sidebar_vars = true;
+		
+	}
 
     /**
      * Show the application dashboard.
@@ -23,10 +25,7 @@ class HomeController extends MainController
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        
-        $this->sidebar_vars = true;
-        
+    {   
         return $this->renderOutput();
     }
 }
