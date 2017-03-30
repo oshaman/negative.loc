@@ -5,6 +5,7 @@ namespace Oshaman\Publication\Http\Controllers;
 use Illuminate\Http\Request;
 use Oshaman\Publication\Repositories\MenusRepository;
 use Menu;
+use Lang;
 
 class MainController extends Controller
 {
@@ -74,11 +75,11 @@ class MainController extends Controller
 			foreach($menu as $item) {
 				
 				if($item->parent == 0) {
-					$m->add($item->title, array('url'  => $item->path, 'id' => $item->id, 'ico' => $item->ico))->append('<i class="' . $item->ico . '"></i>');
+					$m->add(Lang::get('ua.' . $item->title), array('url'  => $item->path, 'id' => $item->id))->append('<i class="' . $item->ico . '"></i>');
 				}
 				else {
 					if($m->find($item->parent)) {
-						$m->find($item->parent)->add($item->title, array('url'  => $item->path, 'id' => $item->id, 'ico' => $item->ico))->prepend('<i class="' . $item->ico . '"></i>');
+						$m->find($item->parent)->add(Lang::get('ua.' . $item->title), array('url'  => $item->path, 'id' => $item->id))->prepend('<i class="' . $item->ico . '"></i>');
 					}
 				}
 			}

@@ -1,7 +1,7 @@
 <div id="footer" class="sidebar-right">
     <div class="group inner footer_row_1 footer_cols_3">
         <div class="widget-first widget recent-posts">
-            <h3>From our blog</h3>
+            <h3>{{ trans('ua.latest_news') }}</h3>
             <div class="recent-post group">
                 <div class="hentry-post group">
                     <p class="post-date"><span class="day">2</span><span class="month">May</span><span class="year">2045</span></p>
