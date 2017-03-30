@@ -7,6 +7,12 @@
 <title>Negative.In.Ua</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
+
+<meta name="description" content="{{ (isset($meta_desc)) ? $meta_desc : ''}}">
+<meta name="keywords" content="{{ (isset($keywords)) ? $keywords : ''}}">
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <link rel="shortcut icon" type="image/x-icon" href="{{ asset(config('settings.theme')) }}/images/favico.ico">
 <link rel="icon" type="image/x-icon" href="{{ asset(config('settings.theme')) }}/images/favico.ico">
 <!-- CSSs -->

@@ -14,3 +14,8 @@ Route::get('/', ['uses' => 'HomeController@index', 'as' => 'home']);
 
 Auth::routes();
 
+/**
+*   Laravel >= 5.3
+*   The Auth::routes method now registers a POST route for /logout instead of a GET route. 
+*/
+Route::get('/logout', 'Auth\LoginController@logout');
