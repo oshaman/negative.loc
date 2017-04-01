@@ -9,7 +9,8 @@ abstract class Repository {
 	protected $model = FALSE;
 	
 	
-	public function get($select = '*', $take = FALSE, $pagination = FALSE, $where = FALSE, $order = FALSE) {
+	public function get($select = '*', $take = FALSE, $pagination = FALSE, $where = FALSE, $order = FALSE) 
+    {
 		
 		$builder = $this->model->select($select);
 		
@@ -33,7 +34,8 @@ abstract class Repository {
 		return $this->check($builder->get());
 	}
 	
-	protected function check($result) {
+	protected function check($result)
+    {
 		
 		if($result->isEmpty()) {
 			return FALSE;
@@ -53,13 +55,15 @@ abstract class Repository {
 		
 	}
 	
-	public function one($alias,$attr = array()) {
-		$result = $this->model->where('alias',$alias)->first();
+	public function one($alias,$attr = array())
+    {
+		$result = $this->model->where('alias', $alias)->first();
 		
 		return $result;
 	}
     
-    public function transliterate($string) {
+    public function transliterate($string)
+    {
 		$str = mb_strtolower($string, 'UTF-8');
 		
 		$leter_array = array(

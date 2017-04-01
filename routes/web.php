@@ -11,7 +11,8 @@
 |
 */
 Route::get('/', ['uses' => 'HomeController@index', 'as' => 'home']);
-
+Route::match(['get', 'post'], '/contacts', ['uses' => 'ContactsController@index', 'as' => 'contacts']);
+Route::get('/history', ['uses' => 'EventsController@index', 'as' => 'hisory']);
 Auth::routes();
 
 /**

@@ -15,6 +15,7 @@ class MenusSeeder extends Seeder
             [
                 ['title'=>'home', 'path'=>'http://negative.loc'],
                 ['title'=>'history', 'path'=>'http://negative.loc/history'],
+                ['title'=>'contacts', 'path'=>'http://negative.loc/contacts'],
                 ['title'=>'articles', 'path'=>'http://negative.loc/articles'],
                 ['title'=>'world', 'path'=>'http://negative.loc/articles/category/world'],
                 ['title'=>'incidents', 'path'=>'http://negative.loc/articles/category/incidents'],

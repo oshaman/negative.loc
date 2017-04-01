@@ -15,6 +15,7 @@ return [
     */
 	'home' => 'Головна',
     'history' => 'Цей день в історії',
+    'contacts' => 'Контакти',
     'articles' => 'Статті',
     'world' => 'У світі',
     'incidents' => 'Події',

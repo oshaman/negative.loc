@@ -4,7 +4,7 @@
 <!--[if IE 8]><html id="ie8" lang="en"><![endif]-->
 <!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!--><html lang="en"><!--<![endif]-->
 <head>
-<title>Negative.In.Ua</title>
+<title>Negative.In.Ua {{ (isset($title)) ? ' : ' . $title : ''}}</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 
