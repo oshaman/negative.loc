@@ -1,4 +1,7 @@
-<div id="content" class="group">
+<div id="primary" class="layout-sidebar-right home-section">
+    <div class="inner group">
+<!-- START CONTENT -->
+    <div id="content" class="group">
     <div class="post type-post status-publish format-standard hentry category-uncategorized hentry-post group blog-big">
         <div class="meta group">
             <p class="date"><i class="icon-calendar"></i>May 2, 2045</p>

@@ -15,17 +15,17 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title', 64);
-            $table->string('text');
+            $table->string('title', 64)->unique();
+            $table->text('text');
             $table->text('desc');
-            $table->string('alias',150)->unique();
+            $table->string('alias',128)->unique();
             $table->string('img');
             $table->string('keywords');
         	$table->string('meta_desc');
-            $table->timestamp('date')->useCurrent = true;
+            $table->unsignedSmallInteger('day')->default('230');
             $table->integer('user_id')->unsigned()->default(1);
             $table->foreign('user_id')->references('id')->on('users');
-            $table->index('date');
+            $table->index('day');
             
             $table->timestamps();
         });

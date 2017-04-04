@@ -12,10 +12,6 @@
     {!! $content !!}
 @endsection
 
-@section('sidebar')
-    {!! $sidebar !!}
-@endsection
-
 @section('footer')
     {!! $footer !!}
 @endsection

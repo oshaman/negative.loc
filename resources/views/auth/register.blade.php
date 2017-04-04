@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+<div id="primary" class="layout-sidebar-no home-section">
+    <div class="inner group">
+<!-- START CONTENT -->
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

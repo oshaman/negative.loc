@@ -7,6 +7,7 @@
 
 
 @section('footer')
+
 <div id="footer" class="sidebar-right">
     <div class="group inner footer_row_1 footer_cols_3">
         <div class="quick-contact-widget widget two-third last">

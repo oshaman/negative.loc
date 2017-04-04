@@ -13,7 +13,6 @@ class EventsController extends MainController
     {
         parent::__construct(new \Oshaman\Publication\Repositories\MenusRepository(new \Oshaman\Publication\Menu));
         $this->events_rep = $rep;
-        $this->sidebar_vars = true;
     }
     
     public function index()
@@ -25,8 +24,8 @@ class EventsController extends MainController
         $this->template = 'events.index';
         
         $this->content_vars = $this->events_rep->get(
-            ['title', 'text', 'desc', 'alias', 'img', 'keywords', 'meta_desc', 'date', 'user_id'],
-                false, false, ['user_id', 2], false);
+            ['title', 'desc', 'alias', 'img', 'user_id'],
+                false, false, ['day', date("nd")], false);
         // dd($this->content_vars);
         
         $content = view('events.content')->with('content', $this->content_vars)->render();

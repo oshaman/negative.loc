@@ -37,6 +37,30 @@ class EventsSeeder extends Seeder
                 'alias'=>'event6_alias', 'img'=>'pic6.jpg', 'keywords'=>'event6_key',
                 'meta_desc'=>'event6_meta', 'user_id'=>'1'
                 ],
+                ['title'=>'Event7', 'text'=>'TEST_E7', 'desc'=>'event7_desc',
+                'alias'=>'event7_alias', 'img'=>'pic1.jpg', 'keywords'=>'event7_key',
+                'meta_desc'=>'event7_meta', 'user_id'=>'2'
+                ],
+                ['title'=>'Event8', 'text'=>'TEST_E8', 'desc'=>'event8_desc',
+                'alias'=>'event8_alias', 'img'=>'pic2.jpg', 'keywords'=>'event8_key',
+                'meta_desc'=>'event8_meta', 'user_id'=>'1'
+                ],
+                ['title'=>'Event9', 'text'=>'TEST_E9', 'desc'=>'event9_desc',
+                'alias'=>'event9_alias', 'img'=>'pic3.jpg', 'keywords'=>'event9_key',
+                'meta_desc'=>'event9_meta', 'user_id'=>'2'
+                ],
+                ['title'=>'Event10', 'text'=>'TEST_E10', 'desc'=>'event10_desc',
+                'alias'=>'event10_alias', 'img'=>'pic4.jpg', 'keywords'=>'event10_key',
+                'meta_desc'=>'event10_meta', 'user_id'=>'1'
+                ],
+                ['title'=>'Event11', 'text'=>'TEST_E11', 'desc'=>'event11_desc',
+                'alias'=>'event11_alias', 'img'=>'pic5.jpg', 'keywords'=>'event11_key',
+                'meta_desc'=>'event11_meta', 'user_id'=>'2'
+                ],
+                ['title'=>'Event12', 'text'=>'TEST_E12', 'desc'=>'event12_desc',
+                'alias'=>'event12_alias', 'img'=>'pic6.jpg', 'keywords'=>'event12_key',
+                'meta_desc'=>'event12_meta', 'user_id'=>'2'
+                ],
             ]
         );
     }

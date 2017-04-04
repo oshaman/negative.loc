@@ -49,8 +49,6 @@
 @yield('topbar')
 <div class="wrapper group">
     @yield('header')
-    <div id="primary" class="layout-sidebar-right home-section">
-        <div class="inner group">
     <!-- CONTENT -->
     @yield('content')
     <!-- SIDEBAR -->
