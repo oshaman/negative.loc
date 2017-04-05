@@ -15,7 +15,7 @@ class EventsController extends MainController
         $this->events_rep = $rep;
     }
     
-    public function index()
+    public function index($alias = FALSE)
     {
         $this->title = 'History';
         $this->meta_desc = 'This Day In History';
@@ -25,7 +25,7 @@ class EventsController extends MainController
         
         $this->content_vars = $this->events_rep->get(
             ['title', 'desc', 'alias', 'img', 'user_id'],
-                false, false, ['day', date("nd")], false);
+                false, true, ['day', date("nd")], false);
         // dd($this->content_vars);
         
         $content = view('events.content')->with('content', $this->content_vars)->render();
@@ -33,5 +33,10 @@ class EventsController extends MainController
         
         
         return $this->renderOutput();
+    }
+    
+    public function getEvents($alias = FALSE)
+    {
+        
     }
 }

@@ -12,9 +12,11 @@
 */
 Route::get('/', ['uses' => 'HomeController@index', 'as' => 'home']);
 Route::match(['get', 'post'], '/contacts', ['uses' => 'ContactsController@index', 'as' => 'contacts']);
-Route::get('/history', ['uses' => 'EventsController@index', 'as' => 'history']);
-Auth::routes();
+Route::get('/history/{alias?}', ['uses' => 'EventsController@index', 'as' => 'history'])->where('alias', '[\w-]+');
+Route::get('/articles/{alias?}', ['uses' => 'ArticlesController@index', 'as' => 'articles'])->where('alias', '[\w-]+');
+Route::get('articles/category/{cat_alias?}',['uses'=>'ArticlesController@show','as'=>'catAlias'])->where('cat_alias','[\w-]+');
 
+Auth::routes();
 /**
 *   Laravel >= 5.3
 *   The Auth::routes method now registers a POST route for /logout instead of a GET route. 

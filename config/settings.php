@@ -3,11 +3,11 @@
 		'theme' => env('THEME','default'),
         'maps_api' => '',
 		'captcha_key' => '',
+		'paginate' => 6,
         
         
 		'home_port_count' => 5,
 		'home_articles_count' => 3,
-		'paginate' => 2,
 		'recent_comments' => 3,
 		'articles_img' => [
 						'max' => ['width'=>816,'height'=>282],
