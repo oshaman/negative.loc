@@ -13,12 +13,12 @@ class MenusSeeder extends Seeder
     {
         DB::table('menus')->insert(
             [
-                ['title'=>'home', 'path'=>'http://negative.loc'],
-                ['title'=>'articles', 'path'=>'http://negative.loc/articles'],
-                ['title'=>'history', 'path'=>'http://negative.loc/history'],
-                ['title'=>'contacts', 'path'=>'http://negative.loc/contacts'],
-                ['title'=>'world', 'path'=>'http://negative.loc/articles/category/world'],
-                ['title'=>'incidents', 'path'=>'http://negative.loc/articles/category/incidents'],
+                ['title'=>'home', 'path'=>'http://negative.loc', 'ico'=>'icon-home'],
+                ['title'=>'articles', 'path'=>'http://negative.loc/articles', 'ico'=>'icon-file'],
+                ['title'=>'history', 'path'=>'http://negative.loc/history', 'ico'=>'icon-calendar'],
+                ['title'=>'contacts', 'path'=>'http://negative.loc/contacts', 'ico'=>'icon-edit'],
+                ['title'=>'world', 'path'=>'http://negative.loc/articles/category/world', 'ico'=>'icon-picture'],
+                ['title'=>'incidents', 'path'=>'http://negative.loc/articles/category/incidents', 'ico'=>'icon-screenshot'],
                 ['title'=>'economy', 'path'=>'http://negative.loc/articles/category/economy'],
                 ['title'=>'sport', 'path'=>'http://negative.loc/articles/category/sport'],
                 ['title'=>'politics', 'path'=>'http://negative.loc/articles/category/politics']
