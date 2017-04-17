@@ -8,7 +8,6 @@ Homestead.yaml
 .env
 .env.example
 artisan
-/bootstrap
 /tests
 readme.md
 server.php

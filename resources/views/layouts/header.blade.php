@@ -1,7 +1,7 @@
 <div id="header" class="group">
     <div class="group inner">
         <div id="logo" class="group">
-            <h1> <a class="logo-text" href="#">Nega<span>t</span>ive</a></h1>
+            <h1> <a class="logo-text" href="{{ route('home') }}">Nega<span>t</span>ive</a></h1>
             <p>{{ trans('ua.only_trash') }}</p>
         </div>
         @if ($menu)

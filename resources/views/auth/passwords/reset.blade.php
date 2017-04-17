@@ -4,7 +4,9 @@
     @include('layouts.topbar')
 @endsection
 
-@section('content')
+
+
+@section('footer')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -79,6 +81,3 @@
 </div>
 @endsection
 
-@section('footer')
-    @include('layouts.footer')
-@endsection

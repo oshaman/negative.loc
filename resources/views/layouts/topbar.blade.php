@@ -1,6 +1,6 @@
 <div id="topbar">
     <div class="inner group">
-        <div class="topbar-left"><a href="#">Negative.In.Ua</a></div>
+        <div class="topbar-left"><a href="{{ route('home') }}">Negative.In.Ua</a></div>
         <div class="topbar-right">
             <ul class="topbar-level-1">
                 <li><a href="#">Top bar menu</a>

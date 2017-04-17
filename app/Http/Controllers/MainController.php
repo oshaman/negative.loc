@@ -34,6 +34,7 @@ class MainController extends Controller
 		
 		
 		$menu = $this->getMenu();
+		$this->footer_vars = $this->getCustomMenu();
 		
 		$this->vars = array_add($this->vars, 'keywords', $this->keywords);
 		$this->vars = array_add($this->vars, 'meta_desc', $this->meta_desc);
@@ -78,4 +79,21 @@ class MainController extends Controller
 		
 		return $mBuilder;
 	}
+    
+    public function getCustomMenu()
+    {
+        $menu = $this->m_rep->get();
+		
+		$mBuilder = Menu::make('simpleNav', function($m) use ($menu) {
+			
+			foreach($menu as $item) {
+				
+                $m->add(Lang::get('ua.' . $item->title), array('url'  => $item->path, 'class' => 'columns2'));
+				
+			}
+			
+		});
+		
+		return $mBuilder;
+    }
 }

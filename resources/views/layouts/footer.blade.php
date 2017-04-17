@@ -19,33 +19,21 @@
         </div>
         <div class="widget widget_nav_menu">
             <h3>Custom menu</h3>
+            @if (!empty($footer))
             <div class="menu-footer-menu-container">
-                <ul id="menu-footer-menu" class="menu">
-                    <li class="columns2"><a href="#">Blog</a></li>
-                    <li class="columns2"><a href="#">Features</a></li>
-                    <li class="columns2"><a href="#">Pages</a></li>
-                    <li class="columns2"><a href="#">Contact</a></li>
-                    <li class="columns2"><a href="#">Testimonials</a></li>
-                    <li class="columns2"><a href="#">Portfolio</a></li>
-                    <li class="columns2"><a href="#">Sliders</a></li>
-                    <li class="columns2"><a href="#">Web design blog</a></li>
-                    <li class="columns2"><a href="#">Support forum</a></li>
-                    <li class="columns2"><a href="#">Di&#8217;verso theme</a></li>
-                    <li class="columns2"><a href="#">Sommerce theme</a></li>
-                    <li class="columns2"><a href="#">Impero theme</a></li>
-                    <li class="columns2"><a href="#">Kassyopea theme</a></li>
-                    <li class="columns2"><a href="#">Maya theme</a></li>
-                </ul>
+                    {!! Menu::get('simpleNav')->asUl(array('id' => 'menu-footer-menu', 'class' => 'menu')) !!}
             </div>
+            @endif
         </div>
         <div class="quick-contact-widget widget two-third last">
             <div class="widget-last widget quick-contact">
                 <h3>Quick Contact</h3>
-                <form id="contact-form-example" class="contact-form" method="post" action="#" enctype="multipart/form-data">
+                <form id="contact-form-example" class="contact-form" method="post" action="{{ route('contacts') }}" enctype="multipart/form-data">
+                    {{ csrf_field() }}
                     <fieldset>
                         <ul>
                             <li class="text-field">
-                                <label for="name-example"> <span class="label">Name</span> </label>
+                                <label for="name-example"> <span class="label">{{ trans('ua.name') }}</span> </label>
                                 <div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
                                 <input type="text" name="name" id="name-example" class="required" value="">
                                 </div>
@@ -57,13 +45,13 @@
                                 </div>
                             </li>
                             <li class="textarea-field">
-                                <label for="message-example"> <span class="label">Message</span> </label>
+                                <label for="message-example"> <span class="label">{{ trans('ua.message') }}</span> </label>
                                 <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
-                                <textarea name="message" id="message-example" rows="8" cols="30" class="required"></textarea>
+                                    <textarea name="message" id="message-example" rows="8" cols="30" class="required"></textarea>
                                 </div>
                             </li>
                                 <li class="submit-button">
-                                <input type="submit" name="yiw_sendemail" value="send message" class="sendmail alignright">
+                                <input type="submit" name="yiw_sendemail" value="{{ trans('ua.send_message') }}" class="sendmail alignright">
                             </li>
                         </ul>
                     </fieldset>

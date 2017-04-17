@@ -79,6 +79,7 @@
             </div>
         </div>
     </div>
+    <img src="{{ asset(config('settings.theme')) }}/images/exceptions/under-construction-01.jpg">
 </div>
 @endsection
 @section('footer')
