@@ -29,4 +29,8 @@ return [
 	'send_message' => 'Відправити повідомлення',
 	'message' => 'Повідомлення',
 	'name' => 'Ім\'я',
+    /**
+    *   Events
+    */
+    'featured_events' => 'Цікаві події',
 ];

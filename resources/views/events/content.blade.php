@@ -4,7 +4,7 @@
             <h2 class="page-title">3 Columns</h2>
         </div>
         <div class="meta-right">
-            <p id="crumbs" class="theme_breadcumb"><a class="home" href="index.html">Home Page</a>  //  <a class="no-link" href="">Portfolio</a>  //  <a class="no-link current" href="#">3 Columns</a></p>
+            <p id="crumbs" class="theme_breadcumb"><a class="home" href="#">Home Page</a>  //  <a class="no-link" href="">Portfolio</a>  //  <a class="no-link current" href="#">3 Columns</a></p>
         </div>
     </div>
 </div>
@@ -16,8 +16,8 @@
         @if($content)
         @foreach($content as $key => $event)
             <li class="status-publish hentry {{ (0 == $key or ($key%3) == 0) ? 'first' : (0 == ($key+1)%3 ? 'last' : '') }} col1_3 col">
-                <a class="img" href="images/events/{{ $event->img }}">
-                    <img src="{{ asset(config('settings.theme')) }}/images/portfolio/{{ $event->img }}" class="attachment-thumb_portfolio_3cols wp-post-image" alt="{{ $event->title }}" title="{{ $event->title }}" />
+                <a class="img" href="{{ route('history', $event->alias) }}">
+                    <img src="{{ asset(config('settings.theme')) }}/images/events/{{ $event->img }}" class="attachment-thumb_portfolio_3cols wp-post-image" alt="{{ $event->title }}" title="{{ $event->title }}" />
                 </a>
                 <h5><a href="{{ route('history'). '/' .$event->alias }}">{{ $event->title }}</a></h5>
                 <p>{{ $event->desc }} &#8230;</p>
