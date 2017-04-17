@@ -1,8 +1,8 @@
 <?php
 
-namespace Corp\Repositories;
+namespace Oshaman\Publication\Repositories;
 
-use Corp\Article;
+use Oshaman\Publication\Article;
 use Gate;
 
 use Image;
@@ -11,11 +11,12 @@ use Config;
 class ArticlesRepository extends Repository {
 	
 	
+
 	public function __construct(Article $articles) {
 		$this->model = $articles;
 	}
 	
-	public function one($alias,$attr = array()) {
+	/* public function one($alias,$attr = array()) {
 		$article = parent::one($alias,$attr);
 		
 		if($article && !empty($attr)) {
@@ -162,7 +163,7 @@ class ArticlesRepository extends Repository {
 			return ['status' => 'Материал удален'];
 		}
 		
-	}
+	} */
 	
 }
 

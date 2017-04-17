@@ -41,8 +41,8 @@
 <script src="{{ asset(config('settings.theme')) }}/js/jquery.prettyPhoto.js"></script>
 <script src="{{ asset(config('settings.theme')) }}/js/jquery.aw-showcase.js"></script>
 <script src="{{ asset(config('settings.theme')) }}/js/superfish.js"></script>
-<script src='{{ asset(config('settings.theme')) }}/js/buttons.min.js'></script>
-<script src='{{ asset(config('settings.theme')) }}/js/jquery.quicksand.js'></script>
+<script src="{{ asset(config('settings.theme')) }}/js/buttons.min.js"></script>
+<script src="{{ asset(config('settings.theme')) }}/js/jquery.quicksand.js"></script>
 </head>
 <!-- BODY -->
 <body class="no_js responsive boxed-layout chrome">
