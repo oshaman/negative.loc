@@ -11,12 +11,15 @@
         <h2>{{ $article->title }}</h2>
         <div>
             <div class="meta-bottom">
-                {{ $article->desc }}
+                {!! str_limit($article->text, 288, '...') !!}
             </div>
             <div class="the-content">
                 <p><a href="{{ route('articles', $article->alias) }}" class="btn btn-retro-package-3 btn-more-link">{{ trans('ua.read_more') }}</a></p>
-                <p class="date-cat"><i class="icon-calendar"></i>{{ $article->created_at }}
-                <i class="icon-tags"></i> <span>In: <a href="{{ route('articles', $article->category->alias) }}" rel="category tag">{{ $article->category->title }}</a></span></p>
+                <p class="date-cat">
+                    <i class="icon-calendar"></i>{{ date("d-m-Y H:i", strtotime($article->created_at)) }}
+                    <i class="icon-tags"></i> <span>{{ trans('ua.cat') }}: <a href="{{ route('cat_alias', $article->category->alias) }}">{{ $article->category->title }}</a></span>
+                    <i class="icon-external-link"></i> <span>{{ trans('ua.source') }}: <a href="{{ $article->source ?: route('home') }}" class="link">{{ $article->source ?: route('home') }}</a></span>
+                </p>
             </div>
         </div>
     </div>

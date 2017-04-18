@@ -25,7 +25,7 @@ class EventsController extends MainController
             
             $this->content_vars->events = $this->events_rep->get(
                 ['title', 'alias', 'img'], 7, false, ['day', date("nd")], false);
-            // dd($this->content_vars->events);
+                
             $content = view('events.content_one')->with('content', $this->content_vars)->render();
             $this->vars = array_add($this->vars, 'content', $content);
         } else {

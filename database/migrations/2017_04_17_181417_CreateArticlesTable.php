@@ -15,10 +15,10 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title',32);
+            $table->string('title', 128);
             $table->text('text');
-            $table->text('desc');
-            $table->string('alias',64)->unique();
+            $table->string('source');
+            $table->string('alias')->unique();
             $table->string('img');
             $table->string('keywords');
         	$table->string('meta_desc');

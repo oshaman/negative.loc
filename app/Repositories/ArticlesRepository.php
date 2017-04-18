@@ -16,18 +16,19 @@ class ArticlesRepository extends Repository {
 		$this->model = $articles;
 	}
 	
-	/* public function one($alias,$attr = array()) {
-		$article = parent::one($alias,$attr);
+	public function one($alias, $attr = array()) {
+		$article = parent::one($alias, $attr);
 		
 		if($article && !empty($attr)) {
-			$article->load('comments');
-			$article->comments->load('user');
+			$article->load('category');
+			// $article->load('comments');
+			// $article->comments->load('user');
 		}
 		
 		return $article;
 	}
 	
-	public function addArticle($request) {
+	/* public function addArticle($request) {
 
 		if(Gate::denies('save', $this->model)) {
 			abort(403);

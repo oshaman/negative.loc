@@ -33,13 +33,12 @@ class HomeController extends MainController
     public function index()
     {   
         $this->content_vars = $this->articles_rep->get(
-                ['title', 'created_at', 'desc', 'img', 'alias', 'category_id'],
-                false, true, false, false
+                ['title', 'created_at', 'text', 'img', 'alias', 'category_id', 'source'],
+                false, true, false, ['created_at', 'desc']
                 );
         if ($this->content_vars) {
             $this->content_vars->load('category');
         }
-        // dd($this->content_vars);
         $content = view('layouts.content')->with('content', $this->content_vars)->render();
 		$this->vars = array_add($this->vars, 'content', $content);
         

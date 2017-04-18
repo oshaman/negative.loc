@@ -10,6 +10,8 @@ return [
 	'read_more' => ' Докладніше',
 	'articles_no' => '<h2>Записів немає</h2>',
 	'latest_comments' => 'Останні коментарі',
+    'weather' => 'Погода',
+    'currency' => 'Валюта',
     
     /**
     *   Menus
@@ -17,7 +19,7 @@ return [
 	'home' => 'Головна',
     'history' => 'Цей день в історії',
     'contacts' => 'Контакти',
-    'articles' => 'Статті',
+    'articles' => 'Новини',
     'world' => 'У світі',
     'incidents' => 'Події',
     'economy' => 'Економіка',
@@ -33,4 +35,10 @@ return [
     *   Events
     */
     'featured_events' => 'Цікаві події',
+    /**
+    *   
+    */
+    'source' => 'Джерело',
+    'cat' => 'Категорія',
+    
 ];

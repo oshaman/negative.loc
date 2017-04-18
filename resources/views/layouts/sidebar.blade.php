@@ -3,10 +3,10 @@
         <div class="tabs-container">
             <ul class="tabs">
                 <li>
-                    <h4><a href="#tab1" title="Currency">Currency</a></h4>
+                    <h4><a href="#tab1" title="Currency">{{ trans('ua.currency') }}</a></h4>
                 </li>
                 <li>
-                    <h4><a href="#tab2" title="Weather">Weather</a></h4>
+                    <h4><a href="#tab2" title="Weather">{{ trans('ua.weather') }}</a></h4>
                 </li>
             </ul>
             <div class="border-box group">

@@ -18,7 +18,7 @@ class CreateEventsTable extends Migration
             $table->string('title', 64)->unique();
             $table->text('text');
             $table->text('desc');
-            $table->string('alias',128)->unique();
+            $table->string('alias')->unique();
             $table->string('img');
             $table->string('keywords');
         	$table->string('meta_desc');
