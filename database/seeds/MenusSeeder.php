@@ -19,9 +19,9 @@ class MenusSeeder extends Seeder
                 ['title'=>'contacts', 'path'=>'http://negative.loc/contacts', 'ico'=>'icon-edit'],
                 ['title'=>'world', 'path'=>'http://negative.loc/articles/category/world', 'ico'=>'icon-picture'],
                 ['title'=>'incidents', 'path'=>'http://negative.loc/articles/category/incidents', 'ico'=>'icon-screenshot'],
-                ['title'=>'economy', 'path'=>'http://negative.loc/articles/category/economy'],
-                ['title'=>'sport', 'path'=>'http://negative.loc/articles/category/sport'],
-                ['title'=>'politics', 'path'=>'http://negative.loc/articles/category/politics']
+                ['title'=>'economy', 'path'=>'http://negative.loc/articles/category/economy', 'ico'=>'icon-screenshot'],
+                ['title'=>'sport', 'path'=>'http://negative.loc/articles/category/sport', 'ico'=>'icon-screenshot'],
+                ['title'=>'politics', 'path'=>'http://negative.loc/articles/category/politics',  'ico'=>'icon-screenshot']
             ]
         );
     }

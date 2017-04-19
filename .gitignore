@@ -1,6 +1,7 @@
 /node_modules
 /public
 /storage
+/phpmyadmin
 /vendor
 /.idea
 Homestead.json

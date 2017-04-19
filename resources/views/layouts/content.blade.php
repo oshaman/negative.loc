@@ -11,7 +11,7 @@
         <h2>{{ $article->title }}</h2>
         <div>
             <div class="meta-bottom">
-                {!! str_limit($article->text, 288, '...') !!}
+                {!! str_limit($article->text, 288, '&#8230;') !!}
             </div>
             <div class="the-content">
                 <p><a href="{{ route('articles', $article->alias) }}" class="btn btn-retro-package-3 btn-more-link">{{ trans('ua.read_more') }}</a></p>

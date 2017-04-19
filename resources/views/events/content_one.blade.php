@@ -20,11 +20,14 @@
         <div class="posts">
             <div class="portfolio type-portfolio status-publish hentry hentry-post group portfolio-post internal-post">
                 <div class="post_header portfolio_header group">
-                    <img width="700" height="260" src="{{ asset(config('settings.theme')) }}/images/portfolio/work.jpg" class="internal wp-post-image" alt="work" title="work" />                                
+                    <img width="700" height="260" src="{{ asset(config('settings.theme')) }}/images/events/{{ $content->img }}" class="internal wp-post-image" alt="{{ $content->title }}" title="{{ $content->title }}" />                                
                     <h2>{{ $content->title }}</h2>
                 </div>
                 <div class="post_content group  no-skills ">
-                {!! $content->text !!}
+                    <div class="meta-bottom">
+                        {!! $content->desc !!}
+                        {!! $content->text !!}
+                    </div>
                 </div>
             </div>
         </div>

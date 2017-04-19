@@ -20,7 +20,7 @@
                     <img src="{{ asset(config('settings.theme')) }}/images/events/{{ $event->img }}" class="attachment-thumb_portfolio_3cols wp-post-image" alt="{{ $event->title }}" title="{{ $event->title }}" />
                 </a>
                 <h5><a href="{{ route('history'). '/' .$event->alias }}">{{ $event->title }}</a></h5>
-                <p>{{ $event->desc }} &#8230;</p>
+                <p>{{ $event->desc }}</p>
                 <a href="{{ route('history'). '/' .$event->alias }}" class="btn btn-son-1 "><i class="icon-search"></i>{{ trans('ua.read_more') }}</a></a>                
             </li>
         @endforeach
