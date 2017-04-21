@@ -11,10 +11,22 @@
 |
 */
 Route::get('/', ['uses' => 'HomeController@index', 'as' => 'home']);
-Route::match(['get', 'post'], '/contacts', ['uses' => 'ContactsController@index', 'as' => 'contacts']);
-Route::get('/history/{alias?}', ['uses' => 'EventsController@index', 'as' => 'history'])->where('alias', '[\w-]{5,64}');
-Route::get('/articles/{alias?}', ['uses' => 'ArticlesController@index', 'as' => 'articles'])->where('alias', '[\w-]+');
-Route::get('articles/category/{cat_alias?}',['uses'=>'ArticlesController@show','as'=>'cat_alias'])->where('cat_alias','[\w-]{5,20}');
+Route::match(['get', 'post'], 'contacts', ['uses' => 'ContactsController@index', 'as' => 'contacts']);
+Route::get('history/{alias?}', ['uses' => 'EventsController@index', 'as' => 'history'])->where('alias', '[\w-]{5,64}');
+
+
+//news
+Route::group(['prefix' => 'news'],function() {
+
+    Route::get('/', 'HomeController@index');
+    Route::get('article/{alias?}', ['uses' => 'ArticlesController@index', 'as' => 'articles'])->where('alias', '[\w-]+');
+    Route::get('category/{cat_alias?}',['uses'=>'ArticlesController@show','as'=>'cat_alias'])->where('cat_alias','[\w-]{5,20}');
+	
+	
+}); 
+
+
+
 
 Auth::routes();
 /**

@@ -17,7 +17,6 @@
                 <p><a href="{{ route('articles', $article->alias) }}" class="btn btn-retro-package-3 btn-more-link">{{ trans('ua.read_more') }}</a></p>
                 <p class="date-cat">
                     <i class="icon-calendar"></i>{{ date("d-m-Y H:i", strtotime($article->created_at)) }}
-                    <i class="icon-tags"></i> <span>{{ trans('ua.cat') }}: <a href="{{ route('cat_alias', $article->category->title) }}">{{ trans('categories.' .$article->category->title) }}</a></span>
                     <i class="icon-external-link"></i> <span>{{ trans('ua.source') }}: <a href="{{ $article->source ?: route('home') }}" class="link">{{ $article->source ?: route('home') }}</a></span>
                 </p>
             </div>

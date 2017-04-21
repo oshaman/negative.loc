@@ -28,7 +28,7 @@
                 <a href="{{ $content->source ?: route('home') }}"  class="link">{{ $content->source ?: route('home')}}</a></span>
             </p>
             <p class="categories">
-                <i class="icon-tags"></i> <span>{{ trans('ua.cat') }}: <a href="{{ route('cat_alias', $content->category->alias) }}" class="cats">{{ $content->category->title }}</a></span>
+                <i class="icon-tags"></i> <span>{{ trans('ua.cat') }}: <a href="{{ route('cat_alias', $content->category->alias) }}" class="cats">{{ trans('categories.' . $content->category->title) }}</a></span>
             </p>
             <p class="comments">
                 <i class="icon-comment"></i> <span><a href="#" title="Comment on Another great article of the blog">2 comments</a></span>

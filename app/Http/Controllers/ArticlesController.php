@@ -5,6 +5,8 @@ namespace Oshaman\Publication\Http\Controllers;
 use Illuminate\Http\Request;
 use Oshaman\Publication\Repositories\ArticlesRepository;
 
+use Oshaman\Publication\Category;
+
 class ArticlesController extends MainController
 {
     protected $a_rep;
@@ -36,24 +38,37 @@ class ArticlesController extends MainController
                 return $this->renderOutput();
             }
         }
-        
-        
+        abort(404);
     }
     
     public function show($alias=false)
     {
-        $this->title = 'Bad News';
-        $this->meta_desc = 'Bad News';
-        $this->keywords = 'Bad News';
-        
-        $this->template = 'articles.index';
-        
-        // dd($this->content_vars);
-        
-        $content = view('articles.content')->with('content', $this->content_vars)->render();
-        $this->vars = array_add($this->vars, 'content', $content);
-        
-        
-        return $this->renderOutput();
+        $where = FALSE;
+    	
+    	if ($alias) {
+			$id = Category::select('*')->where('title', $alias)->first();
+            if (!$id) {                
+                abort(404);
+            }
+            //WHERE `category_id` = $id
+            $where = ['category_id',$id->id];
+            $this->content_vars = $this->a_rep->get(
+                    ['title', 'created_at', 'description', 'img', 'alias', 'source'],
+                    false, true, $where, ['created_at', 'desc']
+            );
+		
+            $this->title = trans('categories.title_' . $id->title);
+            $this->meta_desc = trans('categories.title_' . $id->title);
+            $this->keywords = trans('categories.title_' . $id->title);
+
+            $this->template = 'articles.index';
+            
+            $content = view('articles.content_category')->with('content', $this->content_vars)->render();
+            $this->vars = array_add($this->vars, 'content', $content);
+            // dd($this->content_vars);
+            
+            return $this->renderOutput();
+        }
+        abort(404);
     }
 }

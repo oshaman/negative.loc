@@ -13,11 +13,11 @@ class CategoriesSeeder extends Seeder
     {
         DB::table('categories')->insert(
             [
-                ['title'=>'Події', 'alias'=>'incidents'],
-                ['title'=>'Економіка', 'alias'=>'economy'],
-                ['title'=>'Спорт', 'alias'=>'sport'],
-                ['title'=>'Політика', 'alias'=>'politics'],
-                ['title'=>'У світі', 'alias'=>'world'],
+                ['title'=>'incidents'],
+                ['title'=>'economy'],
+                ['title'=>'sport'],
+                ['title'=>'politics'],
+                ['title'=>'world'],
             ]
         );
     }

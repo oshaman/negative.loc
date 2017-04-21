@@ -13,14 +13,14 @@ class HomeController extends MainController
      *
      * @return void
      */
-    protected $articles_rep;
+    protected $a_rep;
     
     public function __construct(ArticlesRepository $a_rep)
     {
     	
     	parent::__construct(new \Oshaman\Publication\Repositories\MenusRepository(new \Oshaman\Publication\Menu));
     	
-    	$this->articles_rep = $a_rep;
+    	$this->a_rep = $a_rep;
         $this->sidebar_vars = true;
 		
 	}
@@ -32,8 +32,8 @@ class HomeController extends MainController
      */
     public function index()
     {   
-        $this->content_vars = $this->articles_rep->get(
-                ['title', 'created_at', 'text', 'img', 'alias', 'category_id', 'source'],
+        $this->content_vars = $this->a_rep->get(
+                ['title', 'created_at', 'description', 'img', 'alias', 'category_id', 'source'],
                 false, true, false, ['created_at', 'desc']
                 );
         if ($this->content_vars) {

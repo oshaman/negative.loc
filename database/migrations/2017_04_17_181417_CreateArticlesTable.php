@@ -17,6 +17,7 @@ class CreateArticlesTable extends Migration
             $table->increments('id');
             $table->string('title', 128);
             $table->text('text');
+            $table->text('description');
             $table->string('source');
             $table->string('alias')->unique();
             $table->string('img');
