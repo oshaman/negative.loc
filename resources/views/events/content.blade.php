@@ -12,6 +12,8 @@
     <div class="inner group">
 <!-- START CONTENT -->
 <div id="content" class="group">
+<h2>Negative: <span>{{ trans('ua.history') }}</span></h2>
+<div class="border-line"></div>
     <ul id="portfolio">
         @if($content)
         @foreach($content as $key => $event)

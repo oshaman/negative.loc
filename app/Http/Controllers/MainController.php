@@ -13,12 +13,13 @@ class MainController extends Controller
     
     protected $keywords;
 	protected $meta_desc;
-	protected $title;
+	protected $title = 'Negative';
     
     protected $template = 'index';
     protected $content_vars;
     protected $sidebar_vars = false;
     protected $footer_vars;
+    protected $topbar_vars;
     
     
     protected $vars = array();
@@ -40,7 +41,8 @@ class MainController extends Controller
 		$this->vars = array_add($this->vars, 'meta_desc', $this->meta_desc);
 		$this->vars = array_add($this->vars, 'title', $this->title);
 		
-		$topbar = view('layouts.topbar')->render();
+		$this->topbar_vars = $this->title;
+		$topbar = view('layouts.topbar')->with('top', $this->topbar_vars)->render();
 		$this->vars = array_add($this->vars, 'topbar', $topbar);
         
 		$header = view('layouts.header')->with('menu', $menu)->render();

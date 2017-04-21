@@ -32,6 +32,7 @@ class HomeController extends MainController
      */
     public function index()
     {   
+        $this->title = trans('ua.home');
         $this->content_vars = $this->a_rep->get(
                 ['title', 'created_at', 'description', 'img', 'alias', 'category_id', 'source'],
                 false, true, false, ['created_at', 'desc']

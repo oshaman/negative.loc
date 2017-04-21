@@ -50,8 +50,8 @@ class ArticlesController extends MainController
             if (!$id) {                
                 abort(404);
             }
-            //WHERE `category_id` = $id
             $where = ['category_id',$id->id];
+            
             $this->content_vars = $this->a_rep->get(
                     ['title', 'created_at', 'description', 'img', 'alias', 'source'],
                     false, true, $where, ['created_at', 'desc']
@@ -63,9 +63,8 @@ class ArticlesController extends MainController
 
             $this->template = 'articles.index';
             
-            $content = view('articles.content_category')->with('content', $this->content_vars)->render();
+            $content = view('articles.content_category')->with(['content' => $this->content_vars, 'title' => $this->title])->render();
             $this->vars = array_add($this->vars, 'content', $content);
-            // dd($this->content_vars);
             
             return $this->renderOutput();
         }

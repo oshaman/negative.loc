@@ -30,10 +30,9 @@ class EventsController extends MainController
             $this->vars = array_add($this->vars, 'content', $content);
         } else {
             
-            $this->title = 'History';
+            $this->title = trans('ua.history');
             $this->meta_desc = 'This Day In History';
             $this->keywords = 'This Day In History';
-            
             
             $this->content_vars = $this->events_rep->get(
                 ['title', 'desc', 'alias', 'img', 'user_id'],
