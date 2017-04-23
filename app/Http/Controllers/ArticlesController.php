@@ -22,7 +22,6 @@ class ArticlesController extends MainController
     {
         if ($alias) {
             $article = $this->a_rep->one($alias, ['cat' => true]);
-            // dd($article);
             if (isset($article->id)) {
                 $this->title = $article->title;
                 $this->keywords = $article->keywords;
@@ -73,13 +72,11 @@ class ArticlesController extends MainController
         
         foreach ($cats as $cat) {
             $where = ['category_id', $cat->id];
-            // $name = $cat->title;
-            // $x = [$name => $this->a_rep->get(['title', 'alias'], 5, false, $where, ['created_at', 'desc'])];
-            $this->content_vars[$cat->title] = $this->a_rep->get(['title', 'alias'], 5, false, $where, ['created_at', 'desc']);
+            
+            $this->content_vars[$cat->title] = $this->a_rep->get(['title', 'created_at','alias'], 5, false, $where, ['created_at', 'desc']);
             
         }
-        // dd($this->content_vars);
-
+        
         $this->title = trans('ua.latest_news');
         $this->meta_desc = trans('ua.latest_news');
         $this->keywords = trans('ua.latest_news');
@@ -89,8 +86,6 @@ class ArticlesController extends MainController
         $content = view('articles.content_by_categories')->with(['content' => $this->content_vars, 'title' => $this->title])->render();
         $this->vars = array_add($this->vars, 'content', $content);
         
-        return $this->renderOutput();
-        
-        
+        return $this->renderOutput(); 
     }
 }
