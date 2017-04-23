@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('topbar')
-    @include('layouts.topbar')
+    @include('layouts.topbar', ['top'=>'404'])
 @endsection
 
 @section('content')

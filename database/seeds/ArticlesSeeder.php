@@ -13,20 +13,37 @@ class ArticlesSeeder extends Seeder
     {
         DB::table('articles')->insert(
             [
-                ['title'=>'Дипломат КНДР предупредил ООН', 'text'=>'test1', 'description'=>'test_desc', 'source'=>'source_test', 'alias'=>'Diplomat-KNDR-predupredil-OON', 'img'=>'pic1.jpg', 'keywords'=>'article_1', 'meta_desc'=>'meta_1'],
-                ['title'=>'Title2', 'text'=>'test2', 'description'=>'test_desc', 'source'=>'source_test_2', 'alias'=>'Test_2', 'img'=>'pic2.jpg', 'keywords'=>'article_2', 'meta_desc_2'=>'meta_2'],
-                ['title'=>'Title3', 'text'=>'test3', 'description'=>'test_desc', 'source'=>'source_test_3', 'alias'=>'Test_3', 'img'=>'pic3.jpg', 'keywords'=>'article_3', 'meta_desc_3'=>'meta_3'],
-                ['title'=>'Title4', 'text'=>'test4', 'description'=>'test_desc', 'source'=>'source_test_4', 'alias'=>'Test_4', 'img'=>'pic4.jpg', 'keywords'=>'article_4', 'meta_desc_4'=>'meta_4'],
-                ['title'=>'Title5', 'text'=>'test5', 'description'=>'test_desc', 'source'=>'source_test_5', 'alias'=>'Test_5', 'img'=>'pic5.jpg', 'keywords'=>'article_5', 'meta_desc_5'=>'meta_5'],
-                ['title'=>'Title6', 'text'=>'test6', 'description'=>'test_desc', 'source'=>'source_test_6', 'alias'=>'Test_6', 'img'=>'pic6.jpg', 'keywords'=>'article_6', 'meta_desc_6'=>'meta_6'],
-                ['title'=>'Title7', 'text'=>'test7', 'description'=>'test_desc', 'source'=>'source_test_7', 'alias'=>'Test_7', 'img'=>'pic7.jpg', 'keywords'=>'article_7', 'meta_desc_7'=>'meta_7'],
-                ['title'=>'Title8', 'text'=>'test8', 'description'=>'test_desc', 'source'=>'source_test_8', 'alias'=>'Test_8', 'img'=>'pic8.jpg', 'keywords'=>'article_8', 'meta_desc_8'=>'meta_8'],
-                ['title'=>'Title9', 'text'=>'test9', 'description'=>'test_desc', 'source'=>'source_test_9', 'alias'=>'Test_9', 'img'=>'pic9.jpg', 'keywords'=>'article_9', 'meta_desc_9'=>'meta_9'],
-                ['title'=>'Title10', 'text'=>'test10', 'description'=>'test_desc', 'source'=>'source_test_10', 'alias'=>'Test_10', 'img'=>'pic10.jpg', 'keywords'=>'article_10', 'meta_desc_10'=>'meta_10'],
-                ['title'=>'Title11', 'text'=>'test11', 'description'=>'test_desc', 'source'=>'source_test_11', 'alias'=>'Test_11', 'img'=>'pic11.jpg', 'keywords'=>'article_11', 'meta_desc_11'=>'meta_11'],
-                ['title'=>'Title12', 'text'=>'test12', 'description'=>'test_desc', 'source'=>'source_test_12', 'alias'=>'Test_12', 'img'=>'pic12.jpg', 'keywords'=>'article_12', 'meta_desc_12'=>'meta_12'],
-                ['title'=>'Title13', 'text'=>'test13', 'description'=>'test_desc', 'source'=>'source_test_13', 'alias'=>'Test_13', 'img'=>'pic13.jpg', 'keywords'=>'article_13', 'meta_desc_13'=>'meta_13'],
-                ['title'=>'Title14', 'text'=>'test14', 'description'=>'test_desc', 'source'=>'source_test_14', 'alias'=>'Test_14', 'img'=>'pic14.jpg', 'keywords'=>'article_14', 'meta_desc_14'=>'meta_14'],
+                ['title'=>'Дипломат КНДР предупредил ООН', 'text'=>'<p>test</p>', 'description'=>'<p>test</p>', 'source'=>'source_test', 'alias'=>'Diplomat-KNDR-predupredil-OON', 'img'=>'pic1.jpg', 'keywords'=>'article_1', 'meta_desc'=>'meta_1'],
+                ['title'=>'Title2', 'text'=>'<p>test</p>', 'description'=>'<p>test</p>', 'source'=>'source_test_2', 'alias'=>'Test_2', 'img'=>'pic2.jpg', 'keywords'=>'article_2', 'meta_desc_2'=>'meta_2'],
+                ['title'=>'Title3', 'text'=>'<p>test</p>', 'description'=>'<p>test</p>', 'source'=>'source_test_3', 'alias'=>'Test_3', 'img'=>'pic3.jpg', 'keywords'=>'article_3', 'meta_desc_3'=>'meta_3'],
+                ['title'=>'Title4', 'text'=>'<p>test</p>', 'description'=>'<p>test</p>', 'source'=>'source_test_4', 'alias'=>'Test_4', 'img'=>'pic4.jpg', 'keywords'=>'article_4', 'meta_desc_4'=>'meta_4'],
+                ['title'=>'Title5', 'text'=>'<p>test</p>', 'description'=>'<p>test</p>', 'source'=>'source_test_5', 'alias'=>'Test_5', 'img'=>'pic5.jpg', 'keywords'=>'article_5', 'meta_desc_5'=>'meta_5'],
+                ['title'=>'Title6', 'text'=>'<p>test</p>', 'description'=>'<p>test</p>', 'source'=>'source_test_6', 'alias'=>'Test_6', 'img'=>'pic6.jpg', 'keywords'=>'article_6', 'meta_desc_6'=>'meta_6'],
+                ['title'=>'Title7', 'text'=>'<p>test</p>', 'description'=>'<p>test</p>', 'source'=>'source_test_7', 'alias'=>'Test_7', 'img'=>'pic7.jpg', 'keywords'=>'article_7', 'meta_desc_7'=>'meta_7'],
+                ['title'=>'Title8', 'text'=>'<p>test</p>', 'description'=>'<p>test</p>', 'source'=>'source_test_8', 'alias'=>'Test_8', 'img'=>'pic8.jpg', 'keywords'=>'article_8', 'meta_desc_8'=>'meta_8'],
+                ['title'=>'Title9', 'text'=>'<p>test</p>', 'description'=>'<p>test</p>', 'source'=>'source_test_9', 'alias'=>'Test_9', 'img'=>'pic9.jpg', 'keywords'=>'article_9', 'meta_desc_9'=>'meta_9'],
+                ['title'=>'Title10', 'text'=>'<p>test</p>', 'description'=>'<p>test</p>', 'source'=>'source_test_10', 'alias'=>'Test_10', 'img'=>'pic10.jpg', 'keywords'=>'article_10', 'meta_desc_10'=>'meta_10'],
+                ['title'=>'Title11', 'text'=>'<p>test</p>', 'description'=>'<p>test</p>', 'source'=>'source_test_11', 'alias'=>'Test_11', 'img'=>'pic11.jpg', 'keywords'=>'article_11', 'meta_desc_11'=>'meta_11'],
+                ['title'=>'Title12', 'text'=>'<p>test</p>', 'description'=>'<p>test</p>', 'source'=>'source_test_12', 'alias'=>'Test_12', 'img'=>'pic12.jpg', 'keywords'=>'article_12', 'meta_desc_12'=>'meta_12'],
+                ['title'=>'Title13', 'text'=>'<p>test</p>', 'description'=>'<p>test</p>', 'source'=>'source_test_13', 'alias'=>'Test_13', 'img'=>'pic13.jpg', 'keywords'=>'article_13', 'meta_desc_13'=>'meta_13'],
+                ['title'=>'Title14', 'text'=>'<p>test</p>', 'description'=>'<p>test</p>', 'source'=>'source_test_14', 'alias'=>'Test_14', 'img'=>'pic14.jpg', 'keywords'=>'article_14', 'meta_desc_14'=>'meta_14'],
+                ['title'=>'Нацбанк перечислит в госбюджет-2017 44,38 млрд грн из 59,45 млрд грн прибыли за 2016г – глава Cовета НБУ', 'text'=>'<p>Совет Национального банка Украины (НБУ) утвердил распределение 59,45 млрд грн прибыли центрального банка за 2016 год, в том числе направление в государственный бюджет 44 млрд 378,83 млн грн, сообщил глава Совета Богдан Данилишин.</p>
+
+<p>На своей странице в Facebook во вторник он уточнил, что на формирование общих резервов собственного капитала Нацбанка будет направлено 15 млрд 71,74 млн грн.</p>
+
+<p>Госбюджет-2017 предполагает, что Нацбанк перечислит в этом году в госбюджет минимум 45 млрд грн.</p>
+
+<p>Б.Данилишин добавил, что принял к сведению заключение аудиторской фирмы ЗАО "Делойт энд Туш ЮСК" о консолидированной финансовой отчетности НБУ по 2016 год, утвердил эту отчетность и отчет об исполнении сметы административных расходов за 2016 год, а также принял решение о публикации отчетности в определенные сроки.</p>
+
+<p>Как сообщалось, на минувшей неделе представители правления Нацбанка отметили, что перечисление прибыли за 2016 год в госбюджет будет осуществляться постепенно траншами. Они не уточнили их объем, однако подчеркнули, что график платежей будет учитывать состояние ликвидности на рынке.</p>
+
+<p>В 2016 году НБУ перечислил в госбюджет 38,16 млрд грн прибыли за предыдущий год. Из-за затянувшегося формирования совета Нацбанка, в полномочия которого входит утверждение финотчетности, НБУ начал перечисление прибыли только в октябре, распределив всю сумму на три транша: в октябре – 10 млрд грн, в ноябре – 14 млрд грн, в декабре – 14,16 млрд грн.</p>
+
+<p>Совет Нацбанка уже утвердил прогнозируемый объем прибыли, который НБУ перечислит в госбюджет 2018 года по итогам работы в 2017 году, – 47,824 млрд грн. Однако эта сумма может существенно измениться в результате репрофайлинга портфеля гособлигаций в собственности центробанка.</p>', 'description'=>'<p>Совет Национального банка Украины (НБУ) утвердил распределение 59,45 млрд грн прибыли центрального банка за 2016 год, в том числе направление в государственный бюджет 44 млрд 378,83 млн грн', 'source'=>'source_test_15.com', 'alias'=>'Test_15', 'img'=>'pic17.jpg', 'keywords'=>'article_14', 'meta_desc_14'=>'meta_14'],
+                ['title'=>'МВФ: в Україні передчасно вводити накопичувальну пенсійну систему', 'text'=>'<p>Міжнародний валютний фонд вважає передчасним введення другого рівня пенсійної системи в Україні. </p>
+<p>Читайте також Пенсійної реформи очікують 12 мільйонів українців - Рева Про це написав голова місії МВФ в Україні Рон ван Роден у своїй статті для ЕП. "Введення так званої накопичувальної пенсійної системи (другий рівень) в доповнення до діючої системи, на чому деякі наполягають, не буде мати особливого сенсу без попереднього виправлення недоліків діючої системи", - пише ван Роден.</p>
+<p> "Введення накопичувальної системи було б передчасним, враховуючи нинішній рівень розвитку фінансових ринків та нормативно-правову базу в Україні", - вважає голова місії МВФ в Україні. Також він вважає, що Україна насамперед повинна знайти спосіб зменшити приплив нових пенсіонерів в пенсійну систему і збільшити надходження до Пенсійного фонду.</p>
+<p> Раніше в МВФ заявили, що Україна не може дозволити собі зволікати з всеосяжною пенсійною реформою, у тому числі шляхом підвищення ефективного пенсійного віку.</p>', 'description'=>'<p>D-Міжнародний валютний фонд вважає передчасним введення другого рівня пенсійної системи в Україні. </p>', 'source'=>'source_test_14.com', 'alias'=>'Test_16', 'img'=>'pic14.jpg', 'keywords'=>'article_14', 'meta_desc_14'=>'meta_14'],
             ]
         );
     }

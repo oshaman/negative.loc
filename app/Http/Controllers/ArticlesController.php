@@ -68,6 +68,29 @@ class ArticlesController extends MainController
             
             return $this->renderOutput();
         }
-        abort(404);
+        
+        $cats = Category::select('*')->get();
+        
+        foreach ($cats as $cat) {
+            $where = ['category_id', $cat->id];
+            // $name = $cat->title;
+            // $x = [$name => $this->a_rep->get(['title', 'alias'], 5, false, $where, ['created_at', 'desc'])];
+            $this->content_vars[$cat->title] = $this->a_rep->get(['title', 'alias'], 5, false, $where, ['created_at', 'desc']);
+            
+        }
+        // dd($this->content_vars);
+
+        $this->title = trans('ua.latest_news');
+        $this->meta_desc = trans('ua.latest_news');
+        $this->keywords = trans('ua.latest_news');
+
+        $this->template = 'articles.index';
+        
+        $content = view('articles.content_by_categories')->with(['content' => $this->content_vars, 'title' => $this->title])->render();
+        $this->vars = array_add($this->vars, 'content', $content);
+        
+        return $this->renderOutput();
+        
+        
     }
 }
