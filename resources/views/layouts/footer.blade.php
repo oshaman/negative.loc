@@ -28,24 +28,25 @@
         <div class="quick-contact-widget widget two-third last">
             <div class="widget-last widget quick-contact">
                 <h3>{{ trans('ua.contact_us') }}</h3>
+                <p>{{ trans('ua.required') }} - *</p>
                 <form id="contact-form-example" class="contact-form" method="post" action="{{ route('contacts') }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <fieldset>
                         <ul>
                             <li class="text-field">
-                                <label for="name-example"> <span class="label">{{ old('name') ? '' : trans('ua.name') }}</span> </label>
+                                <label for="name-example"> <span class="label">{{ old('name') ? '' : trans('ua.name') . '*' }}</span> </label>
                                 <div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
                                 <input type="text" name="name" id="name-example" class="required" value="{{ old('name') }}" required>
                                 </div>
                             </li>
                             <li class="text-field">
-                                <label for="email-example"> <span class="label">{{ old('email') ? '' : trans('ua.email') }}</span> </label>
+                                <label for="email-example"> <span class="label">{{ old('email') ? '' : trans('ua.email') . '*' }}</span> </label>
                                 <div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span>
-                                <input type="text" name="email" id="email-example" class="required email-validate" value="{{ old('email') }}" required>
+                                <input type="email" name="email" id="email-example" class="required email-validate" value="{{ old('email') }}" required>
                                 </div>
                             </li>
                             <li class="textarea-field">
-                                <label for="message-example"> <span class="label">{{ old('message') ? '' : trans('ua.message') }}</span> </label>
+                                <label for="message-example"> <span class="label">{{ old('message') ? '' : trans('ua.message') . '*' }}</span> </label>
                                 <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
                                     <textarea name="message" id="message-example" rows="8" cols="30" class="required"required>{{ old('message') }}</textarea>
                                 </div>

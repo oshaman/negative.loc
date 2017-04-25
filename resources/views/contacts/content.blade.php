@@ -18,11 +18,11 @@
 <div id="content" class="group">
 @if (count($errors) > 0)
     <div class="contact-form">
-        
-            @foreach ($errors->all() as $error)
-                <p class="error">{{ $error }}</p>
+            <p class="error">
+            @foreach ($errors->toArray() as $key=>$error)
+                {!! str_replace($key, '<strong>' . trans('ua.' . $key) . '</strong>', $error[0]) !!}</br>
             @endforeach
-   
+            </p>
     </div>
 @endif
 @if (session('status'))
