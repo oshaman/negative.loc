@@ -24,7 +24,10 @@ Route::group(['prefix' => 'news'],function() {
 	
 	
 }); 
-
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
+    
+    Route::get('/', ['uses' => 'Admin\AdminController@index', 'as' => 'admin']);
+});
 
 
 
