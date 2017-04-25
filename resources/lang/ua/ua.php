@@ -10,6 +10,14 @@ return [
 	'read_more' => ' Докладніше',
 	'articles_no' => '<h2>Записів немає</h2>',
 	'latest_comments' => 'Останні коментарі',
+    'contact_us' => 'Зв\'яжіться з нами',
+    /**
+    *   Email
+    */
+    'message_sent' => 'Повідомлення відправлено',
+    /**
+    *   Sidebar
+    */
     'weather' => 'Погода',
     'currency' => 'Валюта',
     
@@ -31,6 +39,7 @@ return [
 	'send_message' => 'Відправити повідомлення',
 	'message' => 'Повідомлення',
 	'name' => 'Ім\'я',
+	'email' => 'Ел.пошта',
     /**
     *   Events
     */
