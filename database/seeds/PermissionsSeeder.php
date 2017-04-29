@@ -18,6 +18,8 @@ class PermissionsSeeder extends Seeder
                 ['name'=>'VIEW_ADMIN'],
                 ['name'=>'VIEW_DATA'],
                 ['name'=>'EDIT_DATA'],
+                ['name'=>'VIEW_ADMIN_ARTICLES'],
+                ['name'=>'VIEW_ADMIN_EVENTS'],
             ]
         );
     }

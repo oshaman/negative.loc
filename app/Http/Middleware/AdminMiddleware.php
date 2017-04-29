@@ -4,6 +4,7 @@ namespace Oshaman\Publication\Http\Middleware;
 
 use Closure;
 use Auth;
+use Gate;
 
 class AdminMiddleware
 {
@@ -18,13 +19,15 @@ class AdminMiddleware
     {
         if (!$this->checkIp($request->ip())) {
             abort(404);
-        } else {
-            if (Auth::guard($guard)->guest()) {
-                return redirect()->guest('login');
-            }
         }
         
+        if (Auth::guard($guard)->guest()) {
+                return redirect()->guest('login');
+        }
         
+        if (Gate::denies('VIEW_ADMIN')) {
+            abort(404);
+        }
         
         return $next($request);
     }

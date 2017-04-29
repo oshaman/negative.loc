@@ -23,10 +23,35 @@ Route::group(['prefix' => 'news'],function() {
     Route::get('category/{cat_alias?}',['uses'=>'ArticlesController@show','as'=>'cat_alias'])->where('cat_alias','[\w-]{5,20}');
 	
 	
-}); 
+});
+/**
+*   Admin Panel
+* 
+*/
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
     
-    Route::get('/', ['uses' => 'Admin\AdminController@index', 'as' => 'admin']);
+    Route::get('/', ['uses' => 'Admin\IndexController@index', 'as' => 'admin']);
+    /**
+    *   Admin ARTICLES
+    * 
+    */
+    Route::group(['prefix' => 'articles'], function() {
+        //  show articles list
+        Route::get('/', ['uses' => 'Admin\ArticlesController@index', 'as' => 'admin_articles']);
+        //  (editor uses)show articles list sort by CHECKED, DATE or AUTHOR
+        Route::get('sort/{alias}/{param?}', 'Admin\ArticlesController@sorted')->where(['alias' => '[\w-]{5,20}', 'param' => '[\w-]{,20}']);
+        
+        Route::match(['get', 'post'], 'create', 'Admin\ArticlesController@create');
+        Route::match(['get', 'post'], 'edit/{alias}', 'Admin\ArticlesController@edit')->where('alias', '[\w-]{5,20}');
+        Route::get('del/{alias}', 'Admin\ArticlesController@destroy')->where('alias', '[\w-]{5,20}');
+        
+    });
+    
+    /**
+    *   Admin HISTORY
+    * 
+    */    
+    Route::match(['get', 'post'], 'events', ['uses' => 'Admin\EvetntsController@index', 'as' => 'admin_events']);
 });
 
 

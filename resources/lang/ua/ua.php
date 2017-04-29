@@ -11,6 +11,7 @@ return [
 	'articles_no' => '<h2>Записів немає</h2>',
 	'latest_comments' => 'Останні коментарі',
     'contact_us' => 'Зв\'яжіться з нами',
+    'admin_panel' => 'Панель администратора',
     /**
     *   Email
     */
@@ -50,5 +51,11 @@ return [
     */
     'source' => 'Джерело',
     'cat' => 'Категорія',
+    /**
+    *   ADMIN  
+    */
+    'articles_manager' => 'Менеджер новин',
+    
+    
     
 ];

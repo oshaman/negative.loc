@@ -7,6 +7,7 @@ use Oshaman\Publication\Http\Controllers\Controller;
 
 use Auth;
 use Menu;
+use Gate;
 
 class AdminController extends Controller
 {
@@ -15,13 +16,8 @@ class AdminController extends Controller
     protected $title;
     protected $vars;
     
-    public function index()
+    public function renderOutput()
     {
-        
-        
-        $this->content = view('admin.content')->with('content', $this->content)->render();;
-        
-        
         $this->vars = array_add($this->vars, 'title', $this->title);
 		
         $this->topbar_vars = $this->title;
@@ -46,10 +42,16 @@ class AdminController extends Controller
     public function getMenu() {
 		return Menu::make('adminMenu', function($menu) {
 			
-            /* if(Gate::allows('VIEW_ADMIN_ARTICLES')) {
-                $menu->add('Статьи',array('route' => 'articles.index'));
+			$menu->add(trans('ua.home'),  array('route'  => 'home'))->prepend('<i class="icon-home"></i>');
+            
+            if(Gate::allows('VIEW_ADMIN_ARTICLES')) {
+                $menu->add(trans('ua.articles'), array('route' => 'admin_articles'))->prepend('<i class="icon-file"></i>');
             }
             
+            if(Gate::allows('VIEW_ADMIN_EVENTS')) {
+                $menu->add(trans('ua.history'), array('route' => 'admin_events'))->prepend('<i class="icon-calendar"></i>');
+            }
+            /* 
             if(Gate::allows('VIEW_ADMIN_MENU')){
                 $menu->add('Меню',  array('route'  => 'menus.index'));
             }
@@ -63,13 +65,7 @@ class AdminController extends Controller
             } */
             
             
-			$menu->add('Main',  array('route'  => 'home'));
-            
-			if(isset(Auth::user()->name)){
-                $menu->add('Logout',array('route' => 'logout','class' => 'alert-danger'));
-            }
-			
-			
+            		
 		});
 	}
 }
