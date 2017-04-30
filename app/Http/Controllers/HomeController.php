@@ -35,7 +35,7 @@ class HomeController extends MainController
         $this->title = trans('ua.home');
         $this->content_vars = $this->a_rep->get(
                 ['title', 'created_at', 'description', 'img', 'alias', 'category_id', 'source'],
-                false, true, false, ['created_at', 'desc']
+                false, true, ['approved', true], ['created_at', 'desc']
                 );
         if ($this->content_vars) {
             $this->content_vars->load('category');

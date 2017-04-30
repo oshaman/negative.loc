@@ -17,7 +17,10 @@ class ArticlesController extends MainController
         $this->a_rep = $rep;
         $this->sidebar_vars = true;
     }
-    
+    /**
+    *   View current article
+    * 
+    */
     public function index($alias=false)
     {
         if ($alias) {
@@ -39,17 +42,20 @@ class ArticlesController extends MainController
         }
         abort(404);
     }
-    
+    /**
+    *   View articles by category or view all categories
+    * 
+    */
     public function show($alias=false)
     {
         $where = FALSE;
-    	
+    	//  articles by selected category
     	if ($alias) {
 			$id = Category::select('*')->where('title', $alias)->first();
             if (!$id) {                
                 abort(404);
             }
-            $where = ['category_id',$id->id];
+            $where = array(['category_id', $id->id], ['approved', true]);
             
             $this->content_vars = $this->a_rep->get(
                     ['title', 'created_at', 'description', 'img', 'alias', 'source'],
@@ -71,7 +77,7 @@ class ArticlesController extends MainController
         $cats = Category::select('*')->get();
         
         foreach ($cats as $cat) {
-            $where = ['category_id', $cat->id];
+            $where = array(['category_id', $cat->id], ['approved', true]);
             
             $this->content_vars[$cat->title] = $this->a_rep->get(['title', 'created_at','alias'], 5, false, $where, ['created_at', 'desc']);
             

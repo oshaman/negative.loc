@@ -14,6 +14,8 @@ class ChangeArticlesTable extends Migration
     public function up()
     {
         Schema::table('articles', function (Blueprint $table) {
+            $table->boolean('approved')->default(false);
+            $table->index('approved');
             $table->index('created_at');
         });
     }
@@ -27,6 +29,8 @@ class ChangeArticlesTable extends Migration
     {
         Schema::table('articles', function (Blueprint $table) {
             $table->dropIndex('created_at');
+            $table->dropIndex('approved');
+            $table->dropColumn('approved');
         });
     }
 }

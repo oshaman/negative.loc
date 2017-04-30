@@ -19,7 +19,11 @@ abstract class Repository {
 		}
 		
 		if($where) {
-			$builder->where($where[0], $where[1], $where[2] = false);
+            if (is_array($where[0])) {
+                $builder->where([$where[0], $where[1]]);
+            } else {
+                $builder->where($where[0], $where[1], $where[2] = false);
+            }
 		}
         
         if($order) {
