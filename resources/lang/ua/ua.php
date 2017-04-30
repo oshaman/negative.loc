@@ -51,10 +51,7 @@ return [
     */
     'source' => 'Джерело',
     'cat' => 'Категорія',
-    /**
-    *   ADMIN  
-    */
-    'articles_manager' => 'Менеджер новин',
+    
     
     
     

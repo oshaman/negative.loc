@@ -16,10 +16,14 @@ class PermissionsSeeder extends Seeder
                 ['name'=>'ADMIN_USERS'],
                 ['name'=>'CONFIRMATION_DATA'],
                 ['name'=>'VIEW_ADMIN'],
-                ['name'=>'VIEW_DATA'],
-                ['name'=>'EDIT_DATA'],
-                ['name'=>'VIEW_ADMIN_ARTICLES'],
-                ['name'=>'VIEW_ADMIN_EVENTS'],
+                //  events
+                ['name'=>'ADD_EVENTS'],
+                ['name'=>'UPDATE_EVENTS'],
+                ['name'=>'DELETE_EVENTS'],
+                //  articles
+                ['name'=>'ADD_ARTICLES'],
+                ['name'=>'UPDATE_ARTICLES'],
+                ['name'=>'DELETE_ARTICLES'],
             ]
         );
     }

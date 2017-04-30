@@ -2,6 +2,9 @@
 
 namespace Oshaman\Publication\Providers;
 
+use Oshaman\Publication\Article;
+use Oshaman\Publication\Policies\ArticlePolicy;
+
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -33,12 +36,12 @@ class AuthServiceProvider extends ServiceProvider
         	return $user->canDo('VIEW_ADMIN', FALSE);
         });
 
-        Gate::define('VIEW_ADMIN_ARTICLES', function ($user) {
-                    return $user->canDo('VIEW_ADMIN_ARTICLES', FALSE);
+        Gate::define('UPDATE_ARTICLES', function ($user) {
+                    return $user->canDo('UPDATE_ARTICLES', FALSE);
         });
         
-        Gate::define('VIEW_ADMIN_EVENTS', function ($user) {
-                    return $user->canDo('VIEW_ADMIN_EVENTS', FALSE);
+        Gate::define('UPDATE_EVENTS', function ($user) {
+                    return $user->canDo('UPDATE_EVENTS', FALSE);
         });
         
         // Gate::define('EDIT_USERS', function ($user) {

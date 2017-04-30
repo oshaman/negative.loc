@@ -44,13 +44,14 @@ class AdminController extends Controller
 			
 			$menu->add(trans('ua.home'),  array('route'  => 'home'))->prepend('<i class="icon-home"></i>');
             
-            if(Gate::allows('VIEW_ADMIN_ARTICLES')) {
+            if(Gate::allows('UPDATE_ARTICLES')) {
                 $menu->add(trans('ua.articles'), array('route' => 'admin_articles'))->prepend('<i class="icon-file"></i>');
             }
             
-            if(Gate::allows('VIEW_ADMIN_EVENTS')) {
+            if(Gate::allows('UPDATE_EVENTS')) {
                 $menu->add(trans('ua.history'), array('route' => 'admin_events'))->prepend('<i class="icon-calendar"></i>');
             }
+            
             /* 
             if(Gate::allows('VIEW_ADMIN_MENU')){
                 $menu->add('Меню',  array('route'  => 'menus.index'));

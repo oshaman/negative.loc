@@ -18,6 +18,7 @@ class RolesSeeder extends Seeder
                 ['name'=>'moderator'],
                 ['name'=>'admin'],
                 ['name'=>'articles_moderator'],
+                ['name'=>'events_moderator'],
             ]
         );
     }

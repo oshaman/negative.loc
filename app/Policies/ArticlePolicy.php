@@ -2,8 +2,10 @@
 
 namespace Oshaman\Publication\Policies;
 
-use Oshaman\Publication\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+
+use Oshaman\Publication\User;
+use Oshaman\Publication\Article;
 
 class ArticlePolicy
 {
@@ -19,15 +21,18 @@ class ArticlePolicy
         //
     }
     
-    public function save(User $user) {
+    public function create(User $user)
+    {
 		return $user->canDo('ADD_ARTICLES');
 	}
     
-    public function edit(User $user) {
-		return $user->canDo('UPDATE_ARTICLES');
+    public function update(User $user, Article $article)
+    {
+		return ($user->canDo('UPDATE_ARTICLES') && $user->id == $article->user_id);
 	}
     
-    public function destroy(User $user, Article $article) {
+    public function destroy(User $user, Article $article)
+    {
 		return ($user->canDo('DELETE_ARTICLES')  && $user->id == $article->user_id);
 	}
 }

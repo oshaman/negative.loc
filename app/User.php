@@ -33,12 +33,14 @@ class User extends Authenticatable
 	}
 	
 	
-	public function roles() {
+	public function roles()
+    {
 		return $this->belongsToMany('Oshaman\Publication\Role','role_user');
 	}
     
     //  set $requre = true if all of permissions has to be checked
-	public function canDo($permission, $require = FALSE) {
+	public function canDo($permission, $require = FALSE)
+    {
 		if(is_array($permission)) {
 			foreach($permission as $permName) {
 				

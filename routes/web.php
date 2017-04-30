@@ -41,17 +41,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
         //  (editor uses)show articles list sort by CHECKED, DATE or AUTHOR
         Route::get('sort/{alias}/{param?}', 'Admin\ArticlesController@sorted')->where(['alias' => '[\w-]{5,20}', 'param' => '[\w-]{,20}']);
         
-        Route::match(['get', 'post'], 'create', 'Admin\ArticlesController@create');
-        Route::match(['get', 'post'], 'edit/{alias}', 'Admin\ArticlesController@edit')->where('alias', '[\w-]{5,20}');
-        Route::get('del/{alias}', 'Admin\ArticlesController@destroy')->where('alias', '[\w-]{5,20}');
+        Route::match(['get', 'post'], 'create', ['uses'=>'Admin\ArticlesController@create', 'as'=>'create_article']);
+        Route::match(['get', 'post'], 'edit/{alias}', ['uses'=>'Admin\ArticlesController@edit', 'as'=>'edit_article'])->where('alias', '[\w-]{5,20}');
+        Route::match(['get', 'post'], 'del/{alias}', ['uses'=>'Admin\ArticlesController@del', 'as'=>'delete_article'])->where('alias', '[\w-]{5,20}');
         
     });
-    
+    Route::get('events', ['uses' => 'Admin\EventsController@index', 'as' => 'admin_events']);
     /**
     *   Admin HISTORY
     * 
     */    
-    Route::match(['get', 'post'], 'events', ['uses' => 'Admin\EvetntsController@index', 'as' => 'admin_events']);
+    Route::match(['get', 'post'], 'events', ['uses' => 'Admin\EventsController@index', 'as' => 'admin_events']);
 });
 
 
