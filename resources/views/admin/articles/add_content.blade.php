@@ -14,40 +14,83 @@
 <!-- START CONTENT -->
 <div id="content" class="group">
     <div class="page type-page status-publish hentry group">
-        <form id="contact-form-example" class="contact-form" method="post" action="sendmail.php" enctype="multipart/form-data">
+        {!! Form::open([
+            'url' => route('create_article'),
+            'class' => 'contact-form',
+            'method' => 'POST',
+            'enctype' => 'multipart/form-data',
+            'novalidate'=>''
+        ]) !!}
             <fieldset>
                 <ul>
                     <li class="text-field">
-                        <label for="name-example">
-                        <span class="label">Name</span>
-                        </label>
-                        <div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span><input type="text" name="name" id="name-example" class="required" value="" /></div>
-                        <div class="msg-error"></div>
+                        <h4>{!! Form::label('a_title', trans('admin.add_title')); !!}</h4>
+                        <div class="input-prepend"><span class="add-on"><i class="icon-th-list"></i></span>
+                            {!! Form::text('title', old('title') ? : '', ['placeholder'=>trans('admin.add_title_placeholder'), 'id'=>'a_title', 'required' => '']) !!}
+                        </div>
                     </li>
                     <li class="text-field">
-                        <label for="email-example">
-                        <span class="label">Email</span>
-                        </label>
-                        <div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span><input type="text" name="email" id="email-example" class="required email-validate" value="" /></div>
+                        <h4>{!! Form::label('a_alias', trans('admin.add_alias')); !!}</h4>
+                        <div class="input-prepend"><span class="add-on"><i class="icon-th-list"></i></span>
+                            {!! Form::text('alias', old('alias') ? : '', ['placeholder'=>trans('admin.add_alias_placeholder'), 'id'=>'a_alias']) !!}
+                        </div>
+                    </li>
+                    <li class="text-field">
+                        <h4>{!! Form::label('a_keywords', trans('admin.add_keywords')); !!}</h4>
+                        <div class="input-prepend"><span class="add-on"><i class="icon-pushpin"></i></span>
+                            {!! Form::text('keywords', old('keywords') ? : '', ['placeholder'=>trans('admin.add_keywords_placeholder'), 'id'=>'a_keywords', 'required' => '']) !!}
+                        </div>
+                    </li>
+                    <li class="text-field">
+                        <h4>{!! Form::label('a_meta', trans('admin.add_meta')); !!}</h4>
+                        <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
+                            {!! Form::text('meta', old('meta') ? : '', ['placeholder'=>trans('admin.add_meta_placeholder'), 'id'=>'a_meta']) !!}
+                        </div>
+                    </li>
+                <!-- TextArea -->
+                    <li class="textarea-field">
+                        <h4>{!! Form::label('editor', trans('admin.add_text')); !!}</h4>
+                        <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
+                            {!! Form::textarea('text', old('text') ? : '', ['id'=>'editor','required'=>'', 'rows'=>8, 'cols'=>30]) !!}
+                        </div>
                         <div class="msg-error"></div>
                     </li>
                     <li class="textarea-field">
-                        <label for="message-example">
-                        <span class="label">Message</span>
-                        </label>
-                        <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span><textarea name="message" id="message-example" rows="8" cols="30" class="required"></textarea></div>
+                        <h4>{!! Form::label('editor2', trans('admin.add_desc')); !!}</h4>
+                        <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
+                            {!! Form::textarea('description', old('description') ? : '', ['id'=>'editor2','required'=>'', 'rows'=>8, 'cols'=>30]) !!}
+                        </div>
+                    </li>
+                    
+                    <li class="text-field">
+                        <h4>{!! Form::label('img', trans('admin.add_img')); !!}</h4>
+                        <div class="input-prepend"><span class="add-on"><i class="icon-picture"></i></span>
+                            {!! Form::file('image', ['accept'=>'image/*', 'data-placeholder'=>trans('admin.add_img')]) !!}
+                        </div>
+                    </li>
+                    <li class="text-field">
+                        <h4>{!! Form::label('cats', trans('admin.add_cat')); !!}</h4>
+                        <div class="input-prepend">
+                            {!! Form::select('cats', $categories, old('keywords') ? : null, ['placeholder' => 'Pick a size...']) !!}
+                        </div>
                         <div class="msg-error"></div>
                     </li>
+                    
+                    
+                    
+                    
+                    
+                    
                     <li class="submit-button">
-                        <input type="text" name="yiw_bot" id="yiw_bot" />
-                        <input type="hidden" name="action" value="sendemail" id="action" />
-                        <input type="hidden" name="yiw_referer" value="#" />
-                        <input type="hidden" name="id_form" value="example" />
-                        <input type="submit" name="yiw_sendemail" value="send message" class="sendmail alignright" />			
+                        {!! Form::button(trans('admin.save'), ['class' => 'btn btn-campfire-5','type'=>'submit']) !!}			
                     </li>
                 </ul>
             </fieldset>
-        </form>
+        {!! Form::close() !!}
+    <script>
+        CKEDITOR.replace( 'editor' );
+        CKEDITOR.replace( 'editor2' );
+    </script>
     </div>
 </div>
 <!-- END CONTENT -->

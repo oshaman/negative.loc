@@ -28,7 +28,7 @@ class ArticlesController extends AdminController
         $this->title = trans('admin.articles_manager');
         
         $articles = $this->a_rep->get(['id', 'title', 'description', 'alias', 'img', 'category_id', 'approved'], false, true, ['user_id', Auth::id()], ['created_at', 'desc']);
-        
+
         if ($articles) {
             $articles->load('category');
         }
@@ -47,12 +47,11 @@ class ArticlesController extends AdminController
     {
         if (Gate::denies('create', new \Oshaman\Publication\Article)) {
             abort(404);
-		}   else {dd('++++++');}
+		}
 		
-        
-		$this->title = "Добавить новый материал";
+        $this->title = trans('admin.add');
 		
-		$categories = Category::select(['title','alias','parent_id','id'])->get();
+		$categories = Category::select(['title','parent_id','id'])->get();
 		
 		$lists = array();
 		
@@ -61,11 +60,11 @@ class ArticlesController extends AdminController
 				$lists[$category->title] = array();
 			}
 			else {
-				$lists[$categories->where('id',$category->parent_id)->first()->title][$category->id] = $category->title;    
+				$lists[$categories->where('id',$category->parent_id)->first()->title][$category->id] = trans('categories.' . $category->title);    
 			}
 		}
 		
-		$this->content = view('admin.add_content')->with('categories', $lists)->render();
+		$this->content = view('admin.articles.add_content')->with('categories', $lists)->render();
 		
 		return $this->renderOutput();
         

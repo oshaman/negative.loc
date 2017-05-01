@@ -40,6 +40,7 @@
 <script src="{{ asset(config('settings.theme')) }}/js/superfish.js"></script>
 <script src="{{ asset(config('settings.theme')) }}/js/buttons.min.js"></script>
 <script src="{{ asset(config('settings.theme')) }}/js/jquery.quicksand.js"></script>
+<script src="{{ asset(config('settings.theme')) }}/js/ckeditor/ckeditor.js"></script>
 </head>
 <!-- BODY -->
 <body class="no_js responsive boxed-layout chrome">
