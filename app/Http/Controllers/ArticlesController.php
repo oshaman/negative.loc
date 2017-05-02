@@ -74,7 +74,7 @@ class ArticlesController extends MainController
             return $this->renderOutput();
         }
         
-        $cats = Category::select('*')->get();
+        $cats = Category::select('*')->whereNotIn('parent_id', [0])->get();
         
         foreach ($cats as $cat) {
             $where = array(['category_id', $cat->id], ['approved', true]);

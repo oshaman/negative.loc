@@ -9,6 +9,7 @@ use Auth;
 use Gate;
 use Oshaman\Publication\Category;
 use Oshaman\Publication\Repositories\ArticlesRepository;
+use Oshaman\Publication\Http\Requests\ArticleRequest;
 
 class ArticlesController extends AdminController
 {
@@ -43,12 +44,31 @@ class ArticlesController extends AdminController
         dd('sorted');
     }
     
-    public function create()
+    public function create(ArticleRequest $request)
     {
         if (Gate::denies('create', new \Oshaman\Publication\Article)) {
             abort(404);
 		}
+        /**
+        * Store a newly created resource in storage.
+        *
+        */
+        if ($request->isMethod('post')) {
+
+            $result = $this->a_rep->addArticle($request);
 		
+            if(is_array($result) && !empty($result['error'])) {
+                return back()->with($result);
+            }
+            
+            return redirect('/admin')->with($result);
+        }
+        
+        /**
+        * Show the form for creating a new resource.
+        *
+        */
+        
         $this->title = trans('admin.add');
 		
 		$categories = Category::select(['title','parent_id','id'])->get();
@@ -64,7 +84,7 @@ class ArticlesController extends AdminController
 			}
 		}
 		
-		$this->content = view('admin.articles.add_content')->with('categories', $lists)->render();
+		$this->content = view('admin.articles.add_content')->with(['categories' => $lists, 'request' => $request->all()])->render();
 		
 		return $this->renderOutput();
         

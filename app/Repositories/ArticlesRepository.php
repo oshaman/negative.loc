@@ -27,31 +27,31 @@ class ArticlesRepository extends Repository {
 		
 		return $article;
 	}
-	
-	/* public function addArticle($request) {
+    
+	public function addArticle($request) {
 
-		if(Gate::denies('save', $this->model)) {
-			abort(403);
+		if (Gate::denies('save', $this->model)) {
+			abort(404);
 		}
 		
 		$data = $request->except('_token','image');
 		
-		if(empty($data)) {
+		if (empty($data)) {
 			return array('error' => 'Нет данных');
 		}
 		
-		if(empty($data['alias'])) {
+		if (empty($data['alias'])) {
 			$data['alias'] = $this->transliterate($data['title']);
 		}
 		
-		if($this->one($data['alias'],FALSE)) {
+		if ($this->one($data['alias'],FALSE)) {
 			$request->merge(array('alias' => $data['alias']));
 			$request->flash();
 			
 			return ['error' => 'Данный псевдоним уже успользуется'];
 		}
 		
-		if($request->hasFile('image')) {
+		if ($request->hasFile('image')) {
 			$image = $request->file('image');
 			
 			if($image->isValid()) {
@@ -83,14 +83,13 @@ class ArticlesRepository extends Repository {
 				
 				if($request->user()->articles()->save($this->model)) {
 					return ['status' => 'Материал добавлен'];
-				}                          
-				
+				}
 			}
-			
 		}	
 	}
     
-    public function updateArticle($request, $article) {
+    
+	/* public function updateArticle($request, $article) {
 
 		if(Gate::denies('edit', $this->model)) {
 			abort(403);

@@ -14,6 +14,16 @@
 <!-- START CONTENT -->
 <div id="content" class="group">
     <div class="page type-page status-publish hentry group">
+    {{dump($request)}}
+   @if (count($errors) > 0)
+        <div class="contact-form">
+                <p class="error">
+                @foreach ($errors->toArray() as $key=>$error)
+                    {!! str_replace($key, '<strong>' . trans('admin.' . $key) . '</strong>', $error[0]) !!}</br>
+                @endforeach
+                </p>
+        </div>
+    @endif
         {!! Form::open([
             'url' => route('create_article'),
             'class' => 'contact-form',
@@ -26,7 +36,8 @@
                     <li class="text-field">
                         <h4>{!! Form::label('a_title', trans('admin.add_title')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-th-list"></i></span>
-                            {!! Form::text('title', old('title') ? : '', ['placeholder'=>trans('admin.add_title_placeholder'), 'id'=>'a_title', 'required' => '']) !!}
+                            {!! Form::text('title', old('title') ? : '', ['placeholder'=>trans('admin.add_title_placeholder'), 'id'=>'a_title',
+                            'required' => '']) !!}
                         </div>
                     </li>
                     <li class="text-field">
@@ -45,6 +56,12 @@
                         <h4>{!! Form::label('a_meta', trans('admin.add_meta')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
                             {!! Form::text('meta', old('meta') ? : '', ['placeholder'=>trans('admin.add_meta_placeholder'), 'id'=>'a_meta']) !!}
+                        </div>
+                    </li>
+                    <li class="text-field">
+                        <h4>{!! Form::label('a_source', trans('admin.add_source')); !!}</h4>
+                        <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
+                            {!! Form::text('a_source', old('a_source') ? : '', ['placeholder'=>trans('admin.add_source_placeholder'), 'id'=>'a_source']) !!}
                         </div>
                     </li>
                 <!-- TextArea -->
@@ -69,9 +86,9 @@
                         </div>
                     </li>
                     <li class="text-field">
-                        <h4>{!! Form::label('cats', trans('admin.add_cat')); !!}</h4>
+                        <h4>{!! Form::label('cat', trans('admin.add_cat')); !!}</h4>
                         <div class="input-prepend">
-                            {!! Form::select('cats', $categories, old('keywords') ? : null, ['placeholder' => 'Pick a size...']) !!}
+                            {!! Form::select('cat', $categories, old('keywords') ? : null, ['placeholder' => trans('admin.add_cat_placeholder')]) !!}
                         </div>
                         <div class="msg-error"></div>
                     </li>

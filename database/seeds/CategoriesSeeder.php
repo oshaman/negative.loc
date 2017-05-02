@@ -13,12 +13,12 @@ class CategoriesSeeder extends Seeder
     {
         DB::table('categories')->insert(
             [
-                ['title'=>'main'],
-                ['title'=>'incidents'],
-                ['title'=>'economy'],
-                ['title'=>'sport'],
-                ['title'=>'politics'],
-                ['title'=>'world'],
+                ['title'=>'main', 'parent_id'=>0],
+                ['title'=>'incidents', 'parent_id'=>1],
+                ['title'=>'economy', 'parent_id'=>1],
+                ['title'=>'sport', 'parent_id'=>1],
+                ['title'=>'politics', 'parent_id'=>1],
+                ['title'=>'world', 'parent_id'=>1],
             ]
         );
     }
