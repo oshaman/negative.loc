@@ -48,9 +48,30 @@
 <div class="wrapper group">
     @yield('header')
     <!-- CONTENT -->
+    <div id="page_meta" class="home-section">
+        <div class="inner group">
+            <div class="meta-left">
+                <h2 class="page-title">Articles</h2><span class="special-font" style="font-size:18px;">special font!</span>
+            </div>
+            <div class="meta-right">
+                <span class="twitter_label twitter_label-red">your text</span>
+            </div>
+            @if (session('status'))
+                <div class="box success-box">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="box error-box">
+                    {{ session('error') }}
+                </div>
+            @endif
+        </div>
+    </div>
     @yield('content')
         </div>  
-    </div>  
+    </div>
     <div class="clear"></div>
 </div>
     <!-- FOOTER -->

@@ -30,7 +30,7 @@ class ArticlesRepository extends Repository {
     
 	public function addArticle($request) {
 
-		if (Gate::denies('save', $this->model)) {
+		if (Gate::denies('create', $this->model)) {
 			abort(404);
 		}
 		
@@ -40,17 +40,22 @@ class ArticlesRepository extends Repository {
 			return array('error' => 'Нет данных');
 		}
 		
+        if (!empty($data['delay'])) {
+            $data['created_at'] = date("Y-m-d H:i:s", time()+$data['delay']*60);
+        }
+        
 		if (empty($data['alias'])) {
-			$data['alias'] = $this->transliterate($data['title']);
+			$data['alias'] = $this->transliterate($data['title']) . '-' .date('YmdH');
 		}
+        
 		
 		if ($this->one($data['alias'],FALSE)) {
 			$request->merge(array('alias' => $data['alias']));
 			$request->flash();
 			
-			return ['error' => 'Данный псевдоним уже успользуется'];
+			return ['error' => trans('admin.alias_in_use')];
 		}
-		
+		dd($data);
 		if ($request->hasFile('image')) {
 			$image = $request->file('image');
 			
@@ -77,15 +82,16 @@ class ArticlesRepository extends Repository {
 						
 				
 				$data['img'] = json_encode($obj);  
-                // dd($data);
 				
-				$this->model->fill($data); 
-				
-				if($request->user()->articles()->save($this->model)) {
-					return ['status' => 'Материал добавлен'];
-				}
 			}
-		}	
+		}
+        $this->model->fill($data); 
+				
+        dd($this->model);
+        
+        if($request->user()->articles()->save($this->model)) {
+            return ['status' => 'Материал добавлен'];
+        }
 	}
     
     

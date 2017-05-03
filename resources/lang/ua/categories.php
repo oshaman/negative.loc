@@ -10,6 +10,7 @@ return [
     | The following language lines contain the default cats messages .
     |
     */
+    'main' => 'Основні',
     'economy' => 'Економіка',
     'incidents' => 'Події',
     'sport' => 'Спорт',

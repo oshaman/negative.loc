@@ -1,20 +1,9 @@
-<div id="page_meta" class="home-section">
-    <div class="inner group">
-        <div class="meta-left">
-            <h2 class="page-title">Articles</h2><span class="special-font" style="font-size:18px;">special font!</span>
-        </div>
-        <div class="meta-right">
-            <span class="twitter_label twitter_label-red">your text</span>
-        </div>
-    </div>
-</div>
 <div id="primary" class="layout-sidebar-no home-section">
     <div class="inner group">
 
 <!-- START CONTENT -->
 <div id="content" class="group">
     <div class="page type-page status-publish hentry group">
-    {{dump($request)}}
    @if (count($errors) > 0)
         <div class="contact-form">
                 <p class="error">
@@ -29,7 +18,8 @@
             'class' => 'contact-form',
             'method' => 'POST',
             'enctype' => 'multipart/form-data',
-            'novalidate'=>''
+            'novalidate'=>'',
+            'files' => true
         ]) !!}
             <fieldset>
                 <ul>
@@ -55,14 +45,21 @@
                     <li class="text-field">
                         <h4>{!! Form::label('a_meta', trans('admin.add_meta')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
-                            {!! Form::text('meta', old('meta') ? : '', ['placeholder'=>trans('admin.add_meta_placeholder'), 'id'=>'a_meta']) !!}
+                            {!! Form::text('meta_desc', old('meta_desc') ? : '', ['placeholder'=>trans('admin.add_meta_placeholder'), 'id'=>'a_meta']) !!}
                         </div>
                     </li>
                     <li class="text-field">
                         <h4>{!! Form::label('a_source', trans('admin.add_source')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
-                            {!! Form::text('a_source', old('a_source') ? : '', ['placeholder'=>trans('admin.add_source_placeholder'), 'id'=>'a_source']) !!}
+                            {!! Form::text('source', old('source') ? : '', ['placeholder'=>trans('admin.add_source_placeholder'), 'id'=>'a_source']) !!}
                         </div>
+                    </li>
+                    <li class="text-field">
+                        <h4>{!! Form::label('cat', trans('admin.add_cat')); !!}</h4>
+                        <div class="input-prepend">
+                            {!! Form::select('category_id', $categories, old('category_id') ? : null, ['placeholder' => trans('admin.add_cat_placeholder')]) !!}
+                        </div>
+                        <div class="msg-error"></div>
                     </li>
                 <!-- TextArea -->
                     <li class="textarea-field">
@@ -78,26 +75,21 @@
                             {!! Form::textarea('description', old('description') ? : '', ['id'=>'editor2','required'=>'', 'rows'=>8, 'cols'=>30]) !!}
                         </div>
                     </li>
-                    
+                <!-- Image -->
                     <li class="text-field">
-                        <h4>{!! Form::label('img', trans('admin.add_img')); !!}</h4>
+                        <h4>{!! Form::label('a_img', trans('admin.add_img')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-picture"></i></span>
-                            {!! Form::file('image', ['accept'=>'image/*', 'data-placeholder'=>trans('admin.add_img')]) !!}
+                            {!! Form::file('img', ['accept'=>'image/*', 'id'=>'a_img']) !!}
                         </div>
                     </li>
                     <li class="text-field">
-                        <h4>{!! Form::label('cat', trans('admin.add_cat')); !!}</h4>
-                        <div class="input-prepend">
-                            {!! Form::select('cat', $categories, old('keywords') ? : null, ['placeholder' => trans('admin.add_cat_placeholder')]) !!}
+                        <h4>{!! Form::label('delay', trans('admin.add_delay')); !!}</h4>
+                        <div class="input-prepend"><span class="add-on"><i class="icon-time"></i></span>
+                            <input type="text" name="delay" id="delay">
                         </div>
-                        <div class="msg-error"></div>
                     </li>
                     
-                    
-                    
-                    
-                    
-                    
+                <!-- Submit -->
                     <li class="submit-button">
                         {!! Form::button(trans('admin.save'), ['class' => 'btn btn-campfire-5','type'=>'submit']) !!}			
                     </li>

@@ -16,6 +16,31 @@ class ArticleRequest extends FormRequest
         return \Auth::user()->canDo('ADD_ARTICLES');
     }
 
+    protected function getValidatorInstance()
+    {
+        $validator = parent::getValidatorInstance();
+    	
+        // $model = $this->route()->parameter('article');
+    	// dd($model);
+    	
+    	$validator->sometimes('alias','unique:articles|max:255', function($input) {
+        	
+        	
+        	if($this->route()->hasParameter('article')) {
+				$model = $this->route()->parameter('article');
+				
+				return ($model->alias !== $input->alias)  && !empty($input->alias);
+			}
+        	
+        	return !empty($input->alias);
+        	
+        });
+        
+        return $validator;
+    	
+    	
+    }
+    
     /**
      * Get the validation rules that apply to the request.
      *
@@ -27,7 +52,7 @@ class ArticleRequest extends FormRequest
             return [
                 'title' => 'required|max:255',
                 'text' => 'required',
-                'cat' => 'required|integer'
+                'category_id' => 'required|integer'
             ];
         }
         

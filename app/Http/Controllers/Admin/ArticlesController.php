@@ -77,14 +77,14 @@ class ArticlesController extends AdminController
 		
 		foreach($categories as $category) {
 			if($category->parent_id == 0) {
-				$lists[$category->title] = array();
+				$lists[trans('categories.' . $category->title)] = array();
 			}
 			else {
-				$lists[$categories->where('id',$category->parent_id)->first()->title][$category->id] = trans('categories.' . $category->title);    
+				$lists[trans('categories.' . $categories->where('id',$category->parent_id)->first()->title)][$category->id] = trans('categories.' . $category->title);    
 			}
 		}
 		
-		$this->content = view('admin.articles.add_content')->with(['categories' => $lists, 'request' => $request->all()])->render();
+		$this->content = view('admin.articles.add_content')->with('categories', $lists)->render();
 		
 		return $this->renderOutput();
         
