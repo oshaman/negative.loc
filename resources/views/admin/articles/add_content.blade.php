@@ -88,13 +88,15 @@
                             <input type="text" name="delay" id="delay">
                         </div>
                     </li>
-                    
-                <!-- Submit -->
-                    <li class="submit-button">
-                        {!! Form::button(trans('admin.save'), ['class' => 'btn btn-campfire-5','type'=>'submit']) !!}			
-                    </li>
                 </ul>
             </fieldset>
+                <!-- Approved -->
+                @if(Auth::user()->canDo('CONFIRMATION_DATA'))
+                        <h5><input name="approved" type="checkbox" value="1">{{ trans('admin.approved') }}</h5>
+                @endif
+                <!-- Submit -->
+                {!! Form::button(trans('admin.save'), ['class' => 'btn btn-large btn-campfire-5','type'=>'submit']) !!}			
+
         {!! Form::close() !!}
     <script>
         CKEDITOR.replace( 'editor' );

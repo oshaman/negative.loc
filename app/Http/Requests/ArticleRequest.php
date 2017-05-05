@@ -23,8 +23,7 @@ class ArticleRequest extends FormRequest
         // $model = $this->route()->parameter('article');
     	// dd($model);
     	
-    	$validator->sometimes('alias','unique:articles|max:255', function($input) {
-        	
+    	$validator->sometimes('alias','unique:articles|max:255|alpha_dash', function($input) {
         	
         	if($this->route()->hasParameter('article')) {
 				$model = $this->route()->parameter('article');
@@ -36,9 +35,13 @@ class ArticleRequest extends FormRequest
         	
         });
         
+        $validator->sometimes('delay','numeric|max:720', function($input) {
+        	
+        	return !empty($input->delay);
+        	
+        });
+        
         return $validator;
-    	
-    	
     }
     
     /**

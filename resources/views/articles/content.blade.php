@@ -25,7 +25,7 @@
             </p>
             <p class="author">
                 <i class="icon-external-link"></i> <span>{{ trans('ua.source') }}:
-                <a href="{{ $content->source ?: route('home') }}"  class="link">{{ $content->source ?: route('home')}}</a></span>
+                <a href="{{ $content->source ?: route('home') }}"  class="link">{{ $content->source }}</a></span>
             </p>
             <p class="categories">
                 <i class="icon-tags"></i> <span>{{ trans('ua.cat') }}: <a href="{{ route('cat_alias', $content->category->alias) }}" class="cats">{{ trans('categories.' . $content->category->title) }}</a></span>
@@ -38,7 +38,7 @@
         <div class="thumbnail">
             <h1 class="post-title">{{ $content->title }}</h1>
             <div class="image-wrap">
-                <img width="720" height="298" src="{{ asset(config('settings.theme')) }}/images/articles/{{ $content->img }}" class="attachment-blog_big wp-post-image" alt="{{ $content->img }}" title="{{ $content->title }}" />                            
+                <img width="720" height="298" src="{{ asset(config('settings.theme')) }}/images/articles/{{ $content->img ? : ('pic'.rand(1,14).'.jpg')}}" class="attachment-blog_big wp-post-image" alt="{{ $content->title }}" title="{{ $content->title }}" />                            
             </div>
         </div>
         <div class="clearer"></div>

@@ -12,14 +12,14 @@
 */
 Route::get('/', ['uses' => 'HomeController@index', 'as' => 'home']);
 Route::match(['get', 'post'], 'contacts', ['uses' => 'ContactsController@index', 'as' => 'contacts']);
-Route::get('history/{alias?}', ['uses' => 'EventsController@index', 'as' => 'history'])->where('alias', '[\w-]{5,64}');
+Route::get('history/{alias?}', ['uses' => 'EventsController@index', 'as' => 'history'])->where('alias', '[\w-_]{5,64}');
 
 
 //news
 Route::group(['prefix' => 'news'],function() {
 
     Route::get('/', 'HomeController@index');
-    Route::get('article/{alias?}', ['uses' => 'ArticlesController@index', 'as' => 'articles'])->where('alias', '[\w-]+');
+    Route::get('article/{alias?}', ['uses' => 'ArticlesController@index', 'as' => 'articles'])->where('alias', '[\w_-]+');
     Route::get('category/{cat_alias?}',['uses'=>'ArticlesController@show','as'=>'cat_alias'])->where('cat_alias','[\w-]{5,20}');
 	
 	
@@ -39,11 +39,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
         //  show articles list
         Route::get('/', ['uses' => 'Admin\ArticlesController@index', 'as' => 'admin_articles']);
         //  (editor uses)show articles list sort by CHECKED, DATE or AUTHOR
-        Route::get('sort/{alias}/{param?}', 'Admin\ArticlesController@sorted')->where(['alias' => '[\w-]{5,20}', 'param' => '[\w-]{,20}']);
+        Route::get('sort/{alias}/{param?}', 'Admin\ArticlesController@sorted')->where(['alias' => '[\w_-]{,20}', 'param' => '[\w-_]{,255}']);
         
         Route::match(['get', 'post'], 'create', ['uses'=>'Admin\ArticlesController@create', 'as'=>'create_article']);
-        Route::match(['get', 'post'], 'edit/{alias}', ['uses'=>'Admin\ArticlesController@edit', 'as'=>'edit_article'])->where('alias', '[\w-]{5,20}');
-        Route::match(['get', 'post'], 'del/{alias}', ['uses'=>'Admin\ArticlesController@del', 'as'=>'delete_article'])->where('alias', '[\w-]{5,20}');
+        Route::match(['get', 'post'], 'edit/{id}', ['uses'=>'Admin\ArticlesController@edit', 'as'=>'edit_article'])->where('id', '[0-9]+');
+        Route::match(['get', 'post'], 'del/{alias}', ['uses'=>'Admin\ArticlesController@del', 'as'=>'delete_article'])->where('alias', '[\w-_]{5,255}');
         
     });
     Route::get('events', ['uses' => 'Admin\EventsController@index', 'as' => 'admin_events']);

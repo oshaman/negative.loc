@@ -22,7 +22,7 @@
             @foreach($articles as $article)
                 <tr>
                     <th class="features">{{ $article->id }}</th>
-                    <td>{!! Html::link(route('edit_article',['articles'=>$article->alias]),$article->title) !!}</td>
+                    <td>{!! Html::link(route('edit_article',['articles'=>$article->id]),$article->title) !!}</td>
                     <td>{{ str_limit($article->description,200) }}</td>
                     <td>
                         @if(isset($article->img->mini))

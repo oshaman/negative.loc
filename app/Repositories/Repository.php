@@ -47,7 +47,7 @@ abstract class Repository {
 		
 		$result->transform(function($item,$key) {
 			
-			if(is_string($item->img) && is_object(json_decode($item->img)) && (json_last_error() == JSON_ERROR_NONE)) {
+			if (is_string($item->img) && is_object(json_decode($item->img)) && (json_last_error() == JSON_ERROR_NONE)) {
 				$item->img = json_decode($item->img);
 			}
 
@@ -62,6 +62,13 @@ abstract class Repository {
 	public function one($alias, $attr = array())
     {
 		$result = $this->model->where('alias', $alias)->first();
+		
+		return $result;
+	}
+    
+    public function findById($id, $attr = array())
+    {
+		$result = $this->model->where('id', $id)->first();
 		
 		return $result;
 	}
@@ -104,11 +111,10 @@ abstract class Repository {
 			'ya' => 'я',
 		);
 		
-		foreach($leter_array as $leter => $kyr) {
+		foreach ($leter_array as $leter => $kyr) {
 			$kyr = explode(',',$kyr);
 			
 			$str = str_replace($kyr,$leter, $str);
-			
 		}
 		
 		//  A-Za-z0-9-

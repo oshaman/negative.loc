@@ -34,41 +34,64 @@ class ArticlesRepository extends Repository {
 			abort(404);
 		}
 		
-		$data = $request->except('_token','image');
+		$data = $request->except('_token','img');
 		
 		if (empty($data)) {
-			return array('error' => 'Нет данных');
+			return array('error' => trans('admin.no_data'));
 		}
 		
-        if (!empty($data['delay'])) {
-            $data['created_at'] = date("Y-m-d H:i:s", time()+$data['delay']*60);
-        }
-        
 		if (empty($data['alias'])) {
-			$data['alias'] = $this->transliterate($data['title']) . '-' .date('YmdH');
+			$data['alias'] = $this->transliterate($data['title']) . '-' .date('Ymd');
 		}
         
-		
 		if ($this->one($data['alias'],FALSE)) {
 			$request->merge(array('alias' => $data['alias']));
 			$request->flash();
 			
 			return ['error' => trans('admin.alias_in_use')];
 		}
-		dd($data);
-		if ($request->hasFile('image')) {
-			$image = $request->file('image');
+        
+        if (!empty($data['delay'])) {
+            $data['created_at'] = date("Y-m-d H:i:s", time()+$data['delay']*60);
+        }
+        
+        if (empty($data['source'])) {
+            $data['source'] = 'www.' . config('app.name');
+        }
+        
+        if (empty($data['keywords'])) {
+            $data['keywords'] = $data['title'];
+        }
+        
+        if (empty($data['meta_desc'])) {
+            $data['meta_desc'] = $data['title'];
+        }
+        
+        if (empty($data['description'])) {
+            $data['description'] = str_limit($data['text'], 320);
+        }
+        
+        if (!empty($data['approved'])) {
+            if (Gate::denies('CONFIRMATION_DATA')) {
+                array_forget($data, 'approved');
+            } else {
+                $data['approved'] = true;
+            }
+        }
+		
+		if ($request->hasFile('img')) {
+			$image = $request->file('img');
 			
 			if($image->isValid()) {
 				
-				$str = str_random(16);
-				
+				$str = str_limit($data['alias'], 56) . '-' . time();
+				// dd($str);
 				$obj = new \stdClass;
 				
 				$obj->mini = $str.'_mini.jpg';
 				$obj->max = $str.'_max.jpg';
 				$obj->path = $str.'.jpg';
-				
+                
 				$img = Image::make($image);
 				
 				$img->fit(Config::get('settings.image')['width'],
@@ -82,15 +105,14 @@ class ArticlesRepository extends Repository {
 						
 				
 				$data['img'] = json_encode($obj);  
-				
 			}
 		}
-        $this->model->fill($data); 
-				
-        dd($this->model);
         
-        if($request->user()->articles()->save($this->model)) {
-            return ['status' => 'Материал добавлен'];
+        $this->model->fill($data);
+        dd($this->model);
+        $id = $request->user()->articles()->save($this->model)->id;
+        if($id) {
+            return ['status' => trans('admin.material_added'), 'id' => $id];
         }
 	}
     

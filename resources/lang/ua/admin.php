@@ -15,6 +15,10 @@ return [
     'delete' => 'Видалити',
     'save' => 'Зберегти',
     'add' => 'Додати новий матеріал',
+    'no_data' => 'Немає даних',
+    'material_added' => 'Матеріал додано',
+    'approved' => 'Санкціювати матеріал',
+    'delay' => 'Затримка публікації',
     //  articles
     'articles' => 'Додані новини',
     'add_title' => 'Заголовок:*',
@@ -32,7 +36,7 @@ return [
     'add_cat' => 'Категорія:*',
     'add_cat_placeholder' => 'Обрати категорію',
     'add_source' => 'Джерело:',
-    'add_source_placeholder' => 'Введіть посилання на джерело',
+    'add_source_placeholder' => 'www.example.com',
     'add_delay' => 'Затримка публікації (хвилин):',
 
 ];

@@ -21,7 +21,7 @@
     @foreach($content as $article)
     <div class="blog-small">
         <div class="thumbnail">
-            <img src="{{ asset(config('settings.theme')) }}/images/articles/{{$article->img}}" class="attachment-blog_small wp-post-image" alt="{{ $article->alias }}" title="{{ $article->title }}" />                        
+            <img src="{{ asset(config('settings.theme')) }}/images/articles/{{ $article->img ? : ('pic'.rand(1,14).'.jpg')}}" class="attachment-blog_small wp-post-image" alt="{{ $article->alias }}" title="{{ $article->title }}" />                        
         </div>
         <h2>{{ $article->title }}</h2>
         <div>
@@ -32,7 +32,7 @@
                 <p><a href="{{ route('articles', $article->alias) }}" class="btn btn-retro-package-3 btn-more-link">{{ trans('ua.read_more') }}</a></p>
                 <p class="date-cat">
                     <i class="icon-calendar"></i>{{ date("d-m-Y H:i", strtotime($article->created_at)) }}
-                    <i class="icon-external-link"></i> <span>{{ trans('ua.source') }}: <a href="{{ $article->source ?: route('home') }}" class="link">{{ $article->source ?: route('home') }}</a></span>
+                    <i class="icon-external-link"></i> <span>{{ trans('ua.source') }}: <a href="{{ $article->source }}" class="link">{{ $article->source }}</a></span>
                 </p>
             </div>
         </div>
