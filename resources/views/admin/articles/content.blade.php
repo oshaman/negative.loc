@@ -1,6 +1,5 @@
-<div id="primary" class="layout-sidebar-no home-section">
+<div id="primary" class="layout-sidebar-right home-section">
     <div class="inner group">
-
 <!-- START CONTENT -->
 <div id="content" class="group">
 @if($articles)

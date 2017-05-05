@@ -15,6 +15,8 @@ class AdminController extends Controller
     protected $content = FALSE;
     protected $title;
     protected $vars;
+    protected $sidebar_vars = false;
+    
     
     public function renderOutput()
     {
@@ -32,7 +34,12 @@ class AdminController extends Controller
 		if($this->content) {
 			$this->vars = array_add($this->vars, 'content', $this->content);
 		}
-		
+        
+        if($this->sidebar_vars){
+            $sidebar = view('layouts.sidebar')->with('sidebar', $this->sidebar_vars)->render();
+            $this->vars = array_add($this->vars, 'sidebar', $sidebar);
+        }
+
 		$footer = view('admin.footer')->render();
 		$this->vars = array_add($this->vars, 'footer', $footer);
 		

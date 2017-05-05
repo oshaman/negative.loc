@@ -8,6 +8,7 @@ use Oshaman\Publication\Http\Controllers\Controller;
 use Auth;
 use Gate;
 use Oshaman\Publication\Category;
+use Oshaman\Publication\Article;
 use Oshaman\Publication\Repositories\ArticlesRepository;
 use Oshaman\Publication\Http\Requests\ArticleRequest;
 
@@ -61,7 +62,7 @@ class ArticlesController extends AdminController
                 return back()->with($result);
             }
             
-            return redirect('/admin/edit/'. $id)->with($result);
+            return redirect('/admin/edit/'. $result['id'])->with($result);
         }
         
         /**
@@ -90,12 +91,34 @@ class ArticlesController extends AdminController
         
     }
     
-    public function edit()
+    public function edit($id)
     {
-        if (Gate::denies('UPDATE_ARTICLES')) {
-            abort(404);
-        }
-        dd('edit');
+        $article = $this->a_rep->findById($id);
+        
+        if(Gate::denies('update', $article)) {
+			abort(404);
+		}
+        // dd($article);
+        $this->title = trans('admin.edit');
+        $this->template = 'index';
+        $this->sidebar_vars = true;
+        $categories = Category::select(['title','parent_id','id'])->get();
+		
+		$lists = array();
+		
+		foreach($categories as $category) {
+			if($category->parent_id == 0) {
+				$lists[trans('categories.' . $category->title)] = array();
+			}
+			else {
+				$lists[trans('categories.' . $categories->where('id',$category->parent_id)->first()->title)][$category->id] = trans('categories.' . $category->title);    
+			}
+		}
+		
+		$this->content = view('admin.articles.edit_content')->with(['categories' => $lists, 'article' => $article])->render();
+		// dd($this->content);
+		return $this->renderOutput();
+        
     }
     
     public function del()

@@ -47,7 +47,6 @@
 @yield('topbar')
 <div class="wrapper group">
     @yield('header')
-    <!-- CONTENT -->
     <div id="page_meta" class="home-section">
         <div class="inner group">
             <div class="meta-left">
@@ -69,8 +68,11 @@
             @endif
         </div>
     </div>
+    <!-- CONTENT -->
     @yield('content')
-        </div>  
+     <!-- SIDEBAR -->
+    @yield('sidebar')
+    </div>
     </div>
     <div class="clear"></div>
 </div>

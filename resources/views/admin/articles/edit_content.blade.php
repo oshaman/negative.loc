@@ -1,8 +1,64 @@
-<div id="primary" class="layout-sidebar-no home-section">
+<div id="primary" class="layout-sidebar-right home-section">
     <div class="inner group">
 <!-- START CONTENT -->
 <div id="content" class="group">
-    <div class="page type-page status-publish hentry group">
+    <!-- Small Preview-->
+    <div class="blog-small">
+        <div class="thumbnail">
+            <img src="{{ asset(config('settings.theme')) }}/images/articles/{{ $article->img ? : ('pic'.rand(1,14).'.jpg')}}" class="attachment-blog_small wp-post-image" alt="{{ $article->alias }}" title="{{ $article->title }}" />                        
+        </div>
+        <h2>{{ $article->title }}</h2>
+        <div>
+            <div class="meta-bottom">
+                {!! str_limit($article->description, 288, '&#8230;') !!}
+            </div>
+            <div class="the-content">
+                <p><a href="{{ route('articles', $article->alias) }}" class="btn btn-retro-package-3 btn-more-link">{{ trans('ua.read_more') }}</a></p>
+                <p class="date-cat">
+                    <i class="icon-calendar"></i>{{ date("d-m-Y H:i", strtotime($article->created_at)) }}
+                    <i class="icon-tags"></i>
+                    <span>{{ trans('ua.cat') }}: <a href="{{ route('cat_alias', $article->category->title) }}">{{ trans('categories.' .$article->category->title) }}</a></span>
+                    <i class="icon-external-link"></i>
+                    <span>{{ trans('ua.source') }}: <a href="http://{{ $article->source }}" class="link">{{ $article->source }}</a></span>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="clear"></div>
+    <!-- Big Preview-->
+    
+    <div class="post hentry-post blog-big">
+        <div class="meta group">
+            <p class="date">
+                <i class="icon-calendar"></i>{{ date('d-m-Y H:i', strtotime($article->created_at)) }}
+            </p>
+            <p class="author">
+                <i class="icon-external-link"></i> <span>{{ trans('ua.source') }}:
+                <a href="{{ $article->source ?: route('home') }}"  class="link">{{ $article->source }}</a></span>
+            </p>
+            <p class="categories">
+                <i class="icon-tags"></i> <span>{{ trans('ua.cat') }}: <a href="{{ route('cat_alias', $article->category->alias) }}" class="cats">{{ trans('categories.' . $article->category->title) }}</a></span>
+            </p>
+            <p class="comments">
+                <i class="icon-comment"></i> <span><a href="#" title="Comment on Another great article of the blog">2 comments</a></span>
+            </p>
+            <p class="edit-link"><i class="icon-pencil"></i><a class="post-edit-link" href="#" title="Edit Post">Edit</a></p>
+        </div>
+        <div class="thumbnail">
+            <h1 class="post-title">{{ $article->title }}</h1>
+            <div class="image-wrap">
+                <img width="720" height="298" src="{{ asset(config('settings.theme')) }}/images/articles/{{ $article->img ? : ('pic'.rand(1,14).'.jpg')}}" class="attachment-blog_big wp-post-image" alt="{{ $article->title }}" title="{{ $article->title }}" />                            
+            </div>
+        </div>
+        <div class="clearer"></div>
+        <div class="the-content-single">
+            {!! $article->text !!}
+        </div>
+    </div>
+    <div class="clear"></div>
+<!-- Edit -->
+<div class="page type-page status-publish hentry group">
    @if (count($errors) > 0)
         <div class="contact-form">
                 <p class="error">

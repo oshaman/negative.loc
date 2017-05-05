@@ -109,7 +109,7 @@ class ArticlesRepository extends Repository {
 		}
         
         $this->model->fill($data);
-        dd($this->model);
+        // dd($this->model);
         $id = $request->user()->articles()->save($this->model)->id;
         if($id) {
             return ['status' => trans('admin.material_added'), 'id' => $id];
