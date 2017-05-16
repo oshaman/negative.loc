@@ -19,8 +19,9 @@ return [
     'edit' => 'Редагування матеріалу',
     'no_data' => 'Немає даних',
     'material_added' => 'Матеріал додано',
+    'material_updated' => 'Матеріал відредаговано',
     'approved' => 'Санкціювати матеріал',
-    'delay' => 'Затримка публікації',
+    'outputtime' => 'Дата публікації',
     'keywords' => 'Ключові слова',
     //  articles
     'articles' => 'Додані новини',
@@ -40,6 +41,6 @@ return [
     'add_cat_placeholder' => 'Обрати категорію',
     'add_source' => 'Джерело:',
     'add_source_placeholder' => 'www.example.com',
-    'add_delay' => 'Затримка публікації (хвилин):',
+    'add_outputtime' => 'Дата публікації:',
 
 ];

@@ -31,9 +31,9 @@ class ArticleRequest extends FormRequest
         	
         });
         
-        $validator->sometimes('delay','max:720', function($input) {
+        $validator->sometimes('outputtime','date', function($input) {
         	
-        	return !empty($input->delay);
+        	return !empty($input->outputtime);
         	
         });
         

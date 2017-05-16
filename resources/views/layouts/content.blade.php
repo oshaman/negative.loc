@@ -6,7 +6,7 @@
     @foreach($content as $article)
     <div class="blog-small">
         <div class="thumbnail">
-            <img src="{{ asset(config('settings.theme')) }}/images/articles/{{ $article->img ? : ('pic'.rand(1,14).'.jpg')}}" class="attachment-blog_small wp-post-image" alt="{{ $article->alias }}" title="{{ $article->title }}" />                        
+            <img src="{{ asset(config('settings.theme')) }}/images/articles/{{ $article->img->mini ? : ('pic'.rand(1,14).'.jpg')}}" class="attachment-blog_small wp-post-image" alt="{{ $article->alias }}" title="{{ $article->title }}" />                        
         </div>
         <h2>{{ $article->title }}</h2>
         <div>

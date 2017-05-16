@@ -18,7 +18,7 @@
                 <fieldset>
                     <ul>
                         <li class="text-field">
-                            <label for="email"> <span class="label">Email</span> </label>
+                            <label for="email"> <span class="label">{{ old('email') ? '' : trans('ua.email') . '*' }}</span> </label>
                             <div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span>
                                 <input type="email" name="email" id="email" class="required email-validate" value="{{ old('email') }}" required>
                             @if ($errors->has('email'))

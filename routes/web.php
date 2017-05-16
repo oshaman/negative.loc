@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
         
         Route::match(['get', 'post'], 'create', ['uses'=>'Admin\ArticlesController@create', 'as'=>'create_article']);
         Route::match(['get', 'post'], 'edit/{id}', ['uses'=>'Admin\ArticlesController@edit', 'as'=>'edit_article'])->where('id', '[0-9]+');
-        Route::match(['get', 'post'], 'del/{alias}', ['uses'=>'Admin\ArticlesController@del', 'as'=>'delete_article'])->where('alias', '[\w-_]{5,255}');
+        Route::get('del/{id}', ['uses'=>'Admin\ArticlesController@del', 'as'=>'delete_article'])->where('id', '[0-9]+');
         
     });
     Route::get('events', ['uses' => 'Admin\EventsController@index', 'as' => 'admin_events']);

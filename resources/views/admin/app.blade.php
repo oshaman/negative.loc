@@ -70,8 +70,6 @@
     </div>
     <!-- CONTENT -->
     @yield('content')
-     <!-- SIDEBAR -->
-    @yield('sidebar')
     </div>
     </div>
     <div class="clear"></div>

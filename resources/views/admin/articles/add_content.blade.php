@@ -82,9 +82,9 @@
                         </div>
                     </li>
                     <li class="text-field">
-                        <h4>{!! Form::label('delay', trans('admin.add_delay')); !!}</h4>
+                        <h4>{!! Form::label('outputtime', trans('admin.add_outputtime')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-time"></i></span>
-                            <input type="text" name="delay" id="delay" value="{{ old('delay') ? : date('Y-m-d H:i:s') }}">
+                            <input type="text" name="outputtime" id="outputtime" value="{{ old('outputtime') ? : date('Y-m-d H:i:s') }}">
                         </div>
                     </li>
                 </ul>

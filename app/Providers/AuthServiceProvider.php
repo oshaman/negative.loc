@@ -37,20 +37,20 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('UPDATE_ARTICLES', function ($user) {
-                    return $user->canDo('UPDATE_ARTICLES', FALSE);
+            return $user->canDo('UPDATE_ARTICLES', FALSE);
         });
         
+        // Gate::define('DELETE_ARTICLES', function ($user) {
+        	// return $user->canDo('DELETE_ARTICLES', FALSE);
+        // });
+        
         Gate::define('UPDATE_EVENTS', function ($user) {
-                    return $user->canDo('UPDATE_EVENTS', FALSE);
+            return $user->canDo('UPDATE_EVENTS', FALSE);
         });
         
         Gate::define('CONFIRMATION_DATA', function ($user) {
         	return $user->canDo('CONFIRMATION_DATA', FALSE);
         });
         
-        // Gate::define('VIEW_ADMIN_MENU', function ($user) {
-        	// return $user->canDo('VIEW_ADMIN_MENU', FALSE);
-        // });
-        //
     }
 }

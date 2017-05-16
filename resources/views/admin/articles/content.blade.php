@@ -1,4 +1,4 @@
-<div id="primary" class="layout-sidebar-right home-section">
+<div id="primary" class="layout-sidebar-no home-section">
     <div class="inner group">
 <!-- START CONTENT -->
 <div id="content" class="group">
@@ -27,16 +27,16 @@
                         @if(isset($article->img->mini))
                             {!! Html::image(asset(config('settings.theme')).'/images/articles/'.$article->img->mini) !!}
                         @else
-                            {!! Html::image(asset(config('settings.theme')).'/images/articles/'.$article->img) !!}
+                            {!! Html::image(asset(config('settings.theme')).'/images/articles/'.$article->img, $article->title, array('width' => 90 , 'height' => 90)) !!}
                         @endif
                     </td>
                     <td>{{ $article->category->title }}</td>
                     <td>{{ $article->alias }}</td>
                     <td>{!! Form::open(
                             ['url' => route('delete_article',
-                                    ['articles'=>$article->alias]),
+                                    ['articles'=>$article->id]),
                                     'class'=>'form-horizontal',
-                                    'method'=>'POST'])
+                                    'method'=>'GET'])
                         !!}
                         {!! Form::button(trans('admin.delete'), ['class' => 'btn btn-french-5','type'=>'submit']) !!}
                         {!! Form::close() !!}
@@ -73,6 +73,6 @@
 
     </div>
     @endif
-    {!! Html::link(route('create_article'),'Добавить  материал',['class' => 'btn btn-the-salmon-dance-3']) !!}
+    {!! Html::link(route('create_article'),trans('admin.add'),['class' => 'btn btn-the-salmon-dance-3']) !!}
 </div>
 <!-- END articles -->

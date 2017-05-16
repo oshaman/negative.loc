@@ -99,14 +99,17 @@ class ArticlesController extends AdminController
 		}
         
         // dd($article);
-        dd(date('Y-m-d H:i:s'));
         if ($request->isMethod('post')) {
-            dd($request);
+            $result = $this->a_rep->updateArticle($request, $article);
+		
+            if(is_array($result) && !empty($result['error'])) {
+                return back()->with($result);
+            }
+            
+            return redirect('/admin/articles')->with($result);
         }
         
         $this->title = trans('admin.edit');
-        $this->template = 'index';
-        $this->sidebar_vars = true;
         $categories = Category::select(['title','parent_id','id'])->get();
 		
 		$lists = array();
@@ -126,9 +129,9 @@ class ArticlesController extends AdminController
         
     }
     
-    public function del()
+    public function del(ArticleRequest $request, Article $article)
     {
-        if (Gate::denies('DELETE_ARTICLES')) {
+        if (Gate::denies('destroy', $article)) {
             abort(404);
         }
         dd('del');

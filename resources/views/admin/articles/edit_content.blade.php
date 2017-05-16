@@ -24,7 +24,6 @@
             </div>
         </div>
     </div>
-    
     <div class="clear"></div>
     <!-- Big Preview-->
     
@@ -138,9 +137,9 @@
                         </div>
                     </li>
                     <li class="text-field">
-                        <h4>{!! Form::label('delay', trans('admin.add_delay')); !!}</h4>
+                        <h4>{!! Form::label('outputtime', trans('admin.add_outputtime')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-time"></i></span>
-                            <input type="text" name="delay" id="delay" value="{{ old('delay') ? : $article->created_at }}">
+                            <input type="text" name="outputtime" id="outputtime" value="{{ old('outputtime') ? : $article->created_at }}">
                         </div>
                     </li>
                 </ul>

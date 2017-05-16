@@ -4,6 +4,7 @@ namespace Oshaman\Publication\Repositories;
 
 use Oshaman\Publication\Article;
 use Gate;
+use File;
 
 use Image;
 use Config;
@@ -53,9 +54,8 @@ class ArticlesRepository extends Repository {
 			return ['error' => trans('admin.alias_in_use')];
 		}
         
-        if (!empty($data['delay'])) {
-            // $data['created_at'] = date("Y-m-d H:i:s", time()+$data['delay']*60);
-            $data['created_at'] = $data['delay'];
+        if (!empty($data['outputtime'])) {
+            $data['created_at'] = $data['outputtime'];
         }
         
         if (empty($data['source'])) {
@@ -98,7 +98,7 @@ class ArticlesRepository extends Repository {
 				$img = Image::make($image);
 				
 				$img->fit(Config::get('settings.image')['width'],
-						Config::get('settings.image')['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->path); 
+						Config::get('settings.image')['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->path);
 				
 				$img->fit(Config::get('settings.articles_img')['max']['width'],
 						Config::get('settings.articles_img')['max']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->max); 
@@ -120,44 +120,53 @@ class ArticlesRepository extends Repository {
 	}
     
     
-	/* public function updateArticle($request, $article) {
+	public function updateArticle($request, $article) {
 
-		if(Gate::denies('edit', $this->model)) {
-			abort(403);
+		if(Gate::denies('update', $this->model)) {
+			abort(404);
 		}
 		
-		$data = $request->except('_token','image','_method');
+		$data = $request->except('_token','img','_method');
 		
-		if(empty($data)) {
-			return array('error' => 'Нет данных');
+		if (empty($data)) {
+			return array('error' => trans('admin.no_data'));
 		}
 		
-		if(empty($data['alias'])) {
-			$data['alias'] = $this->transliterate($data['title']);
-		}
+        if (empty($data['alias'])) {
+			$data['alias'] = $this->transliterate($data['title']) . '-' .date('Ymd');
+		} elseif ($data['alias'] != $article->alias) {
+			$data['alias'] = $this->transliterate($data['alias']) . '-' .date('Ymd');
+        }
 		
+		// dd($data);
 		$result = $this->one($data['alias'],FALSE);
 		
 		if(isset($result->id) && ($result->id != $article->id)) {
 			$request->merge(array('alias' => $data['alias']));
 			$request->flash();
 			
-			return ['error' => 'Данный псевдоним уже успользуется'];
+			return ['error' => trans('admin.alias_in_use')];
 		}
-		
-		if($request->hasFile('image')) {
-			$image = $request->file('image');
-			
+        
+        if (empty($data['source'])) {
+            $data['source'] = 'www.' . config('app.name');
+        }
+        
+		if ($request->hasFile('img')) {
+			$old_img = json_decode($article->img);
+
+			$image = $request->file('img');
+
 			if($image->isValid()) {
 				
-				$str = str_random(16);
-				
+				$str = str_limit($data['alias'], 56) . '-' . time();
+
 				$obj = new \stdClass;
 				
 				$obj->mini = $str.'_mini.jpg';
 				$obj->max = $str.'_max.jpg';
 				$obj->path = $str.'.jpg';
-				
+                
 				$img = Image::make($image);
 				
 				$img->fit(Config::get('settings.image')['width'],
@@ -167,17 +176,22 @@ class ArticlesRepository extends Repository {
 						Config::get('settings.articles_img')['max']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->max); 
 				
 				$img->fit(Config::get('settings.articles_img')['mini']['width'],
-						Config::get('settings.articles_img')['mini']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->mini); 
-
+						Config::get('settings.articles_img')['mini']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->mini);
+		
+                File::delete([
+                    config('settings.theme').'/images/articles/'.$img->mini,
+                    config('settings.theme').'/images/articles/'.$img->path,
+                    config('settings.theme').'/images/articles/'.$img->max,
+                ]);
+                
 				$data['img'] = json_encode($obj);  
-							
-			}	
+			}
 		}
 		
 		$article->fill($data); 
 				
 		if($article->update()) {
-			return ['status' => 'Материал обновлен'];
+			return ['status' => trans('admin.material_updated')];
 		} 
 
 	}
@@ -194,7 +208,7 @@ class ArticlesRepository extends Repository {
 			return ['status' => 'Материал удален'];
 		}
 		
-	} */
+	}
 	
 }
 
