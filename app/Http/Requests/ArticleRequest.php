@@ -20,14 +20,10 @@ class ArticleRequest extends FormRequest
     {
         $validator = parent::getValidatorInstance();
     	
-        // $model = $this->route()->parameter('article');
-    	// dd($model);
-    	
-    	$validator->sometimes('alias','unique:articles|max:255|alpha_dash', function($input) {
+    	$validator->sometimes('alias','unique:articles|max:246|alpha_dash', function($input) {
         	
-        	if($this->route()->hasParameter('article')) {
-				$model = $this->route()->parameter('article');
-				
+        	if($this->route()->hasParameter('id')) {
+				$model = $this->route()->parameter('id');
 				return ($model->alias !== $input->alias)  && !empty($input->alias);
 			}
         	
@@ -35,9 +31,21 @@ class ArticleRequest extends FormRequest
         	
         });
         
-        $validator->sometimes('delay','numeric|max:720', function($input) {
+        $validator->sometimes('delay','max:720', function($input) {
         	
         	return !empty($input->delay);
+        	
+        });
+        
+        $validator->sometimes('keywords',array('string', 'max:255', 'regex:#^[a-zA-zа-яА-Яї0-9_\,\-\s!\']+$#u'), function($input) {
+        	
+        	return !empty($input->keywords);
+        	
+        });
+        
+        $validator->sometimes('meta_desc',array('string', 'max:255', 'regex:#^[a-zA-zа-яА-Яї0-9_\,\-\s!\']+$#u'), function($input) {
+        	
+        	return !empty($input->meta_desc);
         	
         });
         
@@ -53,14 +61,22 @@ class ArticleRequest extends FormRequest
     {
         if ($this->isMethod('post')) {
             return [
-                'title' => 'required|max:255',
-                'text' => 'required',
-                'category_id' => 'required|integer'
+                'title' => 'string|required|max:255',
+                'text' => 'string|required',
+                'category_id' => 'required|integer',
+                'img' => 'image|max:5120',
             ];
         }
         
         return [
               //
               ];
+    }
+    
+    public function messages()
+    {
+        return [
+            'category_id.required' => 'Поле <strong>Категорія</strong> є обов\'язковим до заповнення.',
+        ];
     }
 }

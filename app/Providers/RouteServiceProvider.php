@@ -5,6 +5,8 @@ namespace Oshaman\Publication\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
+use Oshaman\Publication\Article;
+
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -26,6 +28,10 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+        
+        Route::bind('id', function ($value) {
+        	return Article::where('id', $value)->first();
+        });
     }
 
     /**

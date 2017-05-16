@@ -5,7 +5,7 @@
     <!-- Small Preview-->
     <div class="blog-small">
         <div class="thumbnail">
-            <img src="{{ asset(config('settings.theme')) }}/images/articles/{{ $article->img ? : ('pic'.rand(1,14).'.jpg')}}" class="attachment-blog_small wp-post-image" alt="{{ $article->alias }}" title="{{ $article->title }}" />                        
+            <img src="{{ asset(config('settings.theme')) }}/images/articles/{{ $article->img ? : '../no-picture.png'}}" class="attachment-blog_small wp-post-image" alt="{{ $article->alias }}" title="{{ $article->title }}" />                        
         </div>
         <h2>{{ $article->title }}</h2>
         <div>
@@ -48,7 +48,7 @@
         <div class="thumbnail">
             <h1 class="post-title">{{ $article->title }}</h1>
             <div class="image-wrap">
-                <img width="720" height="298" src="{{ asset(config('settings.theme')) }}/images/articles/{{ $article->img ? : ('pic'.rand(1,14).'.jpg')}}" class="attachment-blog_big wp-post-image" alt="{{ $article->title }}" title="{{ $article->title }}" />                            
+                <img width="720" height="298" src="{{ asset(config('settings.theme')) }}/images/articles/{{ $article->img ? : '../no-picture.png'}}" class="attachment-blog_big wp-post-image" alt="{{ $article->title }}" title="{{ $article->title }}" />                            
             </div>
         </div>
         <div class="clearer"></div>
@@ -69,7 +69,7 @@
         </div>
     @endif
         {!! Form::open([
-            'url' => route('create_article'),
+            'url' => route('edit_article', $article->id),
             'class' => 'contact-form',
             'method' => 'POST',
             'enctype' => 'multipart/form-data',
@@ -81,38 +81,38 @@
                     <li class="text-field">
                         <h4>{!! Form::label('a_title', trans('admin.add_title')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-th-list"></i></span>
-                            {!! Form::text('title', old('title') ? : '', ['placeholder'=>trans('admin.add_title_placeholder'), 'id'=>'a_title',
+                            {!! Form::text('title', old('title') ? : $article->title, ['placeholder'=>trans('admin.add_title_placeholder'), 'id'=>'a_title',
                             'required' => '']) !!}
                         </div>
                     </li>
                     <li class="text-field">
                         <h4>{!! Form::label('a_alias', trans('admin.add_alias')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-th-list"></i></span>
-                            {!! Form::text('alias', old('alias') ? : '', ['placeholder'=>trans('admin.add_alias_placeholder'), 'id'=>'a_alias']) !!}
+                            {!! Form::text('alias', old('alias') ? : $article->alias, ['placeholder'=>trans('admin.add_alias_placeholder'), 'id'=>'a_alias']) !!}
                         </div>
                     </li>
                     <li class="text-field">
                         <h4>{!! Form::label('a_keywords', trans('admin.add_keywords')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-pushpin"></i></span>
-                            {!! Form::text('keywords', old('keywords') ? : '', ['placeholder'=>trans('admin.add_keywords_placeholder'), 'id'=>'a_keywords', 'required' => '']) !!}
+                            {!! Form::text('keywords', old('keywords') ? : $article->keywords, ['placeholder'=>trans('admin.add_keywords_placeholder'), 'id'=>'a_keywords', 'required' => '']) !!}
                         </div>
                     </li>
                     <li class="text-field">
                         <h4>{!! Form::label('a_meta', trans('admin.add_meta')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
-                            {!! Form::text('meta_desc', old('meta_desc') ? : '', ['placeholder'=>trans('admin.add_meta_placeholder'), 'id'=>'a_meta']) !!}
+                            {!! Form::text('meta_desc', old('meta_desc') ? : $article->meta_desc, ['placeholder'=>trans('admin.add_meta_placeholder'), 'id'=>'a_meta']) !!}
                         </div>
                     </li>
                     <li class="text-field">
                         <h4>{!! Form::label('a_source', trans('admin.add_source')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
-                            {!! Form::text('source', old('source') ? : '', ['placeholder'=>trans('admin.add_source_placeholder'), 'id'=>'a_source']) !!}
+                            {!! Form::text('source', old('source') ? : $article->source, ['placeholder'=>trans('admin.add_source_placeholder'), 'id'=>'a_source']) !!}
                         </div>
                     </li>
                     <li class="text-field">
                         <h4>{!! Form::label('cat', trans('admin.add_cat')); !!}</h4>
                         <div class="input-prepend">
-                            {!! Form::select('category_id', $categories, old('category_id') ? : null, ['placeholder' => trans('admin.add_cat_placeholder')]) !!}
+                            {!! Form::select('category_id', $categories, old('category_id') ? : $article->category_id, ['placeholder' => trans('admin.add_cat_placeholder')]) !!}
                         </div>
                         <div class="msg-error"></div>
                     </li>
@@ -120,14 +120,14 @@
                     <li class="textarea-field">
                         <h4>{!! Form::label('editor', trans('admin.add_text')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
-                            {!! Form::textarea('text', old('text') ? : '', ['id'=>'editor','required'=>'', 'rows'=>8, 'cols'=>30]) !!}
+                            {!! Form::textarea('text', old('text') ? : $article->text, ['id'=>'editor','required'=>'', 'rows'=>8, 'cols'=>30]) !!}
                         </div>
                         <div class="msg-error"></div>
                     </li>
                     <li class="textarea-field">
                         <h4>{!! Form::label('editor2', trans('admin.add_desc')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
-                            {!! Form::textarea('description', old('description') ? : '', ['id'=>'editor2','required'=>'', 'rows'=>8, 'cols'=>30]) !!}
+                            {!! Form::textarea('description', old('description') ? : $article->description, ['id'=>'editor2','required'=>'', 'rows'=>8, 'cols'=>30]) !!}
                         </div>
                     </li>
                 <!-- Image -->
@@ -140,7 +140,7 @@
                     <li class="text-field">
                         <h4>{!! Form::label('delay', trans('admin.add_delay')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-time"></i></span>
-                            <input type="text" name="delay" id="delay">
+                            <input type="text" name="delay" id="delay" value="{{ old('delay') ? : $article->created_at }}">
                         </div>
                     </li>
                 </ul>

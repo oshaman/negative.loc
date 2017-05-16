@@ -118,7 +118,7 @@ abstract class Repository {
 		}
 		
 		//  A-Za-z0-9-
-		$str = preg_replace('/(\s|[^A-Za-z0-9\-])+/','-',$str);
+		$str = preg_replace('/(\s|[^A-Za-z0-9\-_])+/','-',$str);
 		
 		$str = trim($str,'-');
 		

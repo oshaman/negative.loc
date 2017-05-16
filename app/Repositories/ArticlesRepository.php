@@ -42,7 +42,9 @@ class ArticlesRepository extends Repository {
 		
 		if (empty($data['alias'])) {
 			$data['alias'] = $this->transliterate($data['title']) . '-' .date('Ymd');
-		}
+		} else {
+			$data['alias'] = $this->transliterate($data['alias']) . '-' .date('Ymd');
+        }
         
 		if ($this->one($data['alias'],FALSE)) {
 			$request->merge(array('alias' => $data['alias']));
@@ -52,7 +54,8 @@ class ArticlesRepository extends Repository {
 		}
         
         if (!empty($data['delay'])) {
-            $data['created_at'] = date("Y-m-d H:i:s", time()+$data['delay']*60);
+            // $data['created_at'] = date("Y-m-d H:i:s", time()+$data['delay']*60);
+            $data['created_at'] = $data['delay'];
         }
         
         if (empty($data['source'])) {
@@ -85,7 +88,7 @@ class ArticlesRepository extends Repository {
 			if($image->isValid()) {
 				
 				$str = str_limit($data['alias'], 56) . '-' . time();
-				// dd($str);
+
 				$obj = new \stdClass;
 				
 				$obj->mini = $str.'_mini.jpg';

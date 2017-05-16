@@ -47,7 +47,7 @@ class ArticlesController extends AdminController
     
     public function create(ArticleRequest $request)
     {
-        if (Gate::denies('create', new \Oshaman\Publication\Article)) {
+        if (Gate::denies('create', new Article)) {
             abort(404);
 		}
         /**
@@ -62,7 +62,7 @@ class ArticlesController extends AdminController
                 return back()->with($result);
             }
             
-            return redirect('/admin/edit/'. $result['id'])->with($result);
+            return redirect('/admin/articles/edit/'. $result['id'])->with($result);
         }
         
         /**
@@ -91,14 +91,19 @@ class ArticlesController extends AdminController
         
     }
     
-    public function edit($id)
+    public function edit(ArticleRequest $request, Article $article)
     {
-        $article = $this->a_rep->findById($id);
         
         if(Gate::denies('update', $article)) {
 			abort(404);
 		}
+        
         // dd($article);
+        dd(date('Y-m-d H:i:s'));
+        if ($request->isMethod('post')) {
+            dd($request);
+        }
+        
         $this->title = trans('admin.edit');
         $this->template = 'index';
         $this->sidebar_vars = true;
@@ -116,7 +121,7 @@ class ArticlesController extends AdminController
 		}
 		
 		$this->content = view('admin.articles.edit_content')->with(['categories' => $lists, 'article' => $article])->render();
-		// dd($this->content);
+        
 		return $this->renderOutput();
         
     }
