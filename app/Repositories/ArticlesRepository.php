@@ -91,20 +91,22 @@ class ArticlesRepository extends Repository {
 
 				$obj = new \stdClass;
 				
+				$obj->micro = $str.'_micro.jpg';
 				$obj->mini = $str.'_mini.jpg';
 				$obj->max = $str.'_max.jpg';
 				$obj->path = $str.'.jpg';
                 
 				$img = Image::make($image);
 				
-				$img->fit(Config::get('settings.image')['width'],
-						Config::get('settings.image')['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->path);
-				
-				$img->fit(Config::get('settings.articles_img')['max']['width'],
-						Config::get('settings.articles_img')['max']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->max); 
+				$img->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->path, 100); 
+				 
+				$img->widen(Config::get('settings.articles_img')['max']['width'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->max, 100); 
 				
 				$img->fit(Config::get('settings.articles_img')['mini']['width'],
-						Config::get('settings.articles_img')['mini']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->mini); 
+						Config::get('settings.articles_img')['mini']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->mini, 100);
+                        
+                $img->fit(Config::get('settings.articles_img')['micro']['width'],
+                        Config::get('settings.articles_img')['micro']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->micro, 100);
 						
 				
 				$data['img'] = json_encode($obj);  
@@ -180,16 +182,15 @@ class ArticlesRepository extends Repository {
                 
 				$img = Image::make($image);
 				
-				$img->fit(Config::get('settings.image')['width'],
-						Config::get('settings.image')['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->path, 100); 
-				
-				$img->fit(Config::get('settings.articles_img')['max']['width'],
-						Config::get('settings.articles_img')['max']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->max, 100); 
+				$img->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->path, 100); 
+				 
+				$img->widen(Config::get('settings.articles_img')['max']['width'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->max, 100); 
 				
 				$img->fit(Config::get('settings.articles_img')['mini']['width'],
 						Config::get('settings.articles_img')['mini']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->mini, 100);
+                        
                 $img->fit(Config::get('settings.articles_img')['micro']['width'],
-						Config::get('settings.articles_img')['micro']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->micro, 100);
+                        Config::get('settings.articles_img')['micro']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->micro, 100);
                 
                 if (is_string($article->img) && is_object(json_decode($article->img)) && (json_last_error() ==    JSON_ERROR_NONE)) {
                     $old_img = json_decode($article->img);
