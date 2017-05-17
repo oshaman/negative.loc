@@ -20,7 +20,7 @@ class CreateArticlesTable extends Migration
             $table->text('description');
             $table->string('source');
             $table->string('alias')->unique();
-            $table->string('img');
+            $table->string('img')->default(null);
             $table->string('keywords');
         	$table->string('meta_desc');
             

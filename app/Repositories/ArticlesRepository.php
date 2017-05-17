@@ -87,7 +87,7 @@ class ArticlesRepository extends Repository {
 			
 			if($image->isValid()) {
 				
-				$str = str_limit($data['alias'], 56) . '-' . time();
+				$str = substr($data['alias'], 0, 32) . '-' . time();
 
 				$obj = new \stdClass;
 				
@@ -109,7 +109,7 @@ class ArticlesRepository extends Repository {
                         Config::get('settings.articles_img')['micro']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->micro, 100);
 						
 				
-				$data['img'] = json_encode($obj);  
+				$data['img'] = json_encode($obj);
 			}
 		}
         
@@ -171,7 +171,7 @@ class ArticlesRepository extends Repository {
 
 			if($image->isValid()) {
 				
-				$str = str_limit($data['alias'], 56) . '-' . time();
+				$str = substr($data['alias'], 0, 32) . '-' . time();
 
 				$obj = new \stdClass;
 				
@@ -217,16 +217,19 @@ class ArticlesRepository extends Repository {
     public function deleteArticle($article)
     {
 		// $article->comments()->delete();
-		
+		$old_img = '';
+        
         if (is_string($article->img) && is_object(json_decode($article->img)) && (json_last_error() ==    JSON_ERROR_NONE)) {
             $old_img = json_decode($article->img);
         }
         
 		if($article->delete()) {
-            foreach ($old_img as $pic) {
-                if (File::exists(config('settings.theme').'/images/articles/'.$pic)) {
-                    File::delete(config('settings.theme').'/images/articles/'.$pic);
-                    }
+            if (is_array($old_img)) {                
+                foreach ($old_img as $pic) {
+                    if (File::exists(config('settings.theme').'/images/articles/'.$pic)) {
+                        File::delete(config('settings.theme').'/images/articles/'.$pic);
+                        }
+                }
             }
             return ['status' => trans('admin.deleted')];
 		}
