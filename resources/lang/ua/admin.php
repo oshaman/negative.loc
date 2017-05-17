@@ -23,6 +23,8 @@ return [
     'approved' => 'Санкціювати матеріал',
     'outputtime' => 'Дата публікації',
     'keywords' => 'Ключові слова',
+    'add_outputtime' => 'Дата публікації:',
+    'deleted' => 'Матеріал видалено',
     //  articles
     'articles' => 'Додані новини',
     'add_title' => 'Заголовок:*',
@@ -41,6 +43,6 @@ return [
     'add_cat_placeholder' => 'Обрати категорію',
     'add_source' => 'Джерело:',
     'add_source_placeholder' => 'www.example.com',
-    'add_outputtime' => 'Дата публікації:',
+
 
 ];

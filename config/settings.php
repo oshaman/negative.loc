@@ -10,9 +10,9 @@
 		'home_articles_count' => 3,
 		'recent_comments' => 3,
 		'articles_img' => [
-						'max' => ['width'=>816,'height'=>282],
-						'mini' => ['width'=>55,'height'=>55]
-						
+						'max' => ['width'=>500,'height'=>200],
+						'mini' => ['width'=>215,'height'=>215],
+						'micro' => ['width'=>90,'height'=>90]
 						],
 		
 		'image' => [

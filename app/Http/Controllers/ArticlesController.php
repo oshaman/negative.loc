@@ -26,6 +26,8 @@ class ArticlesController extends MainController
         if ($alias) {
             $article = $this->a_rep->one($alias, ['cat' => true]);
             if (isset($article->id)) {
+                
+                $article->img = json_decode($article->img);
                 $this->title = $article->title;
                 $this->keywords = $article->keywords;
                 $this->meta_desc = $article->meta_desc;

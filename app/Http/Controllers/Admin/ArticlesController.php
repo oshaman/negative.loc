@@ -94,10 +94,6 @@ class ArticlesController extends AdminController
     public function edit(ArticleRequest $request, Article $article)
     {
         
-        if(Gate::denies('update', $article)) {
-			abort(404);
-		}
-        
         // dd($article);
         if ($request->isMethod('post')) {
             $result = $this->a_rep->updateArticle($request, $article);
@@ -108,6 +104,10 @@ class ArticlesController extends AdminController
             
             return redirect('/admin/articles')->with($result);
         }
+        
+        if(Gate::denies('update', $article)) {
+			abort(404);
+		}
         
         $this->title = trans('admin.edit');
         $categories = Category::select(['title','parent_id','id'])->get();
@@ -123,17 +123,24 @@ class ArticlesController extends AdminController
 			}
 		}
 		
+        if($article) {
+			$article->img = json_decode($article->img);
+		}
+        
 		$this->content = view('admin.articles.edit_content')->with(['categories' => $lists, 'article' => $article])->render();
         
 		return $this->renderOutput();
         
     }
     
-    public function del(ArticleRequest $request, Article $article)
+    public function del(Article $article)
     {
         if (Gate::denies('destroy', $article)) {
             abort(404);
         }
-        dd('del');
+        
+        $result = $this->a_rep->deleteArticle($article);
+		
+        return back()->with($result);
     }
 }

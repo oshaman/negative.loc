@@ -5,7 +5,7 @@
     <!-- Small Preview-->
     <div class="blog-small">
         <div class="thumbnail">
-            <img src="{{ asset(config('settings.theme')) }}/images/articles/{{ $article->img ? : '../no-picture.png'}}" class="attachment-blog_small wp-post-image" alt="{{ $article->alias }}" title="{{ $article->title }}" />                        
+            <img src="{{ asset(config('settings.theme')) }}/images/articles/{{ $article->img->mini ? : '../no-picture.png'}}" class="attachment-blog_small wp-post-image" alt="{{ $article->alias }}" title="{{ $article->title }}" />                        
         </div>
         <h2>{{ $article->title }}</h2>
         <div>
@@ -47,7 +47,7 @@
         <div class="thumbnail">
             <h1 class="post-title">{{ $article->title }}</h1>
             <div class="image-wrap">
-                <img width="720" height="298" src="{{ asset(config('settings.theme')) }}/images/articles/{{ $article->img ? : '../no-picture.png'}}" class="attachment-blog_big wp-post-image" alt="{{ $article->title }}" title="{{ $article->title }}" />                            
+                <img width="720" height="298" src="{{ asset(config('settings.theme')) }}/images/articles/{{ $article->img->max ? : '../no-picture.png'}}" class="attachment-blog_big wp-post-image" alt="{{ $article->title }}" title="{{ $article->title }}" />                            
             </div>
         </div>
         <div class="clearer"></div>

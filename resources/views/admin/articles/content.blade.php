@@ -24,10 +24,10 @@
                     <td>{!! Html::link(route('edit_article',['articles'=>$article->id]),$article->title) !!}</td>
                     <td>{{ str_limit($article->description,200) }}</td>
                     <td>
-                        @if(isset($article->img->mini))
-                            {!! Html::image(asset(config('settings.theme')).'/images/articles/'.$article->img->mini) !!}
+                        @if(isset($article->img->micro))
+                            {!! Html::image(asset(config('settings.theme')).'/images/articles/'.$article->img->micro) !!}
                         @else
-                            {!! Html::image(asset(config('settings.theme')).'/images/articles/'.$article->img, $article->title, array('width' => 90 , 'height' => 90)) !!}
+                            {!! Html::image(asset(config('settings.theme')).'/images/articles/no-picture.png', $article->title, array('width' => 90 , 'height' => 90)) !!}
                         @endif
                     </td>
                     <td>{{ $article->category->title }}</td>

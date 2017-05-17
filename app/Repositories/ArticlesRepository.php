@@ -122,7 +122,7 @@ class ArticlesRepository extends Repository {
     
 	public function updateArticle($request, $article) {
 
-		if(Gate::denies('update', $this->model)) {
+		if (Gate::denies('update', $article)) {
 			abort(404);
 		}
 		
@@ -138,7 +138,6 @@ class ArticlesRepository extends Repository {
 			$data['alias'] = $this->transliterate($data['alias']) . '-' .date('Ymd');
         }
 		
-		// dd($data);
 		$result = $this->one($data['alias'],FALSE);
 		
 		if(isset($result->id) && ($result->id != $article->id)) {
@@ -152,9 +151,20 @@ class ArticlesRepository extends Repository {
             $data['source'] = 'www.' . config('app.name');
         }
         
+        if (empty($data['description'])) {
+            $data['description'] = str_limit($data['text'], 320);
+        }
+        
+        if (!empty($data['approved'])) {
+            if (Gate::denies('CONFIRMATION_DATA')) {
+                array_forget($data, 'approved');
+            } else {
+                $data['approved'] = true;
+            }
+        }
+        
 		if ($request->hasFile('img')) {
-			$old_img = json_decode($article->img);
-
+            
 			$image = $request->file('img');
 
 			if($image->isValid()) {
@@ -163,6 +173,7 @@ class ArticlesRepository extends Repository {
 
 				$obj = new \stdClass;
 				
+				$obj->micro = $str.'_micro.jpg';
 				$obj->mini = $str.'_mini.jpg';
 				$obj->max = $str.'_max.jpg';
 				$obj->path = $str.'.jpg';
@@ -170,19 +181,25 @@ class ArticlesRepository extends Repository {
 				$img = Image::make($image);
 				
 				$img->fit(Config::get('settings.image')['width'],
-						Config::get('settings.image')['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->path); 
+						Config::get('settings.image')['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->path, 100); 
 				
 				$img->fit(Config::get('settings.articles_img')['max']['width'],
-						Config::get('settings.articles_img')['max']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->max); 
+						Config::get('settings.articles_img')['max']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->max, 100); 
 				
 				$img->fit(Config::get('settings.articles_img')['mini']['width'],
-						Config::get('settings.articles_img')['mini']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->mini);
-		
-                File::delete([
-                    config('settings.theme').'/images/articles/'.$img->mini,
-                    config('settings.theme').'/images/articles/'.$img->path,
-                    config('settings.theme').'/images/articles/'.$img->max,
-                ]);
+						Config::get('settings.articles_img')['mini']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->mini, 100);
+                $img->fit(Config::get('settings.articles_img')['micro']['width'],
+						Config::get('settings.articles_img')['micro']['height'])->save(public_path().'/'.config('settings.theme').'/images/articles/'.$obj->micro, 100);
+                
+                if (is_string($article->img) && is_object(json_decode($article->img)) && (json_last_error() ==    JSON_ERROR_NONE)) {
+                    $old_img = json_decode($article->img);
+                    // dd($old_img);
+                    foreach ($old_img as $pic) {
+                        if (File::exists(config('settings.theme').'/images/articles/'.$pic)) {
+                            File::delete(config('settings.theme').'/images/articles/'.$pic);
+                        }
+                    }
+                }
                 
 				$data['img'] = json_encode($obj);  
 			}
@@ -196,16 +213,21 @@ class ArticlesRepository extends Repository {
 
 	}
     
-    public function deleteArticle($article) {
+    public function deleteArticle($article)
+    {
+		// $article->comments()->delete();
 		
-		if(Gate::denies('destroy', $article)) {
-			abort(403);
-		}
-		
-		$article->comments()->delete();
-		
+        if (is_string($article->img) && is_object(json_decode($article->img)) && (json_last_error() ==    JSON_ERROR_NONE)) {
+            $old_img = json_decode($article->img);
+        }
+        
 		if($article->delete()) {
-			return ['status' => 'Материал удален'];
+            foreach ($old_img as $pic) {
+                if (File::exists(config('settings.theme').'/images/articles/'.$pic)) {
+                    File::delete(config('settings.theme').'/images/articles/'.$pic);
+                    }
+            }
+            return ['status' => trans('admin.deleted')];
 		}
 		
 	}

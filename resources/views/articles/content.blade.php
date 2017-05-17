@@ -38,7 +38,7 @@
         <div class="thumbnail">
             <h1 class="post-title">{{ $content->title }}</h1>
             <div class="image-wrap">
-                <img width="720" height="298" src="{{ asset(config('settings.theme')) }}/images/articles/{{ $content->img ? : ('pic'.rand(1,14).'.jpg')}}" class="attachment-blog_big wp-post-image" alt="{{ $content->title }}" title="{{ $content->title }}" />                            
+                <img width="720" height="298" src="{{ asset(config('settings.theme')) }}/images/articles/{{ $content->img->max ?? ('templates/pic'.rand(1,14).'.jpg')}}" class="attachment-blog_big wp-post-image" alt="{{ $content->title }}" title="{{ $content->title }}" />                            
             </div>
         </div>
         <div class="clearer"></div>

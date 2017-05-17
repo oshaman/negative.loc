@@ -28,7 +28,7 @@ class ArticlePolicy
     
     public function update(User $user, Article $article)
     {
-		return ($user->canDo('UPDATE_ARTICLES') && $user->id == $article->user_id) || $user->canDo('CONFIRMATION_DATA');
+        return ($user->canDo('UPDATE_ARTICLES') && $user->id == $article->user_id) || $user->canDo('CONFIRMATION_DATA');
 	}
     
     public function destroy(User $user, Article $article)
