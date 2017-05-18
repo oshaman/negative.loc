@@ -45,7 +45,7 @@ return [
     /**
     *   Events
     */
-    'featured_events' => 'Цікаві події',
+    'featured_events' => 'Інші події',
     /**
     *   
     */

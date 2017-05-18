@@ -50,7 +50,7 @@
     <div id="page_meta" class="home-section">
         <div class="inner group">
             <div class="meta-left">
-                <h2 class="page-title">Articles</h2><span class="special-font" style="font-size:18px;">special font!</span>
+                <h2 class="page-title">{{ $title }}</h2><span class="special-font" style="font-size:18px;">special font!</span>
             </div>
             <div class="meta-right">
                 <span class="twitter_label twitter_label-red">your text</span>

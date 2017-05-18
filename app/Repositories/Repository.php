@@ -6,10 +6,10 @@ use Config;
 
 abstract class Repository {
 	
-	protected $model = FALSE;
+	protected $model = false;
 	
 	
-	public function get($select = '*', $take = FALSE, $pagination = FALSE, $where = FALSE, $order = FALSE) 
+	public function get($select = '*', $take = false, $pagination = false, $where = false, $order = false) 
     {
 		
 		$builder = $this->model->select($select);

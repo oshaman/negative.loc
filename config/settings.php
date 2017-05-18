@@ -20,7 +20,11 @@
 					'height'=>768
 				],				
 		
-	
+        'events_img' => [
+						'max' => ['width'=>700,'height'=>260],
+						'mini' => ['width'=>310,'height'=>155],
+						'micro' => ['width'=>90,'height'=>90]
+						],
 	
 	
 	];

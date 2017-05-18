@@ -6,6 +6,7 @@ return [
     *   ADMIN  
     */
     'articles_manager' => 'Менеджер новин',
+    'events_manager' => 'Менеджер історичних подій',
     'id' => 'id',
     'title' => 'Заголовок',
     'text' => 'Текст',
@@ -14,6 +15,7 @@ return [
     'cat' => 'Категорія',
     'alias' => 'Псевдонім',
     'delete' => 'Видалити',
+    'find' => 'Пошук',
     'save' => 'Зберегти',
     'add' => 'Додати новий матеріал',
     'edit' => 'Редагування матеріалу',
@@ -43,6 +45,10 @@ return [
     'add_cat_placeholder' => 'Обрати категорію',
     'add_source' => 'Джерело:',
     'add_source_placeholder' => 'www.example.com',
-
+    //  events
+    'events' => 'Додані історичні події за - ',
+    'pick_a_day' => 'Оберіть дату',
+    'month' => 'Місяць',
+    'day' => 'Число',
 
 ];

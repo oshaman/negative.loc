@@ -25,7 +25,7 @@
                 </div>
                 <div class="post_content group  no-skills ">
                     <div class="meta-bottom">
-                        {!! $content->desc !!}
+                        {!! $content->description !!}
                         {!! $content->text !!}
                     </div>
                 </div>

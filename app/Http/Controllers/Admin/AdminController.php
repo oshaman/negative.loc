@@ -27,7 +27,7 @@ class AdminController extends Controller
 		$this->vars = array_add($this->vars, 'topbar', $topbar);
         
 		$menu = $this->getMenu();
-		// dd($menu);
+
 		$navigation = view('admin.header')->with('menu', $menu)->render();
 		$this->vars = array_add($this->vars, 'header', $navigation);
 		

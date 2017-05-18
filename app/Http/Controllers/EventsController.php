@@ -35,7 +35,7 @@ class EventsController extends MainController
             $this->keywords = 'This Day In History';
             
             $this->content_vars = $this->events_rep->get(
-                ['title', 'desc', 'alias', 'img', 'user_id'],
+                ['title', 'description', 'alias', 'img', 'user_id'],
                 false, true, ['day', date("nd")], false);
             $content = view('events.content')->with('content', $this->content_vars)->render();
             $this->vars = array_add($this->vars, 'content', $content);

@@ -46,12 +46,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
         Route::get('del/{id}', ['uses'=>'Admin\ArticlesController@del', 'as'=>'delete_article'])->where('id', '[0-9]+');
         
     });
-    Route::get('events', ['uses' => 'Admin\EventsController@index', 'as' => 'admin_events']);
     /**
     *   Admin HISTORY
     * 
-    */    
-    Route::match(['get', 'post'], 'events', ['uses' => 'Admin\EventsController@index', 'as' => 'admin_events']);
+    */
+    Route::group(['prefix' => 'events'], function () {
+        //  show events list
+        Route::match(['get', 'post'], '/', ['uses' => 'Admin\EventsController@index', 'as' => 'admin_events']);
+        // create, update, delete
+        Route::match(['get', 'post'], 'create', ['uses'=>'Admin\EventsController@create', 'as'=>'create_event']);
+        Route::match(['get', 'post'], 'edit/{id}', ['uses'=>'Admin\EventsController@edit', 'as'=>'edit_event'])->where('id', '[0-9]+');
+        Route::get('del/{id}', ['uses'=>'Admin\EventsController@del', 'as'=>'delete_event'])->where('id', '[0-9]+');
+    });
 });
 
 
