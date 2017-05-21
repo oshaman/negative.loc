@@ -47,7 +47,7 @@ return [
     'add_source_placeholder' => 'www.example.com',
     //  events
     'events' => 'Додані історичні події за - ',
-    'pick_a_day' => 'Оберіть дату',
+    'pick_a_day' => 'Оберіть дату:',
     'month' => 'Місяць',
     'day' => 'Число',
 

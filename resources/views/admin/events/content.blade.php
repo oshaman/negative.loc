@@ -8,7 +8,7 @@
         'method'=>'POST'])
 !!}
 <h4>{!! Form::label('day', trans('admin.pick_a_day')); !!}</h4>
-{!! Form::selectRange('day', 1, 31); !!}
+{!! Form::selectRange('day', 1, 31, old('day') ? : 1); !!}
 {!! Form::select('month',
                 [
                     1=>trans('dates.1'),
@@ -23,7 +23,7 @@
                     10=>trans('dates.10'),
                     11=>trans('dates.11'),
                     12=>trans('dates.12'),
-                ])
+                ], old('month') ? : 1)
 !!}
 {!! Form::button(trans('admin.find'), ['class' => 'btn btn-the-salmon-dance-3','type'=>'submit']) !!}
 {!! Form::close() !!}
@@ -60,7 +60,7 @@
                         @if(isset($event->img->micro))
                             {!! Html::image(asset(config('settings.theme')).'/images/events/'.$event->img->micro) !!}
                         @else
-                            {!! Html::image(asset(config('settings.theme')).'/images/events/no-picture.png', $event->title, array('width' => 90 , 'height' => 90)) !!}
+                            {!! Html::image(asset(config('settings.theme')).'/images/no-image2.jpg', $event->title, array('width' => 90 , 'height' => 90)) !!}
                         @endif
                     </td>
                     <td>{{ $event->alias }}</td>

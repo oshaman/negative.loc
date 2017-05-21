@@ -17,7 +17,6 @@
             'class' => 'contact-form',
             'method' => 'POST',
             'enctype' => 'multipart/form-data',
-            'novalidate'=>'',
             'files' => true
         ]) !!}
             <fieldset>

@@ -9,6 +9,7 @@ use Oshaman\Publication\Http\Controllers\Controller;
 use Oshaman\Publication\Http\Controllers\Admin\AdminController;
 
 use Oshaman\Publication\Repositories\EventsRepository;
+use Oshaman\Publication\Event;
 
 use Gate;
 
@@ -30,7 +31,7 @@ class EventsController extends AdminController
         }
         
         $this->title = trans('admin.events_manager');
-        $day = date("nd");
+        $day = session('d') ? : date("nd");
         
         if ($request->isMethod('post')) {
             
@@ -40,8 +41,9 @@ class EventsController extends AdminController
             ];
             $this->validate($request, $rules);
             
-            
+            $request->flashOnly(['month', 'day']);
             $day = $request->month . str_pad($request->day, 2, 0, STR_PAD_LEFT);
+            session(['d' => $day]);
         }
          
         
@@ -52,9 +54,33 @@ class EventsController extends AdminController
         return $this->renderOutput();
     }
     
-    public function create()
+    public function create(EventRequest $request)
     {
-        dd('create');
+        if (Gate::denies('create', new Event)) {
+            abort(404);
+        }
+        /**
+        * Store a newly created resource in storage.
+        *
+        */
+        if ($request->isMethod('post')) {
+            $result = $this->e_rep->addEvent($request);
+		
+            if(is_array($result) && !empty($result['error'])) {
+                return back()->with($result);
+            }
+            
+            return redirect('/admin/events/edit/'. $result['id'])->with($result);
+        }
+        
+        /**
+        * Show the form for creating a new resource.
+        *
+        */
+        $this->title = trans('admin.add');
+        $this->content = view('admin.events.add_content')->render();
+        
+        return $this->renderOutput();
     }
     
     public function edit()

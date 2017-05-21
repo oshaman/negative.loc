@@ -13,7 +13,7 @@
         </div>
     @endif
         {!! Form::open([
-            'url' => route('create_article'),
+            'url' => route('create_event'),
             'class' => 'contact-form',
             'method' => 'POST',
             'enctype' => 'multipart/form-data',
@@ -23,7 +23,7 @@
             <fieldset>
                 <ul>
                     <li class="text-field">
-                        <h4>{!! Form::label('a_title', trans('admin.add_title')); !!}</h4>
+                        <h4>{!! Form::label('e_title', trans('admin.add_title')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-th-list"></i></span>
                             {!! Form::text('title', old('title') ? : '', ['placeholder'=>trans('admin.add_title_placeholder'), 'id'=>'a_title',
                             'required' => '']) !!}
@@ -47,19 +47,6 @@
                             {!! Form::text('meta_desc', old('meta_desc') ? : '', ['placeholder'=>trans('admin.add_meta_placeholder'), 'id'=>'a_meta']) !!}
                         </div>
                     </li>
-                    <li class="text-field">
-                        <h4>{!! Form::label('a_source', trans('admin.add_source')); !!}</h4>
-                        <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
-                            {!! Form::text('source', old('source') ? : '', ['placeholder'=>trans('admin.add_source_placeholder'), 'id'=>'a_source']) !!}
-                        </div>
-                    </li>
-                    <li class="text-field">
-                        <h4>{!! Form::label('cat', trans('admin.add_cat')); !!}</h4>
-                        <div class="input-prepend">
-                            {!! Form::select('category_id', $categories, old('category_id') ? : null, ['placeholder' => trans('admin.add_cat_placeholder')]) !!}
-                        </div>
-                        <div class="msg-error"></div>
-                    </li>
                 <!-- TextArea -->
                     <li class="textarea-field">
                         <h4>{!! Form::label('editor', trans('admin.add_text')); !!}</h4>
@@ -82,20 +69,29 @@
                         </div>
                     </li>
                     <li class="text-field">
-                        <h4>{!! Form::label('outputtime', trans('admin.add_outputtime')); !!}</h4>
-                        <div class="input-prepend"><span class="add-on"><i class="icon-time"></i></span>
-                            <input type="text" name="outputtime" id="outputtime" value="{{ old('outputtime') ? : date('Y-m-d H:i:s') }}">
-                        </div>
+                        <h4>{!! Form::label('day', trans('admin.pick_a_day')); !!}</h4>
+                        {!! Form::selectRange('day', 1, 31, null, ['placeholder' => trans('admin.day')]); !!}
+                        {!! Form::select('month',
+                                        [
+                                            1=>trans('dates.1'),
+                                            2=>trans('dates.2'),
+                                            3=>trans('dates.3'),
+                                            4=>trans('dates.4'),
+                                            5=>trans('dates.5'),
+                                            6=>trans('dates.6'),
+                                            7=>trans('dates.7'),
+                                            8=>trans('dates.8'),
+                                            9=>trans('dates.9'),
+                                            10=>trans('dates.10'),
+                                            11=>trans('dates.11'),
+                                            12=>trans('dates.12'),
+                                        ], null, ['placeholder' => trans('admin.month')])
+                        !!}
                     </li>
                 </ul>
-            </fieldset>
-                <!-- Approved -->
-                @if(Auth::user()->canDo('CONFIRMATION_DATA'))
-                        <h5><input name="approved" type="checkbox" value="1">{{ trans('admin.approved') }}</h5>
-                @endif
                 <!-- Submit -->
-                {!! Form::button(trans('admin.save'), ['class' => 'btn btn-large btn-campfire-5','type'=>'submit']) !!}			
-
+                {!! Form::button(trans('admin.save'), ['class' => 'btn btn-large btn-campfire-5','type'=>'submit']) !!}	
+            </fieldset>
         {!! Form::close() !!}
     <script>
         CKEDITOR.replace( 'editor' );

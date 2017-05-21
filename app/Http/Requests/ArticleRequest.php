@@ -61,8 +61,8 @@ class ArticleRequest extends FormRequest
     {
         if ($this->isMethod('post')) {
             return [
-                'title' => 'string|required|max:255',
-                'text' => 'string|required',
+                'title' => 'required|max:255',
+                'text' => 'required',
                 'category_id' => 'required|integer',
                 'img' => 'image|max:5120',
             ];

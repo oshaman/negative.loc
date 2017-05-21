@@ -20,17 +20,6 @@ class EventRequest extends FormRequest
     {
         $validator = parent::getValidatorInstance();
     	
-    	$validator->sometimes('alias','unique:articles|max:246|alpha_dash', function($input) {
-        	
-        	if($this->route()->hasParameter('id')) {
-				$model = $this->route()->parameter('id');
-				return ($model->alias !== $input->alias)  && !empty($input->alias);
-			}
-        	
-        	return !empty($input->alias);
-        	
-        });
-        
         $validator->sometimes('keywords',array('string', 'max:255', 'regex:#^[a-zA-zа-яА-Яї0-9_\,\-\s!\']+$#u'), function($input) {
         	
         	return !empty($input->keywords);
@@ -40,6 +29,18 @@ class EventRequest extends FormRequest
         $validator->sometimes('meta_desc',array('string', 'max:255', 'regex:#^[a-zA-zа-яА-Яї0-9_\,\-\s!\']+$#u'), function($input) {
         	
         	return !empty($input->meta_desc);
+        	
+        });
+        
+        $validator->sometimes('day',array('required', 'integer', 'between:1,31'), function($input) {
+        	
+        	return !(empty($input->day) && empty($input->month));
+        	
+        });
+        
+        $validator->sometimes('month',array('required', 'integer', 'between:1,12'), function($input) {
+        	
+        	return !(empty($input->day) && empty($input->month));
         	
         });
         
@@ -55,8 +56,9 @@ class EventRequest extends FormRequest
     {
         if ($this->isMethod('post')) {
             return [
-                'title' => 'string|required|max:255',
-                'text' => 'string|required',
+                'title' => 'required|max:255',
+                'text' => 'required',
+                'alias' => 'unique:events|max:246|nullable|alpha_dash',
                 'img' => 'image|max:5120',
             ];
         }

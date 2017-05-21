@@ -2,6 +2,9 @@
 
 namespace Oshaman\Publication\Providers;
 
+use Oshaman\Publication\Event;
+use Oshaman\Publication\Policies\EventPolicy;
+
 use Oshaman\Publication\Article;
 use Oshaman\Publication\Policies\ArticlePolicy;
 
@@ -17,6 +20,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Article::class => ArticlePolicy::class,
+        Event::class => EventPolicy::class,
         // Permission::class => PermissionPolicy::class,
         // Menu::class => MenusPolicy::class,
         // User::class => UserPolicy::class,

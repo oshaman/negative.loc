@@ -63,11 +63,11 @@ class ArticlesRepository extends Repository {
         }
         
         if (empty($data['keywords'])) {
-            $data['keywords'] = $data['title'];
+            $data['keywords'] = preg_replace("#[^a-zA-zа-яА-Яї0-9]+#u", ', ', $data['title']);
         }
         
         if (empty($data['meta_desc'])) {
-            $data['meta_desc'] = $data['title'];
+            $data['meta_desc'] = preg_replace("#[^a-zA-zа-яА-Яї0-9]+#u", ', ', $data['title']);
         }
         
         if (empty($data['description'])) {
@@ -155,6 +155,14 @@ class ArticlesRepository extends Repository {
         
         if (empty($data['description'])) {
             $data['description'] = str_limit($data['text'], 320);
+        }
+        
+        if (empty($data['keywords'])) {
+            $data['keywords'] = preg_replace("#[^a-zA-zа-яА-Яї0-9]+#u", ', ', $data['title']);
+        }
+        
+        if (empty($data['meta_desc'])) {
+            $data['meta_desc'] = preg_replace("#[^a-zA-zа-яА-Яї0-9]+#u", ', ', $data['title']);
         }
         
         if (!empty($data['approved'])) {
