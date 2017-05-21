@@ -32,6 +32,10 @@ class User extends Authenticatable
 		return $this->hasMany('Oshaman\Publication\Article');
 	}
 	
+    public function events()
+    {
+		return $this->hasMany('Oshaman\Publication\Event');
+	}
 	
 	public function roles()
     {

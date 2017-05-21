@@ -42,7 +42,7 @@ class EventPolicy
      */
     public function update(User $user, Event $event)
     {
-        //
+        return $user->canDo('UPDATE_EVENTS');
     }
 
     /**

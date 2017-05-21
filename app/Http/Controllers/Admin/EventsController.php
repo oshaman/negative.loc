@@ -83,9 +83,16 @@ class EventsController extends AdminController
         return $this->renderOutput();
     }
     
-    public function edit()
+    public function edit(EventRequest $request, Event $event)
     {
-        dd('edit');
+        if (Gate::denies('update', $event)) {
+			abort(404);
+		}
+        
+        $this->title = trans('admin.edit');
+        
+        $this->content = view('admin.events.edit_content')->with('event', $event)->render();
+        return $this->renderOutput();
     }
 
     public function del()

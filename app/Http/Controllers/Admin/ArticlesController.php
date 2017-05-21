@@ -105,7 +105,7 @@ class ArticlesController extends AdminController
             return redirect('/admin/articles')->with($result);
         }
         
-        if(Gate::denies('update', $article)) {
+        if (Gate::denies('update', $article)) {
 			abort(404);
 		}
         

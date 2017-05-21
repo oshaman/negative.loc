@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 use Oshaman\Publication\Article;
+use Oshaman\Publication\Event;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,10 @@ class RouteServiceProvider extends ServiceProvider
         
         Route::bind('id', function ($value) {
         	return Article::where('id', $value)->first();
+        });
+        
+        Route::bind('event_id', function ($value) {
+        	return Event::where('id', $value)->first();
         });
     }
 

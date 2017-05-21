@@ -39,7 +39,7 @@
     <h3>{{ trans('admin.events') . substr($day, -2) . ' ' . trans('dates.' . substr($day, -4, -2) ) }}</h3>
 @if($events)
     <div class="page type-page status-publish hentry group">
-        <table class="short-table blue" style="width: 100%" cellspacing="0" cellpadding="0">
+        <table class="short-table blue">
             <thead>
                 <tr>
                     <th>{{ trans('admin.id') }}</th>

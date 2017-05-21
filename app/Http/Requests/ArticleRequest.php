@@ -13,7 +13,7 @@ class ArticleRequest extends FormRequest
      */
     public function authorize()
     {
-        return \Auth::user()->canDo('ADD_ARTICLES');
+        return \Auth::user()->canDo('UPDATE_ARTICLES');
     }
 
     protected function getValidatorInstance()
@@ -22,8 +22,9 @@ class ArticleRequest extends FormRequest
     	
     	$validator->sometimes('alias','unique:articles|max:246|alpha_dash', function($input) {
         	
-        	if($this->route()->hasParameter('id')) {
+            if ($this->route()->hasParameter('id')) {
 				$model = $this->route()->parameter('id');
+                if (null === $model) return true;
 				return ($model->alias !== $input->alias)  && !empty($input->alias);
 			}
         	

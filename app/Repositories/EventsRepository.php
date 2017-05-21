@@ -40,14 +40,20 @@ class EventsRepository extends Repository {
         
         if (!empty($data['day']) && !empty($data['month'])) {
             $data['day'] = (int)($data['month']) . str_pad((int)$data['day'], 2, 0, STR_PAD_LEFT);
+        } else {
+            array_forget($data, 'day');
+        }
+        
+        if (empty($data['description'])) {
+            $data['description'] = str_limit($data['text'], 320);
         }
         
         if (empty($data['keywords'])) {
-            $data['keywords'] = preg_replace("#[^a-zA-zа-яА-Яї0-9]+#u", ', ', $data['title']);
+            $data['keywords'] = preg_replace("#[^a-zA-zа-яА-Яїі0-9\.\()]+#u", ', ', $data['title']);
         }
         
         if (empty($data['meta_desc'])) {
-            $data['meta_desc'] = preg_replace("#[^a-zA-zа-яА-Яї0-9]+#u", ', ', $data['title']);
+            $data['meta_desc'] = preg_replace("#[^a-zA-zа-яА-Яїі0-9\.\()]+#u", ', ', $data['title']);
         }
         
         if ($request->hasFile('img')) {
@@ -83,9 +89,9 @@ class EventsRepository extends Repository {
         
         $this->model->fill($data);
         
-        dd($this->model);
+        // dd($this->model);
         
-        $id = $request->user()->articles()->save($this->model)->id;
+        $id = $request->user()->events()->save($this->model)->id;
         if($id) {
             return ['status' => trans('admin.material_added'), 'id' => $id];
         }

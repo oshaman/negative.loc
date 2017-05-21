@@ -3,62 +3,35 @@
 <!-- START CONTENT -->
 <div id="content" class="group">
     <!-- Small Preview-->
-    <div class="blog-small">
-        <div class="thumbnail">
-            <img src="{{ asset(config('settings.theme')) }}/images/articles/{{ $article->img->mini ?? '../no-picture.png'}}" class="attachment-blog_small wp-post-image" alt="{{ $article->alias }}" title="{{ $article->title }}" />                        
-        </div>
-        <h2>{{ $article->title }}</h2>
-        <div>
-            <div class="meta-bottom">
-                {!! str_limit($article->description, 288, '&#8230;') !!}
-            </div>
-            <div class="the-content">
-                <p><a href="{{ route('articles', $article->alias) }}" class="btn btn-retro-package-3 btn-more-link">{{ trans('ua.read_more') }}</a></p>
-                <p class="date-cat">
-                    <i class="icon-calendar"></i>{{ date("d-m-Y H:i", strtotime($article->created_at)) }}
-                    <i class="icon-tags"></i>
-                    <span>{{ trans('ua.cat') }}: <a href="{{ route('cat_alias', $article->category->title) }}">{{ trans('categories.' .$article->category->title) }}</a></span>
-                    <i class="icon-external-link"></i>
-                    <span>{{ trans('ua.source') }}: <a href="http://{{ $article->source }}" class="link">{{ $article->source }}</a></span>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="clear"></div>
+    <ul>
+    <li class="status-publish hentry col1_3 col">
+        <a class="img" href="{{ route('history', $event->alias) }}">
+            <img src="{{ asset(config('settings.theme')) }}/images/events/{{ $event->img->mini ?? '../no-picture.png' }}" class="attachment-thumb_portfolio_3cols wp-post-image" alt="{{ $event->title }}" title="{{ $event->title }}" />
+        </a>
+        <h5><a href="{{ route('history'). '/' .$event->alias }}">{{ $event->title }}</a></h5>
+        <p>{{ $event->description }}</p>
+        <a href="{{ route('history'). '/' .$event->alias }}" class="btn btn-son-1 "><i class="icon-search"></i>{{ trans('ua.read_more') }}</a></a>                
+    </li>
+    </ul>
+    <div class="border-line"></div>
     <!-- Big Preview-->
-    
-    <div class="post hentry-post blog-big">
-        <div class="meta group">
-            <p class="date">
-                <i class="icon-calendar"></i>{{ date('d-m-Y H:i', strtotime($article->created_at)) }}
-            </p>
-            <p class="author">
-                <i class="icon-external-link"></i> <span>{{ trans('ua.source') }}:
-                <a href="{{ $article->source ?: route('home') }}"  class="link">{{ $article->source }}</a></span>
-            </p>
-            <p class="categories">
-                <i class="icon-tags"></i> <span>{{ trans('ua.cat') }}: <a href="{{ route('cat_alias', $article->category->alias) }}" class="cats">{{ trans('categories.' . $article->category->title) }}</a></span>
-            </p>
-            <p class="comments">
-                <i class="icon-comment"></i> <span><a href="#" title="Comment on Another great article of the blog">2 comments</a></span>
-            </p>
-            <p class="edit-link"><i class="icon-pencil"></i><a class="post-edit-link" href="#" title="Edit Post">Edit</a></p>
-        </div>
-        <div class="thumbnail">
-            <h1 class="post-title">{{ $article->title }}</h1>
-            <div class="image-wrap">
-                <img src="{{ asset(config('settings.theme')) }}/images/articles/{{ $article->img->max ?? '../no-picture.png'}}" class="attachment-blog_big wp-post-image" alt="{{ $article->title }}" title="{{ $article->title }}" />                          
+    <div class="posts">
+        <div class="portfolio type-portfolio status-publish hentry hentry-post group portfolio-post internal-post">
+            <div class="post_header portfolio_header group">
+                <img src="{{ asset(config('settings.theme')) }}/images/events/{{ $event->img->max ?? '../no-picture.png' }}" class="internal wp-post-image" alt="{{ $event->title }}" title="{{ $event->title }}" />                                
+                <h2>{{ $event->title }}</h2>
+            </div>
+            <div class="post_content group  no-skills ">
+                <div class="meta-bottom">
+                    {!! $event->description !!}
+                    {!! $event->text !!}
+                </div>
             </div>
         </div>
-        <div class="clearer"></div>
-        <div class="the-content-single">
-            {!! $article->text !!}
-        </div>
     </div>
-    <div class="clear"></div>
 <!-- Edit -->
-<div class="page type-page status-publish hentry group">
-   @if (count($errors) > 0)
+    <div class="page type-page status-publish hentry group">
+    @if (count($errors) > 0)
         <div class="contact-form">
                 <p class="error">
                 @foreach ($errors->toArray() as $key=>$error)
@@ -68,7 +41,7 @@
         </div>
     @endif
         {!! Form::open([
-            'url' => route('edit_article', $article->id),
+            'url' => route('create_event'),
             'class' => 'contact-form',
             'method' => 'POST',
             'enctype' => 'multipart/form-data',
@@ -78,55 +51,42 @@
             <fieldset>
                 <ul>
                     <li class="text-field">
-                        <h4>{!! Form::label('a_title', trans('admin.add_title')); !!}</h4>
+                        <h4>{!! Form::label('e_title', trans('admin.add_title')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-th-list"></i></span>
-                            {!! Form::text('title', old('title') ? : $article->title, ['placeholder'=>trans('admin.add_title_placeholder'), 'id'=>'a_title',
+                            {!! Form::text('title', old('title') ? : $event->title, ['placeholder'=>trans('admin.add_title_placeholder'), 'id'=>'a_title',
                             'required' => '']) !!}
                         </div>
                     </li>
                     <li class="text-field">
-                        <h4>{!! Form::label('a_alias', trans('admin.add_alias')); !!}</h4>
+                        <h4>{!! Form::label('e_alias', trans('admin.add_alias')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-th-list"></i></span>
-                            {!! Form::text('alias', old('alias') ? : $article->alias, ['placeholder'=>trans('admin.add_alias_placeholder'), 'id'=>'a_alias']) !!}
+                            {!! Form::text('alias', old('alias') ? : $event->alias, ['placeholder'=>trans('admin.add_alias_placeholder'), 'id'=>'e_alias']) !!}
                         </div>
                     </li>
                     <li class="text-field">
-                        <h4>{!! Form::label('a_keywords', trans('admin.add_keywords')); !!}</h4>
+                        <h4>{!! Form::label('e_keywords', trans('admin.add_keywords')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-pushpin"></i></span>
-                            {!! Form::text('keywords', old('keywords') ? : $article->keywords, ['placeholder'=>trans('admin.add_keywords_placeholder'), 'id'=>'a_keywords', 'required' => '']) !!}
+                            {!! Form::text('keywords', old('keywords') ? : $event->keywords, ['placeholder'=>trans('admin.add_keywords_placeholder'), 'id'=>'e_keywords', 'required' => '']) !!}
                         </div>
                     </li>
                     <li class="text-field">
-                        <h4>{!! Form::label('a_meta', trans('admin.add_meta')); !!}</h4>
+                        <h4>{!! Form::label('e_meta', trans('admin.add_meta')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
-                            {!! Form::text('meta_desc', old('meta_desc') ? : $article->meta_desc, ['placeholder'=>trans('admin.add_meta_placeholder'), 'id'=>'a_meta']) !!}
+                            {!! Form::text('meta_desc', old('meta_desc') ? : $event->meta_desc, ['placeholder'=>trans('admin.add_meta_placeholder'), 'id'=>'e_meta']) !!}
                         </div>
-                    </li>
-                    <li class="text-field">
-                        <h4>{!! Form::label('a_source', trans('admin.add_source')); !!}</h4>
-                        <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
-                            {!! Form::text('source', old('source') ? : $article->source, ['placeholder'=>trans('admin.add_source_placeholder'), 'id'=>'a_source']) !!}
-                        </div>
-                    </li>
-                    <li class="text-field">
-                        <h4>{!! Form::label('cat', trans('admin.add_cat')); !!}</h4>
-                        <div class="input-prepend">
-                            {!! Form::select('category_id', $categories, old('category_id') ? : $article->category_id, ['placeholder' => trans('admin.add_cat_placeholder')]) !!}
-                        </div>
-                        <div class="msg-error"></div>
                     </li>
                 <!-- TextArea -->
                     <li class="textarea-field">
                         <h4>{!! Form::label('editor', trans('admin.add_text')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
-                            {!! Form::textarea('text', old('text') ? : $article->text, ['id'=>'editor','required'=>'', 'rows'=>8, 'cols'=>30]) !!}
+                            {!! Form::textarea('text', old('text') ? : $event->text, ['id'=>'editor','required'=>'', 'rows'=>8, 'cols'=>30]) !!}
                         </div>
                         <div class="msg-error"></div>
                     </li>
                     <li class="textarea-field">
                         <h4>{!! Form::label('editor2', trans('admin.add_desc')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
-                            {!! Form::textarea('description', old('description') ? : $article->description, ['id'=>'editor2','required'=>'', 'rows'=>8, 'cols'=>30]) !!}
+                            {!! Form::textarea('description', old('description') ? : $event->description, ['id'=>'editor2','required'=>'', 'rows'=>8, 'cols'=>30]) !!}
                         </div>
                     </li>
                 <!-- Image -->
@@ -137,20 +97,29 @@
                         </div>
                     </li>
                     <li class="text-field">
-                        <h4>{!! Form::label('outputtime', trans('admin.add_outputtime')); !!}</h4>
-                        <div class="input-prepend"><span class="add-on"><i class="icon-time"></i></span>
-                            <input type="text" name="outputtime" id="outputtime" value="{{ old('outputtime') ? : $article->created_at }}">
-                        </div>
+                        <h4>{!! Form::label('day', trans('admin.pick_a_day')); !!}</h4>
+                        {!! Form::selectRange('day', 1, 31, null, ['placeholder' => trans('admin.day')]); !!}
+                        {!! Form::select('month',
+                                        [
+                                            1=>trans('dates.1'),
+                                            2=>trans('dates.2'),
+                                            3=>trans('dates.3'),
+                                            4=>trans('dates.4'),
+                                            5=>trans('dates.5'),
+                                            6=>trans('dates.6'),
+                                            7=>trans('dates.7'),
+                                            8=>trans('dates.8'),
+                                            9=>trans('dates.9'),
+                                            10=>trans('dates.10'),
+                                            11=>trans('dates.11'),
+                                            12=>trans('dates.12'),
+                                        ], null, ['placeholder' => trans('admin.month')])
+                        !!}
                     </li>
                 </ul>
-            </fieldset>
-                <!-- Approved -->
-                @if(Auth::user()->canDo('CONFIRMATION_DATA'))
-                        <h5><input name="approved" type="checkbox" value="1">{{ trans('admin.approved') }}</h5>
-                @endif
                 <!-- Submit -->
-                {!! Form::button(trans('admin.save'), ['class' => 'btn btn-large btn-campfire-5','type'=>'submit']) !!}			
-
+                {!! Form::button(trans('admin.save'), ['class' => 'btn btn-large btn-campfire-5','type'=>'submit']) !!}	
+            </fieldset>
         {!! Form::close() !!}
     <script>
         CKEDITOR.replace( 'editor' );
