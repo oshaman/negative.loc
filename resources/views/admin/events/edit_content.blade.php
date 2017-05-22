@@ -3,13 +3,13 @@
 <!-- START CONTENT -->
 <div id="content" class="group">
     <!-- Small Preview-->
-    <ul>
+    <ul id="portfolio">
     <li class="status-publish hentry col1_3 col">
         <a class="img" href="{{ route('history', $event->alias) }}">
             <img src="{{ asset(config('settings.theme')) }}/images/events/{{ $event->img->mini ?? '../no-picture.png' }}" class="attachment-thumb_portfolio_3cols wp-post-image" alt="{{ $event->title }}" title="{{ $event->title }}" />
         </a>
         <h5><a href="{{ route('history'). '/' .$event->alias }}">{{ $event->title }}</a></h5>
-        <p>{{ $event->description }}</p>
+        <p>{!! $event->description !!}</p>
         <a href="{{ route('history'). '/' .$event->alias }}" class="btn btn-son-1 "><i class="icon-search"></i>{{ trans('ua.read_more') }}</a></a>                
     </li>
     </ul>
@@ -41,7 +41,7 @@
         </div>
     @endif
         {!! Form::open([
-            'url' => route('create_event'),
+            'url' => route('edit_event', $event->id),
             'class' => 'contact-form',
             'method' => 'POST',
             'enctype' => 'multipart/form-data',

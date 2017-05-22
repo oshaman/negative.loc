@@ -20,13 +20,24 @@ class EventRequest extends FormRequest
     {
         $validator = parent::getValidatorInstance();
     	
-        $validator->sometimes('keywords',array('string', 'max:255', 'regex:#^[a-zA-zа-яА-Яї0-9_\,\-\s!\']+$#u'), function($input) {
+        $validator->sometimes('alias', 'unique:events|max:246|alpha_dash', function ($input) {
+            
+            if ($this->route()->hasParameter('event_id')) {
+				$model = $this->route()->parameter('event_id');
+                if (null === $model) return true;
+				return ($model->alias !== $input->alias)  && !empty($input->alias);
+			}
+        	
+        	return !empty($input->alias);
+        });
+        
+        $validator->sometimes('keywords',array('string', 'max:255', 'regex:#^[a-zA-zа-яА-Яїі0-9_\,\-\s!\'\(\)]+$#u'), function($input) {
         	
         	return !empty($input->keywords);
         	
         });
         
-        $validator->sometimes('meta_desc',array('string', 'max:255', 'regex:#^[a-zA-zа-яА-Яї0-9_\,\-\s!\']+$#u'), function($input) {
+        $validator->sometimes('meta_desc',array('string', 'max:255', 'regex:#^[a-zA-zа-яА-Яїі0-9_\,\-\s!\'\(\)]+$#u'), function($input) {
         	
         	return !empty($input->meta_desc);
         	
@@ -58,7 +69,6 @@ class EventRequest extends FormRequest
             return [
                 'title' => 'required|max:255',
                 'text' => 'required',
-                'alias' => 'unique:events|max:246|nullable|alpha_dash',
                 'img' => 'image|max:5120',
             ];
         }

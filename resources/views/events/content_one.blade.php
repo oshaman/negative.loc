@@ -20,7 +20,7 @@
         <div class="posts">
             <div class="portfolio type-portfolio status-publish hentry hentry-post group portfolio-post internal-post">
                 <div class="post_header portfolio_header group">
-                    <img width="700" height="260" src="{{ asset(config('settings.theme')) }}/images/events/{{ $content->img }}" class="internal wp-post-image" alt="{{ $content->title }}" title="{{ $content->title }}" />                                
+                    <img src="{{ asset(config('settings.theme')) }}/images/events/{{ $content->img->max ?? '../no-picture.png'}}" class="internal wp-post-image" alt="{{ $content->title }}" title="{{ $content->title }}" />                                
                     <h2>{{ $content->title }}</h2>
                 </div>
                 <div class="post_content group  no-skills ">
@@ -46,7 +46,7 @@
                                 @continue
                             @endif
                         <li class="work-item group">
-                            <a class="work-thumb" href="{{ route('history', $event->alias) }}"><img width="86" height="86" src="{{ asset(config('settings.theme')) }}/images/events/{{ $event->img }}" class="attachment-thumb_more_projects wp-post-image" alt="{{$event->title}}" title="{{$event->title}}" /></a>
+                            <a class="work-thumb" href="{{ route('history', $event->alias) }}"><img width="86" height="86" src="{{ asset(config('settings.theme')) }}/images/events/{{ $event->img->micro ?? '../no-image2.jpg' }}" class="attachment-thumb_more_projects wp-post-image" alt="{{$event->title}}" title="{{$event->title}}" /></a>
                             <a class="meta work-title" href="{{ route('history', $event->alias) }}">{{ $event->title }}</a>
                         </li>
                         @endforeach

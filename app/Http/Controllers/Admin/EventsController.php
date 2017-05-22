@@ -85,18 +85,38 @@ class EventsController extends AdminController
     
     public function edit(EventRequest $request, Event $event)
     {
+        if ($request->isMethod('post')) {
+            $result = $this->e_rep->updateEvent($request, $event);
+            
+            if(is_array($result) && !empty($result['error'])) {
+                return back()->with($result);
+            }
+            
+            return redirect('/admin/events')->with($result);
+        }
+        
         if (Gate::denies('update', $event)) {
 			abort(404);
 		}
         
         $this->title = trans('admin.edit');
         
+        if($event) {
+			$event->img = json_decode($event->img);
+		}
+        
         $this->content = view('admin.events.edit_content')->with('event', $event)->render();
         return $this->renderOutput();
     }
 
-    public function del()
+    public function del(Event $event)
     {
-        dd('del');
+        if (Gate::denies('delete', $event)) {
+            abort(404);
+        }
+        
+        $result = $this->e_rep->deleteEvent($event);
+		
+        return back()->with($result);
     }
 }

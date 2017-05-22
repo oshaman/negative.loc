@@ -18,16 +18,23 @@ class EventsController extends MainController
     public function index($alias = FALSE)
     {
         if ($alias) {
-            $this->content_vars = $this->events_rep->one($alias);
-            $this->title = $this->content_vars->title;
-            $this->meta_desc = $this->content_vars->meta_desc;
-            $this->keywords = $this->content_vars->keywords;
-            
-            $this->content_vars->events = $this->events_rep->get(
-                ['title', 'alias', 'img'], false, false, ['day', date("nd")], false);
+            $event = $this->events_rep->one($alias);
+            if (isset($event->id)) {
+                $event->img = json_decode($event->img);
+                $this->content_vars = $event;
+                $this->title = $this->content_vars->title;
+                $this->meta_desc = $this->content_vars->meta_desc;
+                $this->keywords = $this->content_vars->keywords;
                 
-            $content = view('events.content_one')->with('content', $this->content_vars)->render();
-            $this->vars = array_add($this->vars, 'content', $content);
+                $this->content_vars->events = $this->events_rep->get(
+                    ['title', 'alias', 'img'], false, false, ['day', date("nd")], false);
+                    
+                $content = view('events.content_one')->with('content', $this->content_vars)->render();
+                $this->vars = array_add($this->vars, 'content', $content);
+            } else {
+                abort(404);
+            }
+            
         } else {
             
             $this->title = trans('ua.history');

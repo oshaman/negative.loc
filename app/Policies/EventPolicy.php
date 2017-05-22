@@ -54,6 +54,6 @@ class EventPolicy
      */
     public function delete(User $user, Event $event)
     {
-        //
+        return ($user->canDo('DELETE_EVENTS') && $user->id == $event->user_id) || $user->canDo('CONFIRMATION_DATA');
     }
 }

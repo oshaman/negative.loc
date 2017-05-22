@@ -158,11 +158,11 @@ class ArticlesRepository extends Repository {
         }
         
         if (empty($data['keywords'])) {
-            $data['keywords'] = preg_replace("#[^a-zA-zа-яА-Яї0-9]+#u", ', ', $data['title']);
+            $data['keywords'] = preg_replace("#[^a-zA-zа-яА-Яїі0-9\()]+#u", ', ', $data['title']);
         }
         
         if (empty($data['meta_desc'])) {
-            $data['meta_desc'] = preg_replace("#[^a-zA-zа-яА-Яї0-9]+#u", ', ', $data['title']);
+            $data['meta_desc'] = preg_replace("#[^a-zA-zа-яА-Яїі0-9\()]+#u", ', ', $data['title']);
         }
         
         if (!empty($data['approved'])) {
@@ -232,7 +232,7 @@ class ArticlesRepository extends Repository {
         }
         
 		if($article->delete()) {
-            if (is_array($old_img)) {                
+            if ($old_img) {              
                 foreach ($old_img as $pic) {
                     if (File::exists(config('settings.theme').'/images/articles/'.$pic)) {
                         File::delete(config('settings.theme').'/images/articles/'.$pic);
