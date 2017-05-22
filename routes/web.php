@@ -32,6 +32,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
     
     Route::get('/', ['uses' => 'Admin\IndexController@index', 'as' => 'admin']);
     /**
+    *   Admin PERMISSIONS
+    * 
+    */
+    Route::match(['get', 'post'], '/permissions', ['uses' => 'Admin\PermissionsController@index', 'as' => 'admin_permissions']);
+    /**
     *   Admin ARTICLES
     * 
     */

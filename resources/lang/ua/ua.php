@@ -34,6 +34,7 @@ return [
     'economy' => 'Економіка',
     'sport' => 'Спорт',
     'politics' => 'Політика',
+    'permissions' => 'Привілеї',
     /**
     *   Forms
     */

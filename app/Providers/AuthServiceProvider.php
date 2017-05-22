@@ -4,6 +4,8 @@ namespace Oshaman\Publication\Providers;
 
 use Oshaman\Publication\Event;
 use Oshaman\Publication\Policies\EventPolicy;
+use Oshaman\Publication\Permission;
+use Oshaman\Publication\Policies\PermissionPolicy;
 
 use Oshaman\Publication\Article;
 use Oshaman\Publication\Policies\ArticlePolicy;
@@ -21,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Article::class => ArticlePolicy::class,
         Event::class => EventPolicy::class,
+        Permission::class => PermissionPolicy::class,
         // Permission::class => PermissionPolicy::class,
         // Menu::class => MenusPolicy::class,
         // User::class => UserPolicy::class,
@@ -44,9 +47,9 @@ class AuthServiceProvider extends ServiceProvider
             return $user->canDo('UPDATE_ARTICLES', FALSE);
         });
         
-        // Gate::define('DELETE_ARTICLES', function ($user) {
-        	// return $user->canDo('DELETE_ARTICLES', FALSE);
-        // });
+        Gate::define('ADMIN_USERS', function ($user) {
+        	return $user->canDo('ADMIN_USERS', FALSE);
+        });
         
         Gate::define('UPDATE_EVENTS', function ($user) {
             return $user->canDo('UPDATE_EVENTS', FALSE);
