@@ -8,6 +8,7 @@ return [
     'articles_manager' => 'Менеджер новин',
     'events_manager' => 'Менеджер історичних подій',
     'perms_menager' => 'Менеджер доступу',
+    'users_menager' => 'Менеджер користувачів',
     'id' => 'id',
     'title' => 'Заголовок',
     'text' => 'Текст',
@@ -51,7 +52,11 @@ return [
     'pick_a_day' => 'Оберіть дату:',
     'month' => 'Місяць',
     'day' => 'Число',
-    //  events
+    //  Permissions
     'roles' => 'Ролі',
+    'role' => 'Роль',
+    'roles_updated' => 'Ролі оновлені',
+    //  Users
+    'user_edit' => 'Редагування користувача',
     
 ];

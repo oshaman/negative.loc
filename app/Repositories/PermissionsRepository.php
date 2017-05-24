@@ -26,9 +26,6 @@ class PermissionsRepository extends Repository {
 		
 		$data = $request->except('_token');
 		$roles = $this->rol_rep->get();
-		dd($roles);
-		
-	
 		
 		foreach($roles as $value) {
 			if(isset($data[$value->id])) {
@@ -40,7 +37,7 @@ class PermissionsRepository extends Repository {
 			}
 		}
 		
-		return ['status' => 'Права обновлены'];
+		return ['status' => trans('admin.roles_updated')];
 	}
 	
 

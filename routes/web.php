@@ -16,7 +16,7 @@ Route::get('history/{alias?}', ['uses' => 'EventsController@index', 'as' => 'his
 
 
 //news
-Route::group(['prefix' => 'news'],function() {
+Route::group(['prefix' => 'news'], function () {
 
     Route::get('/', 'HomeController@index');
     Route::get('article/{alias?}', ['uses' => 'ArticlesController@index', 'as' => 'articles'])->where('alias', '[\w_-]+');
@@ -28,9 +28,18 @@ Route::group(['prefix' => 'news'],function() {
 *   Admin Panel
 * 
 */
-Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     
     Route::get('/', ['uses' => 'Admin\IndexController@index', 'as' => 'admin']);
+    /**
+    *   Admin USERS
+    * 
+    */
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/', ['uses' => 'Admin\UsersController@index', 'as' => 'users']);
+        Route::match(['get', 'post'], 'edit/{user_id}', ['uses' => 'Admin\UsersController@edit', 'as' =>'user_update'])->where('user_id', '[0-9]+');
+        Route::get('del/{user_id}', ['uses'=>'Admin\UsersController@destroy', 'as'=>'delete_user'])->where('user_id', '[0-9]+');
+    });
     /**
     *   Admin PERMISSIONS
     * 
@@ -40,7 +49,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
     *   Admin ARTICLES
     * 
     */
-    Route::group(['prefix' => 'articles'], function() {
+    Route::group(['prefix' => 'articles'], function () {
         //  show articles list
         Route::get('/', ['uses' => 'Admin\ArticlesController@index', 'as' => 'admin_articles']);
         //  (editor uses)show articles list sort by CHECKED, DATE or AUTHOR

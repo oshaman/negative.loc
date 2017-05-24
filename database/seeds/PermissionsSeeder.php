@@ -14,6 +14,7 @@ class PermissionsSeeder extends Seeder
         DB::table('permissions')->insert(
             [
                 ['name'=>'ADMIN_USERS'],
+                ['name'=>'EDIT_USERS'],
                 ['name'=>'CONFIRMATION_DATA'],
                 ['name'=>'VIEW_ADMIN'],
                 //  events

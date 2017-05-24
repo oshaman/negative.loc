@@ -37,6 +37,11 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('event_id', function ($value) {
         	return Event::where('id', $value)->first();
         });
+        
+        Route::bind('user_id', function ($value) {
+		    // return \Oshaman\Publication\User::find($value);
+		    return \Oshaman\Publication\User::find($value);
+		});
     }
 
     /**

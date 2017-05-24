@@ -43,8 +43,6 @@ class PermissionsController extends AdminController
         $roles = $this->getRoles();
         $permissions = $this->getPermissions();
         
-        // dd($permissions);
-        
         $this->content = view('admin.permissions.content')->with(['roles'=>$roles, 'priv' => $permissions])->render();      
         
         return $this->renderOutput();

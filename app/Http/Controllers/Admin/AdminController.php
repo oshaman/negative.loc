@@ -63,14 +63,16 @@ class AdminController extends Controller
                 $menu->add(trans('ua.permissions'),  array('route'  => 'admin_permissions'))->prepend('<i class="icon-cogs"></i>');
             }
             
+            if(Gate::allows('EDIT_USERS')){
+                $menu->add(trans('ua.users'),  array('route'  => 'users'))->prepend('<i class="icon-user"></i>');
+            }
+            
             /* 
             if(Gate::allows('VIEW_ADMIN_MENU')){
                 $menu->add('Меню',  array('route'  => 'menus.index'));
             }
             
-            if(Gate::allows('EDIT_USERS')){
-                $menu->add('Пользователи',  array('route'  => 'users.index'));
-            } */
+             */
             
             
             		

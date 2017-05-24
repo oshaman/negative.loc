@@ -51,6 +51,10 @@ class AuthServiceProvider extends ServiceProvider
         	return $user->canDo('ADMIN_USERS', FALSE);
         });
         
+        Gate::define('EDIT_USERS', function ($user) {
+        	return $user->canDo('EDIT_USERS', FALSE);
+        });
+        
         Gate::define('UPDATE_EVENTS', function ($user) {
             return $user->canDo('UPDATE_EVENTS', FALSE);
         });
