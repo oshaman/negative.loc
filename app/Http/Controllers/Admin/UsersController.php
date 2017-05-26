@@ -45,11 +45,11 @@ class UsersController extends AdminController
     public function edit(UserRequest $request, User $user)
     {   
         if ($request->isMethod('post')) {
-            $result = $this->us_rep->updateUser($request,$user);
+            $result = $this->us_rep->updateUser($request, $user);
             if(is_array($result) && !empty($result['error'])) {
                 return back()->with($result);
             }
-            return redirect('/admin')->with($result);
+            return redirect()->route('users')->with($result);
         }
         
         if (Gate::denies('EDIT_USERS')) {
@@ -62,8 +62,7 @@ class UsersController extends AdminController
 		    $returnRoles[$role->id] = $role->name;
 		    return $returnRoles;
 		}, []);
-		
-        // dd($user);
+
 		$this->content = view('admin.users.edit_content')->with(['roles'=>$roles,'user'=>$user])->render();
         
         return $this->renderOutput();
@@ -81,7 +80,7 @@ class UsersController extends AdminController
 		if(is_array($result) && !empty($result['error'])) {
 			return back()->with($result);
 		}
-		return redirect('/admin')->with($result);
+		return redirect()->route('users')->with($result);
     }
     
     public function getRoles()

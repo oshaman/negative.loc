@@ -7,6 +7,8 @@ use Oshaman\Publication\Policies\EventPolicy;
 use Oshaman\Publication\Permission;
 use Oshaman\Publication\Policies\PermissionPolicy;
 
+use Oshaman\Publication\User;
+use Oshaman\Publication\Policies\UserPolicy;
 use Oshaman\Publication\Article;
 use Oshaman\Publication\Policies\ArticlePolicy;
 
@@ -24,9 +26,9 @@ class AuthServiceProvider extends ServiceProvider
         Article::class => ArticlePolicy::class,
         Event::class => EventPolicy::class,
         Permission::class => PermissionPolicy::class,
+        User::class => UserPolicy::class,
         // Permission::class => PermissionPolicy::class,
         // Menu::class => MenusPolicy::class,
-        // User::class => UserPolicy::class,
     ];
 
     /**

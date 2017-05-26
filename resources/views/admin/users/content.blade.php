@@ -29,7 +29,7 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->roles->implode('name', ', ') }}</td>
                     <td>
-                    {!! Form::open(['url' => route('delete_user',['users'=> $user->id]),'class'=>'form-horizontal','method'=>'POST']) !!}
+                    {!! Form::open(['url' => route('delete_user',['users'=> $user->id]),'class'=>'form-horizontal','method'=>'GET']) !!}
                         {!! Form::button(trans('admin.delete'), ['class' => 'btn btn-french-5','type'=>'submit']) !!}
                     {!! Form::close() !!}
                     </td>

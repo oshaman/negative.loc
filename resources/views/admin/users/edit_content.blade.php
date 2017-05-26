@@ -1,4 +1,4 @@
-<div id="primary" class="layout-sidebar-right home-section">
+<div id="primary" class="layout-sidebar-no home-section">
     <div class="inner group">
 <!-- START CONTENT -->
 <div id="content" class="group">
@@ -7,7 +7,7 @@
         <div class="contact-form">
                 <p class="error">
                 @foreach ($errors->toArray() as $key=>$error)
-                    {!! str_replace($key, '<strong>' . trans('admin.' . $key) . '</strong>', $error[0]) !!}</br>
+                    {!! str_replace($key, '<strong>' . trans('ua.' . $key) . '</strong>', $error[0]) !!}</br>
                 @endforeach
                 </p>
         </div>
@@ -18,13 +18,13 @@
                     <li class="text-field">
                         <h4>{!! Form::label('name', trans('ua.name')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-th-list"></i></span>
-                            {!! Form::text('name',isset($user->name) ? $user->name  : old('name'), ['placeholder'=>'Введите имя пользователя']) !!}
+                            {!! Form::text('name', old('name') ? : $user->name) !!}
                         </div>
                     </li>
                     <li class="text-field">
                         <h4>{!! Form::label('email', trans('ua.email')); !!}</h4>
                         <div class="input-prepend"><span class="add-on"><i class="icon-th-list"></i></span>
-                            {!! Form::text('email',isset($user->email) ? $user->email  : old('email'), ['placeholder'=>'Введите email']) !!}
+                            {!! Form::text('email', old('email') ? : $user->email) !!}
                         </div>
                     </li>
                     <li class="text-field">
@@ -41,13 +41,24 @@
                     </li>
                     
                     <li class="text-field">
-                        <h4>{!! Form::label('role', trans('admin.role')); !!}</h4>
-                        {!! Form::select('role_id', $roles, (isset($user)) ? $user->roles()->first()->id : null) !!}
+                    <table>
+                    @foreach($roles as $id=>$role)
+                        @if($user->hasRole($role))
+                            <td>
+                                <input checked name="role_id[]"  type="checkbox" value="{{ $id }}">{{ $role }}
+                            </td>
+                        @else
+                            <td>
+                                <input name="role_id[]"  type="checkbox" value="{{ $id }}">{{ $role }}
+                            </td>
+                        @endif
+                    @endforeach
+                    </table>
                     </li>
                 </ul>
+            </fieldset>
                 <!-- Submit -->
                 {!! Form::button(trans('admin.save'), ['class' => 'btn btn-large btn-campfire-5','type'=>'submit']) !!}	
-            </fieldset>
         {!! Form::close() !!}
     </div>
 </div>

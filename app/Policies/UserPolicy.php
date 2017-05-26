@@ -3,7 +3,6 @@
 namespace Oshaman\Publication\Policies;
 
 use Oshaman\Publication\User;
-use Oshaman\Publication\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -17,7 +16,7 @@ class UserPolicy
      * @param  \Oshaman\Publication\User  $user
      * @return mixed
      */
-    public function view(User $user, User $user)
+    public function view(User $user)
     {
         //
     }
@@ -45,7 +44,7 @@ class UserPolicy
      * @param  \Oshaman\Publication\User  $user
      * @return mixed
      */
-    public function delete(User $user, User $user)
+    public function delete(User $user)
     {
         //
     }

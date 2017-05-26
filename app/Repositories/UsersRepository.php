@@ -3,6 +3,7 @@
 namespace Oshaman\Publication\Repositories;
 
 use Oshaman\Publication\User;
+use Gate;
 
 class UsersRepository extends Repository {
 	
@@ -14,33 +15,35 @@ class UsersRepository extends Repository {
 
     public function updateUser($request, $user)
     {	
-        if (Gate::denies('edit',$this->model)) {
-            abort(403);
+        if (Gate::denies('edit', $this->model)) {
+            abort(404);
         }
 		
-		$data = $request->all();
+		$data = $request->except('_token');
 		
-		if(isset($data['password'])) {
+		if(!empty($data['password'])) {
 			$data['password'] = bcrypt($data['password']);
-		}
+		} else { array_forget($data, 'password');}
+        
+        // dd($data);
 		
 		$user->fill($data)->update();
-		$user->roles()->sync([$data['role_id']]);
+		$user->roles()->sync($data['role_id']);
 		
-		return ['status' => 'Пользователь изменен'];
+		return ['status' => trans('admin.user_updated')];
 		
 	}
 	
 	public function deleteUser($user)
     {
-		if (Gate::denies('edit',$this->model)) {
-            abort(403);
+		if (Gate::denies('edit', $this->model)) {
+            abort(404);
         }
 		
 		$user->roles()->detach();
 		
 		if($user->delete()) {
-			return ['status' => 'Пользователь удален'];	
+			return ['status' => trans('admin.user_deleted')];
 		}
 	}
 }

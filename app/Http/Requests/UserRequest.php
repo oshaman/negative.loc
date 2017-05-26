@@ -35,11 +35,11 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        $id = (isset($this->route()->parameter('user')->id)) ? $this->route()->parameter('user')->id . ',id' : '';
+        $id = (isset($this->route()->parameter('user_id')->id)) ? $this->route()->parameter('user_id')->id . ',id' : '';
 		if ($this->isMethod('post')) {
             return [
                  'name' => 'required|max:255',
-                 'role_id' => 'required|integer',
+                 'role_id' => 'required|array',
                  'email' => 'required|email|max:255|unique:users,email,'.$id
             ];
         }
