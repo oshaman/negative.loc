@@ -4,6 +4,8 @@ namespace Oshaman\Publication\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mail;
+use Oshaman\Publication\Logic\GetWeather;
+
 class ContactsController extends MainController
 {
     public function __construct()
@@ -39,13 +41,7 @@ class ContactsController extends MainController
             }
         }
         
-        
-        
-        
-        
-        
-        
-        
+        dd(new GetWeather);
         
         $this->keywords = 'Contacts';
         $this->meta_desc = 'Contacts';

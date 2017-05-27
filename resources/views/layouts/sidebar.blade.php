@@ -11,17 +11,20 @@
             </ul>
             <div class="border-box group">
                 <div id="tab1" class="panel group">
-                    <h4>Your Title of Tab 3</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing lorem<br />
-                        ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
+                    <table class="table-grey">
+                    <thead>
+                        <tr><th></th><th>{{ trans('ua.buy') }}</th><th>{{ trans('ua.sell') }}</th><th>{{ trans('ua.nbu') }}</th><tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>USD</td><td>15.00</td><td>16.00</td><td>15.10<span class="up"> &uarr;</span></td></tr>
+                        <tr><td>EUR</td><td>15.00</td><td>16.00</td><td>15.10<span class="down"> &darr;</span></td></tr>
+                        <tr><td>RUB</td><td>15.00</td><td>16.00</td><td>15.10<span class="up"> &uarr;</span></td></tr>
+                    </tbody>
+                    </table>
                 </div>
                 <div id="tab2" class="panel group">
                     <h4>Your Title of Tab 3</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing lorem<br />
-                        ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                    <p>Eaque ipsa quae ab illo veritatis et quasi architecto beatae vitae dicta.</p>
+                    <div id='openweathermap-widget'></div>
                 </div>
             </div>
         </div>
@@ -47,3 +50,21 @@
         </div>
     </div>
 </div>
+
+ <script type='text/javascript'>
+                    window.myWidgetParam = {
+                        id: 24,
+                        cityid: 703448,
+                        appid: 'a58b1469c263b1d43f666468b1ed1757',
+                        units: 'metric',
+                        containerid: 'openweathermap-widget',
+                    };
+                    (function() {
+                        var script = document.createElement('script');
+                        script.type = 'text/javascript';
+                        script.async = true;
+                        script.src = 'https://openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js';
+                        var s = document.getElementsByTagName('script')[0];
+                        s.parentNode.insertBefore(script, s);
+                    })();
+                  </script>

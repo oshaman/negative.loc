@@ -3,6 +3,7 @@
 		'theme' => env('THEME','default'),
         'maps_api' => '',
 		'captcha_key' => '',
+		'wheather_key' => 'a58b1469c263b1d43f666468b1ed1757',
 		'paginate' => 6,
         
         
