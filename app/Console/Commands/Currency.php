@@ -41,6 +41,6 @@ class Currency extends Command
     {
         $model = new Curr;
         $rates = $model->updateRates();
-
+        \Log::info('Currency update complite - '. date("d-m-Y H:i:s"));
     }
 }

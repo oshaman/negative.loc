@@ -43,9 +43,7 @@ class ContactsController extends MainController
                 return redirect()->route('contacts')->with('status', 'message_sent');
             }
         }
-        $res = new Currency;
         
-        dd($res->handle());
         
         $this->keywords = 'Contacts';
         $this->meta_desc = 'Contacts';

@@ -16,9 +16,20 @@
                         <tr><th></th><th>{{ trans('ua.buy') }}</th><th>{{ trans('ua.sell') }}</th><th>{{ trans('ua.nbu') }}</th><tr>
                     </thead>
                     <tbody>
-                        <tr><td>USD</td><td>15.00</td><td>16.00</td><td>15.10<span class="up"> &uarr;</span></td></tr>
-                        <tr><td>EUR</td><td>15.00</td><td>16.00</td><td>15.10<span class="down"> &darr;</span></td></tr>
-                        <tr><td>RUB</td><td>15.00</td><td>16.00</td><td>15.10<span class="up"> &uarr;</span></td></tr>
+                        @foreach($rates as $rate)
+                        <tr>
+                            <td>{{ $rate->cc }}</td>
+                            <td>{{  round($rate->rate*0.99, 2) }}</td>
+                            <td>{{  round($rate->rate*1.01, 2) }}</td>
+                            <td>{{  round($rate->rate, 2) }}
+                                    @if ($rate->flag == 1) <span class="up">&uArr;
+                                    @elseif ($rate->flag == 2) <span class="down">&dArr;
+                                    @else <span>&hArr;
+                                </span>
+                                    @endif
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                     </table>
                 </div>
