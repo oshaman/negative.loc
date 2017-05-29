@@ -189,7 +189,7 @@ class EventsRepository extends Repository {
         
 		if($event->update()) {
 			return ['status' => trans('admin.material_updated')];
-		} 
+		}
 
     }
     
@@ -197,7 +197,7 @@ class EventsRepository extends Repository {
     {
 		$old_img = '';
         
-        if (is_string($event->img) && is_object(json_decode($event->img)) && (json_last_error() ==    JSON_ERROR_NONE)) {
+        if (is_string($event->img) && is_object(json_decode($event->img)) && (json_last_error() == JSON_ERROR_NONE)) {
             $old_img = json_decode($event->img);
         }
         

@@ -74,5 +74,6 @@
   </div>
 </div>
 <script src="{{ asset(config('settings.theme')) }}/js/jquery.custom.js"></script>
+<script src="{{ asset(config('settings.theme')) }}/js/gotop.js"></script>
 </body>
 </html>

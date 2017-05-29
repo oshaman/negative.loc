@@ -5,6 +5,9 @@ namespace Oshaman\Publication\Http\Controllers;
 use Illuminate\Http\Request;
 use Mail;
 use Oshaman\Publication\Logic\GetWeather;
+use Oshaman\Publication\Logic\GetCurrency;
+
+use Oshaman\Publication\Console\Commands\Currency;
 
 class ContactsController extends MainController
 {
@@ -40,8 +43,9 @@ class ContactsController extends MainController
                 return redirect()->route('contacts')->with('status', 'message_sent');
             }
         }
+        $res = new Currency;
         
-        dd(new GetWeather);
+        dd($res->handle());
         
         $this->keywords = 'Contacts';
         $this->meta_desc = 'Contacts';
