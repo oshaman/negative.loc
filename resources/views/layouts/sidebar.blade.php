@@ -16,6 +16,7 @@
                         <tr><th></th><th>{{ trans('ua.buy') }}</th><th>{{ trans('ua.sell') }}</th><th>{{ trans('ua.nbu') }}</th><tr>
                     </thead>
                     <tbody>
+                    @isset($rates)
                         @foreach($rates as $rate)
                         <tr>
                             <td>{{ $rate->cc }}</td>
@@ -30,6 +31,7 @@
                             </td>
                         </tr>
                         @endforeach
+                    @endisset
                     </tbody>
                     </table>
                 </div>

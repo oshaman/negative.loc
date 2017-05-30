@@ -4,8 +4,7 @@ namespace Oshaman\Publication\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mail;
-use Oshaman\Publication\Logic\GetWeather;
-use Oshaman\Publication\Logic\GetCurrency;
+use Oshaman\Publication\Weather;
 
 use Oshaman\Publication\Console\Commands\Currency;
 
@@ -44,6 +43,9 @@ class ContactsController extends MainController
             }
         }
         
+        $weather = new Weather;
+        
+        dd(is_object($weather->renew()));
         
         $this->keywords = 'Contacts';
         $this->meta_desc = 'Contacts';

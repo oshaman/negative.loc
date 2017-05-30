@@ -36,7 +36,6 @@ class Currency extends Model
                 if ($old->exchangedate == $exdate) continue;
                 
                 $data = [];
-                // $data['cc'] = $old->cc;
                 $data['rate'] = floatval($rate->rate);
                 $data['exchangedate'] = $exdate;
                 if ($data['rate'] > $old->rate) {
