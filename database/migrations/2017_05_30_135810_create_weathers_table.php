@@ -21,6 +21,7 @@ class CreateWeathersTable extends Migration
             $table->string('icon');
             $table->unsignedSmallInteger('pressure');
             $table->unsignedSmallInteger('humidity');
+            $table->smallInteger('temp_curr');
             $table->smallInteger('temp_min');
             $table->smallInteger('temp_max');
             $table->unsignedSmallInteger('clouds');

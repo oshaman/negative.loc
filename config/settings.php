@@ -1,10 +1,12 @@
 <?php
 	return [
 		'theme' => env('THEME','default'),
+		'apixu_key' => env('APIXU_KEY', false),
         'maps_api' => '',
 		'captcha_key' => '',
-		'wheather_key' => 'a58b1469c263b1d43f666468b1ed1757',
+		'wheather_key' => env('OPENW_KEY', false),
 		'paginate' => 6,
+		'pressure_rate' => 0.75006375541921,
         
         
 		'home_port_count' => 5,

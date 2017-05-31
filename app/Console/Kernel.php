@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\Currency::class,
+        Commands\getWeather::class,
+        Commands\getForecast::class,
     ];
 
     /**
@@ -24,8 +26,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('currency')
-                 ->hourly()->withoutOverlapping();
+        $schedule->command('currency')->hourlyAt(7)->withoutOverlapping();
+        $schedule->command('getWeather')->everyTenMinutes()->withoutOverlapping();
+        $schedule->command('getForecast')->hourlyAt(17)->withoutOverlapping();
     }
 
     /**

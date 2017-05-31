@@ -17,79 +17,62 @@ class Weather extends Model
     public function renew()
     { 
         $w_key = config('settings.wheather_key');
-        // $id = '703448,702550';
         $id = implode(',', config('cities.open'));
         
         $url = 'http://api.openweathermap.org/data/2.5/group?id=' . $id. '&units=metric&APPID=' . $w_key;
         
-        
         $this->weather = json_decode(file_get_contents($url));
-        // dd($this->weather->forecast->forecastday[0]->day->mintemp_c);
-        // dd($this->weather);
-        // $this->weather = $url;
         
         if (!is_object($this->weather)) {
             \Log::info('Weather error - '. date("d-m-Y") . '   Error - ' . json_last_error_msg());
-            die;
+            return false;
         }
-        
         $trusted = array_keys(config('cities.open'));
+
         foreach ($this->weather->list as $city) {
             foreach ($trusted as $name) {
-                $data = [];
-                if ($city->name == $name->city) {
-                    $data['city'] = $name->city;
+                $data = $this->where('city', $name)->first();
+                if ($city->name == $name) {
                     if (!empty($city->sys->sunrise)) $data['sunrise'] = date('H:i:s', $city->sys->sunrise);
                     if (!empty($city->sys->sunset)) $data['sunset'] = date('H:i:s', $city->sys->sunset);
                     if (!empty($city->weather[0]->icon)) {
                         $data['icon'] = preg_replace('#[^a-zA-z0-9-]+#', '', $city->weather[0]->icon);
                     }
                     if (!empty($city->main->pressure) && is_numeric($city->main->pressure)) {
-                        $data['pressure'] = (int)round($city->main->pressure*0.75006375541921);
+                        $data['pressure'] = (int)round($city->main->pressure*config('settings.pressure_rate'));
                     } 
                     if (!empty($city->main->humidity)) {
                         $data['humidity'] = filter_var($city->main->humidity, FILTER_SANITIZE_NUMBER_INT);
+                    }
+                    if (!empty($city->main->temp)) {
+                        $data['temp_curr'] = filter_var(round($city->main->temp), FILTER_SANITIZE_NUMBER_INT);
                     }
                     if (isset($city->clouds->all)) {
                         $data['clouds'] = filter_var($city->clouds->all, FILTER_SANITIZE_NUMBER_INT);
                     }
                     if (!empty($city->wind->speed)) {
-                        $data['wind_speed'] = filter_var($city->wind->speed, FILTER_SANITIZE_NUMBER_INT);
+                        $data['wind_speed'] = filter_var(round($city->wind->speed), FILTER_SANITIZE_NUMBER_INT);
                     }
                     if (!empty($city->wind->deg)) {
-                        $data['wind_deg'] = filter_var($city->wind->deg, FILTER_SANITIZE_NUMBER_INT);
+                        $data['wind_deg'] = filter_var(round($city->wind->deg), FILTER_SANITIZE_NUMBER_INT);
                     }
-                    if($this->updateOrCreate(['city'=>$data['city']],$data)) {
-                        \Log::info('Weather updated - '. date("d-m-Y H:i:s"));
+                    if($data->save()) {
+                        \Log::info("Weather in $name updated - " . date("d-m-Y H:i:s"));
                     } else {
-                        \Log::info('Weather error - '. date("d-m-Y H:i:s"));
+                        \Log::info("Weather in $name error - " . date("d-m-Y H:i:s"));
                     }
                 }
             }
         }
-        dd($this->weather);
-        return $this->weather;
+        return true;
     }
     
     public function forecast()
     {
-        $key = "f9cd5d5af9c244499a0133506172705";
+        $key = config('settings.apixu_key');
         $forcast_days='1';
         $cities = config('cities.apixu');
-     
-        // $city = 'Kiev';
-        // $url ="http://api.apixu.com/v1/forecast.json?key=$key&q=$city&days=$forcast_days&=";
-        
-        // $ch = curl_init();  
-        // curl_setopt($ch,CURLOPT_URL,$url);
-        // curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-        
-        // $json_output=curl_exec($ch);
-        // $weather = json_decode($json_output);
-        
-        // $data = $this->where('city', 'kiev')->first();dd($data->temp_min);
-        
-        // dd($cities);
+
         foreach ($cities as $name=>$city) {
             $url ="http://api.apixu.com/v1/forecast.json?key=$key&q=$city&days=$forcast_days&=";
             
@@ -113,18 +96,13 @@ class Weather extends Model
                 $data->temp_max = filter_var(round($weather->forecast->forecastday[0]->day->maxtemp_c),
                             FILTER_SANITIZE_NUMBER_INT);
             }
-            // dd($data);
            
             if($data->save()) {
                 \Log::info("Temperature in $city updated - " . date("d-m-Y H:i:s"));
             } else {
                 \Log::info("Temperature in $city error - ". date("d-m-Y H:i:s"));
-            }
-            
+            }   
         }
-        
-        
-        dd($weather->forecast->forecastday[0]->day->mintemp_c);
-        // $days = $weather->forecast->forecastday;
+        return true;
     }
 }

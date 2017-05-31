@@ -43,9 +43,6 @@ class ContactsController extends MainController
             }
         }
         
-        $weather = new Weather;
-        dd(is_object($weather->forecast()));
-        
         $this->keywords = 'Contacts';
         $this->meta_desc = 'Contacts';
         $this->title = trans('ua.contacts');
