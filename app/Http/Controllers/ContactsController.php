@@ -44,8 +44,7 @@ class ContactsController extends MainController
         }
         
         $weather = new Weather;
-        
-        dd(is_object($weather->renew()));
+        dd(is_object($weather->forecast()));
         
         $this->keywords = 'Contacts';
         $this->meta_desc = 'Contacts';

@@ -15,18 +15,17 @@ class Weather extends Model
     public $weather;
     
     public function renew()
-    {
-        
-        
-        
+    { 
         $w_key = config('settings.wheather_key');
-        $id = '703448';
-        // $id = implode(',', config('cities'));
+        // $id = '703448,702550';
+        $id = implode(',', config('cities.open'));
         
         $url = 'http://api.openweathermap.org/data/2.5/group?id=' . $id. '&units=metric&APPID=' . $w_key;
         
         
         $this->weather = json_decode(file_get_contents($url));
+        // dd($this->weather->forecast->forecastday[0]->day->mintemp_c);
+        // dd($this->weather);
         // $this->weather = $url;
         
         if (!is_object($this->weather)) {
@@ -34,7 +33,7 @@ class Weather extends Model
             die;
         }
         
-        $trusted = $this->select('city')->get();
+        $trusted = array_keys(config('cities.open'));
         foreach ($this->weather->list as $city) {
             foreach ($trusted as $name) {
                 $data = [];
@@ -49,16 +48,7 @@ class Weather extends Model
                         $data['pressure'] = (int)round($city->main->pressure*0.75006375541921);
                     } 
                     if (!empty($city->main->humidity)) {
-                        $data['humidity'] = filter_var($city->main->humidity, FILTER_SANITIZE_NUMBER_INT,
-										["options" => ["max_range" => 99]]);
-                    }
-                    if (!empty($city->main->temp_min)) {
-                        $data['temp_min'] = filter_var($city->main->temp_min, FILTER_SANITIZE_NUMBER_INT,
-										["options" => ["max_range" => 99]]);
-                    }
-                    if (!empty($city->main->temp_max)) {
-                        $data['temp_max'] = filter_var($city->main->temp_max, FILTER_SANITIZE_NUMBER_INT,
-										["options" => ["max_range" => 99]]);
+                        $data['humidity'] = filter_var($city->main->humidity, FILTER_SANITIZE_NUMBER_INT);
                     }
                     if (isset($city->clouds->all)) {
                         $data['clouds'] = filter_var($city->clouds->all, FILTER_SANITIZE_NUMBER_INT);
@@ -79,39 +69,62 @@ class Weather extends Model
         }
         dd($this->weather);
         return $this->weather;
+    }
+    
+    public function forecast()
+    {
+        $key = "f9cd5d5af9c244499a0133506172705";
+        $forcast_days='1';
+        $cities = config('cities.apixu');
+     
+        // $city = 'Kiev';
+        // $url ="http://api.apixu.com/v1/forecast.json?key=$key&q=$city&days=$forcast_days&=";
         
+        // $ch = curl_init();  
+        // curl_setopt($ch,CURLOPT_URL,$url);
+        // curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         
+        // $json_output=curl_exec($ch);
+        // $weather = json_decode($json_output);
         
+        // $data = $this->where('city', 'kiev')->first();dd($data->temp_min);
         
-        
-        
-        // foreach ($weather->weather->list as $city) {
-            // echo '<table border="1"><tr>
-                    // <th>City</th><th>Sunrise\Sunset</th><th>Pic</th><th>Pressure</th>
-                    // <th>humidity</th><th>temp min\max</th><th>Clouds %</th><th>Wind speed\deg</th>
-                    // </tr>';
-            // echo "<td>$city->name</td>
-                // <td>" . date('H:i:s', $city->sys->sunrise) . ' / ' . date('H:i:s', $city->sys->sunrise) . '</td>
-                // <td><img src="http://openweathermap.org/img/w/'  . $city->weather[0]->icon . '.png"></td>
-                // <td> ' . $city->main->pressure*0.75006375541921 . '</td>
-                // <td>' .$city->main->humidity .'</td>
-                // <td>' . $city->main->temp_min . ' \ ' .$city->main->temp_max . '</td>
-                // <td>' . $city->clouds->all . '</td>
-                // <td>' . $city->wind->speed . ' \ ' . $city->wind->deg;
-            // echo '</table>';
-            // dump($city->sys->sunrise);
-            // dump($city->sys->sunset);
-            // dump($city->weather[0]->icon);
-            // dump($city->main->pressure);
-            // dump($city->main->humidity);
-            // dump($city->main->temp_min);
-            // dump($city->main->temp_max);
-            // dump($city->clouds->all);
-            // dump($city->wind->speed);
-            // dump($city->wind->deg);
-            // dump($city->name);
+        // dd($cities);
+        foreach ($cities as $name=>$city) {
+            $url ="http://api.apixu.com/v1/forecast.json?key=$key&q=$city&days=$forcast_days&=";
             
-            // dump($city->clouds->all);
-        // }
+            $ch = curl_init();  
+            curl_setopt($ch,CURLOPT_URL,$url);
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+            
+            $json_output=curl_exec($ch);
+            $weather = json_decode($json_output);
+
+            if (empty($weather) || (isset($weather->error) && count($weather->error) > 0)) {
+                \Log::info("Temperature in $city error - $weather->error->message - ". date("d-m-Y H:i:s"));
+                continue;
+            }
+            $data = $this->where('city', $name)->first();
+            if (!empty($weather->forecast->forecastday[0]->day->mintemp_c)) {
+                $data->temp_min = filter_var(round($weather->forecast->forecastday[0]->day->mintemp_c), 
+                            FILTER_SANITIZE_NUMBER_INT);
+            }
+            if (!empty($weather->forecast->forecastday[0]->day->maxtemp_c)) {
+                $data->temp_max = filter_var(round($weather->forecast->forecastday[0]->day->maxtemp_c),
+                            FILTER_SANITIZE_NUMBER_INT);
+            }
+            // dd($data);
+           
+            if($data->save()) {
+                \Log::info("Temperature in $city updated - " . date("d-m-Y H:i:s"));
+            } else {
+                \Log::info("Temperature in $city error - ". date("d-m-Y H:i:s"));
+            }
+            
+        }
+        
+        
+        dd($weather->forecast->forecastday[0]->day->mintemp_c);
+        // $days = $weather->forecast->forecastday;
     }
 }
