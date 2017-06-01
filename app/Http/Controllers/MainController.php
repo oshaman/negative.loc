@@ -5,6 +5,7 @@ namespace Oshaman\Publication\Http\Controllers;
 use Illuminate\Http\Request;
 use Oshaman\Publication\Repositories\MenusRepository;
 use Oshaman\Publication\Currency;
+use Oshaman\Publication\Weather;
 use Menu;
 use Lang;
 
@@ -51,7 +52,8 @@ class MainController extends Controller
         
         if($this->sidebar_vars){
             $rates = Currency::all();
-            $sidebar = view('layouts.sidebar')->with(['sidebar' => $this->sidebar_vars, 'rates' => $rates])->render();
+            $weather = Weather::all();
+            $sidebar = view('layouts.sidebar')->with(['sidebar' => $this->sidebar_vars, 'rates' => $rates, 'weather' => $weather])->render();
             $this->vars = array_add($this->vars, 'sidebar', $sidebar);
         }
         

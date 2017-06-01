@@ -3,10 +3,10 @@
         <div class="tabs-container">
             <ul class="tabs">
                 <li>
-                    <h4><a href="#tab1" title="Currency">{{ trans('ua.currency') }}</a></h4>
+                    <h4><a href="#tab2" title="Currency">{{ trans('ua.currency') }}</a></h4>
                 </li>
                 <li>
-                    <h4><a href="#tab2" title="Weather">{{ trans('ua.weather') }}</a></h4>
+                    <h4><a href="#tab1" title="Weather">{{ trans('ua.weather') }}</a></h4>
                 </li>
             </ul>
             <div class="border-box group">
@@ -20,8 +20,8 @@
                         @foreach($rates as $rate)
                         <tr>
                             <td>{{ $rate->cc }}</td>
-                            <td>{{  round($rate->rate*0.99, 2) }}</td>
-                            <td>{{  round($rate->rate*1.01, 2) }}</td>
+                            <td>{{  round($rate->rate*0.99, 2)+0.01 }}</td>
+                            <td>{{  round($rate->rate*1.01, 2)-0.01 }}</td>
                             <td>{{  round($rate->rate, 2) }}
                                     @if ($rate->flag == 1) <span class="up">&uArr;
                                     @elseif ($rate->flag == 2) <span class="down">&dArr;
@@ -36,8 +36,39 @@
                     </table>
                 </div>
                 <div id="tab2" class="panel group">
-                    <h4>Your Title of Tab 3</h4>
-                    <div id='openweathermap-widget'></div>
+                    <table class="table-grey">
+                    <thead>
+                        <tr><th>weather</th></tr>
+                    </thead>
+                    <tbody>
+                    @isset($weather)
+                        @foreach($weather as $val)
+                        <tr><td>
+                        <div>
+                            <div class="cityname">Погода у {{$val->city}}</div>
+                            <div class="weather">
+                                <div  class="wparam">
+                                    <div class="temp">{{ $val->temp_curr>0 ? '+' : ''}}{{ $val->temp_curr}}&deg;</div>
+                                    <div class="pic">
+                                        <img src="http://openweathermap.org/img/w/{{ $val->icon }}.png">
+                                    </div>
+                                </div>
+                                <div  class="wparam-right">
+                                    <p>вологість: <span>{{ $val->humidity }}%</span></p>
+                                    <p>тиск: <span>{{ $val->pressure }}mm</span></p>
+                                    <p>вітер: <span>{{ $val->wind_speed }}m/s</span></p>
+                                </div>
+                                <div>
+                                    <div  class="sun">Cхід {{ date("H:i", strtotime($val->sunrise)) }}</div>
+                                    <div  class="sun">Захід {{ date("H:i", strtotime($val->sunset)) }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        </td></tr>
+                        @endforeach
+                    @endisset
+                    </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -63,21 +94,3 @@
         </div>
     </div>
 </div>
-
- <script type='text/javascript'>
-                    window.myWidgetParam = {
-                        id: 24,
-                        cityid: 703448,
-                        appid: 'a58b1469c263b1d43f666468b1ed1757',
-                        units: 'metric',
-                        containerid: 'openweathermap-widget',
-                    };
-                    (function() {
-                        var script = document.createElement('script');
-                        script.type = 'text/javascript';
-                        script.async = true;
-                        script.src = 'https://openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js';
-                        var s = document.getElementsByTagName('script')[0];
-                        s.parentNode.insertBefore(script, s);
-                    })();
-                  </script>
