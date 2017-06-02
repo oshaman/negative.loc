@@ -56,12 +56,40 @@ return [
     'source' => 'Джерело',
     'cat' => 'Категорія',
     /**
-    * SIDEBAR  
+    * SIDEBAR  CCURRENCY
     */
     'buy' => 'Купівля',
     'sell' => 'Продаж',
     'nbu' => 'НБУ',
-    
+    /**
+    * SIDEBAR  WEATHER
+    */
+    'weather' => 'Погода',
+    'on' => 'на',
+    'min' => 'мін.',
+    'max' => 'макс.',
+    'mm' => 'мм',
+    'ms' => 'м/c',
+    'Kiev' => 'Київ',
+    'Lutsk' => 'Луцьк',
+    'Dnipropetrovsk' => 'Дніпро',
+    'Zhytomyr' => 'Житомир',
+    'Uzhhorod' => 'Ужгород',
+    'Zaporizhzhya' => 'Запоріжжя', 
+    'Ivano-Frankivsk' => 'Івано-Франківськ',
+    'Kirovohrad' => 'Кропивницький',
+    'Lviv' => 'Львів',
+    'Mykolayiv' => 'Миколаїв',
+    'Odessa' => 'Одеса',
+    'Poltava' => 'Полтава',
+    'Rivne' => 'Рівне',
+    'Sumy' => 'Суми',
+    'Ternopil' => 'Тернопіль',
+    'Kharkiv' => 'Харків',
+    'Kherson' => 'Херсон',
+    'Khmelnytskyy' => 'Хмельницький',
+    'Cherkasy' => 'Черкаси',
+    'Chernihiv' => 'Чернігів'
     
     
 ];

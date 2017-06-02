@@ -38,16 +38,17 @@
                 <div id="tab2" class="panel group">
                     <table class="table-grey">
                     <thead>
-                        <tr><th>weather</th></tr>
+                        <tr><th>{{ trans('ua.weather') . ' ' . trans('ua.on') . ' - ' . date('d.m.Y')}}</th></tr>
                     </thead>
                     <tbody>
                     @isset($weather)
                         @foreach($weather as $val)
                         <tr><td>
                         <div>
-                            <div class="cityname">Погода у {{$val->city}}</div>
                             <div class="weather">
+                            <div class="cityname"><h3>{{trans('ua.' . $val->city)}}<h3></div>
                                 <div  class="wparam">
+                                    <div class="pic"><img src="{{ asset(config('settings.theme')) }}/images/thermometer.png"></div>
                                     <div class="temp">{{ $val->temp_curr>0 ? '+' : ''}}{{ $val->temp_curr}}&deg;</div>
                                     <div class="pic">
                                         <img src="http://openweathermap.org/img/w/{{ $val->icon }}.png">
@@ -55,8 +56,13 @@
                                 </div>
                                 <div  class="wparam-right">
                                     <p>вологість: <span>{{ $val->humidity }}%</span></p>
-                                    <p>тиск: <span>{{ $val->pressure }}mm</span></p>
-                                    <p>вітер: <span>{{ $val->wind_speed }}m/s</span></p>
+                                    <p>тиск: <span>{{ $val->pressure . ' ' . trans('ua.mm')}}</span></p>
+                                    <p>вітер: <span>{{ $val->wind_speed  . ' ' . trans('ua.ms')}}</span></p>
+                                </div>
+                                <div class="temp_m">
+                                    <div class="sun">{{ trans('ua.min') }} <span>{{ $val->temp_min>0 ? '+' : ''}}{{ $val->temp_min }}&deg;</span></div>
+                                    <div class="sun">{{ trans('ua.max') }} <span>{{ $val->temp_max>0 ? '+' : ''}}{{ $val->temp_max }}&deg;</span></div>
+                                    
                                 </div>
                                 <div>
                                     <div  class="sun">Cхід {{ date("H:i", strtotime($val->sunrise)) }}</div>
