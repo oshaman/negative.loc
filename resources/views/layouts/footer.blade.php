@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="widget widget_nav_menu">
-            <h3>Custom menu</h3>
+            <h3>{{ trans('ua.navi') }}</h3>
             @if (!empty($footer))
             <div class="menu-footer-menu-container">
                     {!! Menu::get('simpleNav')->asUl(array('id' => 'menu-footer-menu', 'class' => 'menu')) !!}

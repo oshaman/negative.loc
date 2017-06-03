@@ -3,10 +3,10 @@
         <div class="tabs-container">
             <ul class="tabs">
                 <li>
-                    <h4><a href="#tab2" title="Currency">{{ trans('ua.currency') }}</a></h4>
+                    <h4><a href="#tab1" title="Currency">{{ trans('ua.currency') }}</a></h4>
                 </li>
                 <li>
-                    <h4><a href="#tab1" title="Weather">{{ trans('ua.weather') }}</a></h4>
+                    <h4><a href="#tab2" title="Weather">{{ trans('ua.weather') }}</a></h4>
                 </li>
             </ul>
             <div class="border-box group">
@@ -46,7 +46,7 @@
                         <tr><td>
                         <div>
                             <div class="weather">
-                            <div class="cityname"><h3>{{trans('ua.' . $val->city)}}<h3></div>
+                            <div class="cityname"><h3>{{trans('ua.' . $val->city)}}</h3></div>
                                 <div  class="wparam">
                                     <div class="pic"><img src="{{ asset(config('settings.theme')) }}/images/thermometer.png"></div>
                                     <div class="temp">{{ $val->temp_curr>0 ? '+' : ''}}{{ $val->temp_curr}}&deg;</div>
@@ -57,7 +57,27 @@
                                 <div  class="wparam-right">
                                     <p>вологість: <span>{{ $val->humidity }}%</span></p>
                                     <p>тиск: <span>{{ $val->pressure . ' ' . trans('ua.mm')}}</span></p>
-                                    <p>вітер: <span>{{ $val->wind_speed  . ' ' . trans('ua.ms')}}</span></p>
+                                    <p>вітер: 
+                                        <span>{{ $val->wind_speed  . ' ' . trans('ua.ms')}}</span>
+                                        @if ($val->wind_deg < 23 || $val->wind_deg >= 338)
+                                            <img src="{{ asset(config('settings.theme')) }}/images/icons/wind/n.png" alt="{{ trans('ua.n') }}" title="{{ trans('ua.n') }}">
+                                        @elseif ($val->wind_deg >= 23 && $val->wind_deg < 68)
+                                            <img src="{{ asset(config('settings.theme')) }}/images/icons/wind/ne.png" alt="{{ trans('ua.ne') }}" title="{{ trans('ua.ne') }}">
+                                        @elseif ($val->wind_deg >= 68 && $val->wind_deg < 113)
+                                            <img src="{{ asset(config('settings.theme')) }}/images/icons/wind/e.png" alt="{{ trans('ua.e') }}" title="{{ trans('ua.e') }}">
+                                        @elseif ($val->wind_deg >= 113 && $val->wind_deg < 158)
+                                            <img src="{{ asset(config('settings.theme')) }}/images/icons/wind/se.png" alt="{{ trans('ua.se') }}" title="{{ trans('ua.se') }}">
+                                        @elseif ($val->wind_deg >= 158 && $val->wind_deg < 203)
+                                            <img src="{{ asset(config('settings.theme')) }}/images/icons/wind/s.png" alt="{{ trans('ua.s') }}" title="{{ trans('ua.s') }}">
+                                        @elseif ($val->wind_deg >= 203 && $val->wind_deg < 248)
+                                            <img src="{{ asset(config('settings.theme')) }}/images/icons/wind/sw.png"
+                                            alt="{{ trans('ua.sw') }}" title="{{ trans('ua.sw') }}">
+                                        @elseif ($val->wind_deg >= 248 && $val->wind_deg < 293)
+                                            <img src="{{ asset(config('settings.theme')) }}/images/icons/wind/w.png" alt="{{ trans('ua.w') }}" title="{{ trans('ua.w') }}">
+                                        @else
+                                            <img src="{{ asset(config('settings.theme')) }}/images/icons/wind/nw.png" alt="{{ trans('ua.nw') }}" title="{{ trans('ua.nw') }}">
+                                        @endif
+                                    </p>
                                 </div>
                                 <div class="temp_m">
                                     <div class="sun">{{ trans('ua.min') }} <span>{{ $val->temp_min>0 ? '+' : ''}}{{ $val->temp_min }}&deg;</span></div>

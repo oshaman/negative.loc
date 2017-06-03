@@ -67,10 +67,8 @@
     <div class="right">
         <a href="#" class="socials facebook" style="font-size:30px;" title="Facebook">F</a>
         <a href="#" class="socials twitter" style="font-size:30px;" title="Twitter">L</a>
-        <a href="#" class="socials skype" style="font-size:30px;" title="Skype">H</a>
         <a href="#" class="socials google" style="font-size:30px;" title="Google">G</a>
         <a href="#" class="socials linkedin" style="font-size:30px;" title="Linkedin">I</a>
-        <a href="#" class="socials rss" style="font-size:30px;" title="RSS">R</a> </div>
   </div>
 </div>
 <script src="{{ asset(config('settings.theme')) }}/js/jquery.custom.js"></script>
