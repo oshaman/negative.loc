@@ -2,6 +2,28 @@
     <div class="inner group">
 <!-- START CONTENT -->
 <div id="content" class="group">
+{!! Form::open([
+            'url' => route('selection'),
+            'class' => 'contact-form',
+            'method' => 'POST',
+            'enctype' => 'multipart/form-data',
+            'novalidate'=>''
+        ]) !!}
+    <fieldset>
+        <ul>
+            <li class="text-field">
+                <h4>{!! Form::label('selection', trans('admin.selection')); !!}</h4>
+                {{ Form::select('selection', ['id'=>'ID', 'user_id'=>'USER', 'alias'=>'alias']) }}
+                <div class="input-prepend"><span class="add-on"><i class="icon-th-list"></i></span>
+                    {!! Form::text('alias') !!}
+                </div>
+            </li>
+        </ul>
+    </fieldset>
+
+<!-- Submit -->
+{!! Form::button(trans('admin.find'), ['class' => 'btn btn-the-salmon-dance-3','type'=>'submit']) !!}
+{!! Form::close() !!}
 @if(!empty($articles))
     <div class="page type-page status-publish hentry group">
         <h3>{{ trans('admin.articles') }}</h3>
@@ -73,6 +95,5 @@
 
     </div>
     @endif
-    {!! Html::link(route('create_article'),trans('admin.add'),['class' => 'btn btn-the-salmon-dance-3']) !!}
 </div>
 <!-- END articles -->

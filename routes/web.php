@@ -53,7 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
         //  show articles list
         Route::get('/', ['uses' => 'Admin\ArticlesController@index', 'as' => 'admin_articles']);
         //  (editor uses)show articles list sort by CHECKED, DATE or AUTHOR
-        Route::get('sort/{alias}/{param?}', 'Admin\ArticlesController@sorted')->where(['alias' => '[\w_-]{,20}', 'param' => '[\w-_]{,255}']);
+        Route::match(['get', 'post'], 'selection', ['uses'=>'Admin\ArticlesController@sorted', 'as'=>'selection']);
         
         Route::match(['get', 'post'], 'create', ['uses'=>'Admin\ArticlesController@create', 'as'=>'create_article']);
         Route::match(['get', 'post'], 'edit/{id}', ['uses'=>'Admin\ArticlesController@edit', 'as'=>'edit_article'])->where('id', '[0-9]+');

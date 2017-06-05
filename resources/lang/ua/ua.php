@@ -30,6 +30,7 @@ return [
     'history' => 'Цей день в історії',
     'contacts' => 'Контакти',
     'articles' => 'Новини',
+    'selection' => 'Новини-підбір',
     'world' => 'У світі',
     'incidents' => 'Події',
     'economy' => 'Економіка',

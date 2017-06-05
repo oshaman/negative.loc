@@ -67,15 +67,10 @@ class AdminController extends Controller
                 $menu->add(trans('ua.users'),  array('route'  => 'users'))->prepend('<i class="icon-user"></i>');
             }
             
-            /* 
-            if(Gate::allows('VIEW_ADMIN_MENU')){
-                $menu->add('Меню',  array('route'  => 'menus.index'));
-            }
             
-             */
-            
-            
-            		
+            if(Gate::allows('CONFIRMATION_DATA')){
+                $menu->add(trans('ua.selection'),  array('route'  => 'selection'))->prepend('<i class="icon-file"></i>');
+            }	
 		});
 	}
 }

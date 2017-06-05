@@ -33,6 +33,7 @@ return [
     'articles' => 'Додані новини',
     'add_title' => 'Заголовок:*',
     'add_title_placeholder' => 'Введіть назву статті',
+    'selection' => 'Параметр набору',
     'add_alias' => 'Псевдонім:',
     'alias_in_use' => 'Даний псевдонім вже використовується.',
     'add_alias_placeholder' => 'Введіть псевдонім статті',

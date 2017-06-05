@@ -171,6 +171,8 @@ class ArticlesRepository extends Repository {
             } else {
                 $data['approved'] = true;
             }
+        } else {
+            $data['approved'] = false;
         }
         
 		if ($request->hasFile('img')) {

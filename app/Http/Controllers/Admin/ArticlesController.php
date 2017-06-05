@@ -40,9 +40,18 @@ class ArticlesController extends AdminController
         return $this->renderOutput();
     }
     
-    public function sorted()
+    public function sorted(Request $request)
     {
-        dd('sorted');
+        if (Gate::denies('CONFIRMATION_DATA')) {
+            abort(404);
+        }
+        if ($request->isMethod('post')) {
+            dd('post');
+        }
+        $this->title = trans('ua.selection');
+        $this->content = view('admin.articles.selection')->render();
+       
+        return $this->renderOutput();
     }
     
     public function create(ArticleRequest $request)
