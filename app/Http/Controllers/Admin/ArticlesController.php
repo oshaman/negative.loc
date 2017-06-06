@@ -45,11 +45,28 @@ class ArticlesController extends AdminController
         if (Gate::denies('CONFIRMATION_DATA')) {
             abort(404);
         }
+        $articles = '';
         if ($request->isMethod('post')) {
-            dd('post');
+            
+            $rules = [
+                    'selection' => 'required|alpha|max:10|min:2',
+                    'param' => 'nullable|alpha_dash|max:255',
+                ];
+            $this->validate($request, $rules);
+            $result = $this->a_rep->selectArticles($request);
+            // dd($result);
+            if (is_array($result) && !empty($result['error'])) {
+                return back()->with($result);
+            } else {
+                $articles = $result;
+            }
         }
         $this->title = trans('ua.selection');
-        $this->content = view('admin.articles.selection')->render();
+        if (!empty($articles)) {
+            $articles->load('category');
+        }
+        
+        $this->content = view('admin.articles.selection')->with('articles', $articles)->render();
        
         return $this->renderOutput();
     }

@@ -2,6 +2,15 @@
     <div class="inner group">
 <!-- START CONTENT -->
 <div id="content" class="group">
+@if (count($errors) > 0)
+    <div class="contact-form">
+            <p class="error">
+            @foreach ($errors->toArray() as $key=>$error)
+                {!! str_replace($key, '<strong>' . trans('admin.' . $key) . '</strong>', $error[0]) !!}</br>
+            @endforeach
+            </p>
+    </div>
+@endif
 {!! Form::open([
             'url' => route('selection'),
             'class' => 'contact-form',
@@ -13,14 +22,14 @@
         <ul>
             <li class="text-field">
                 <h4>{!! Form::label('selection', trans('admin.selection')); !!}</h4>
-                {{ Form::select('selection', ['id'=>'ID', 'user_id'=>'USER', 'alias'=>'alias']) }}
+                {{ Form::select('selection', ['unapproved'=>trans('admin.unapproved'), 'id'=>trans('admin.id'), 'author'=>trans('admin.author'), 'alias'=>trans('admin.alias')]) }}
+                <h4>{!! Form::label('param', trans('admin.param')); !!}</h4>
                 <div class="input-prepend"><span class="add-on"><i class="icon-th-list"></i></span>
-                    {!! Form::text('alias') !!}
+                    {!! Form::text('param') !!}
                 </div>
             </li>
         </ul>
     </fieldset>
-
 <!-- Submit -->
 {!! Form::button(trans('admin.find'), ['class' => 'btn btn-the-salmon-dance-3','type'=>'submit']) !!}
 {!! Form::close() !!}

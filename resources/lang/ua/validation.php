@@ -19,7 +19,7 @@ return [
     'after_or_equal'       => 'The :attribute must be a date after or equal to :date.',
     'alpha'                => 'The :attribute may only contain letters.',
     'alpha_dash'           => 'Поле :attribute має містити в собі тільки літери, цифри та знаки "-" чи "_"',
-    'alpha_num'            => 'The :attribute may only contain letters and numbers.',
+    'alpha_num'            => 'Поле :attribute має містити в собі тільки літери та цифри.',
     'array'                => 'The :attribute must be an array.',
     'before'               => 'The :attribute must be a date before :date.',
     'before_or_equal'      => 'The :attribute must be a date before or equal to :date.',

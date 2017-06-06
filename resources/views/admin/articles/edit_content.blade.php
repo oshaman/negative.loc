@@ -144,7 +144,7 @@
                     </li>
                 </ul>
             </fieldset>
-                <!-- Approved -->{{dump($article)}}
+                <!-- Approved -->
                 @if(Auth::user()->canDo('CONFIRMATION_DATA'))
                         <h5><input name="approved" type="checkbox" value="1" {{ $article->approved === 1 ? "checked" : ""}}>{{ trans('admin.approved') }}</h5>
                 @endif

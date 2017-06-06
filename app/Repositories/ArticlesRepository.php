@@ -8,6 +8,7 @@ use File;
 
 use Image;
 use Config;
+use Validator;
 
 class ArticlesRepository extends Repository {
 	
@@ -245,6 +246,50 @@ class ArticlesRepository extends Repository {
 		}
 		
 	}
+    
+    public function selectArticles($request)
+    {
+        $data = $request->only('selection', 'param');
+        
+        switch ($data['selection']) {
+            case 'unapproved':
+                $res = $this->get(['id', 'title', 'description', 'alias', 'img', 'category_id', 'approved'],
+                                    false,
+                                    true,
+                                    ['approved', false],
+                                    ['created_at', 'desc']);
+                return $res;
+            case 'id':
+                $data['param'] = (int)$data['param'];
+                $res = $this->get(['id', 'title', 'description', 'alias', 'img', 'category_id', 'approved'],
+                                    false,
+                                    true,
+                                    ['id', $data['param']],
+                                    ['created_at', 'desc']);
+                return $res;
+            case 'author':
+                if (empty($data['param'])) return false;
+                $data['param'] = \Oshaman\Publication\User::select('id')->where('name', $data['param'])->firstOrFail()->id;
+                dd($data['param']);
+                $res = $this->get(['id', 'title', 'description', 'alias', 'img', 'category_id', 'approved'],
+                                    false,
+                                    true,
+                                    ['user_id', $data['param']],
+                                    ['created_at', 'desc']);
+                return $res;
+            case 'alias':
+                $res = $this->get(['id', 'title', 'description', 'alias', 'img', 'category_id', 'approved'],
+                                    false,
+                                    true,
+                                    ['alias', $data['param']],
+                                    ['created_at', 'desc']);
+                return $res;
+            default:
+                return false;
+        }
+        
+       return false;
+    }
 	
 }
 
