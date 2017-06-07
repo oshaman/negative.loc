@@ -15,6 +15,31 @@
     <div class="inner group">
 <!-- START CONTENT -->
 <div id="content" class="group">
+<!-- Crumbs -->
+    <div id="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <div itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="button">
+            <a href="{{ route('home') }}" itemprop="item">
+                <span itemprop="name" class="label1">{{ trans('ua.home') }}</span>
+                <meta itemprop="position" content="1" />
+                <span class="arrow"><span></span></span>
+            </a>
+        </div>
+        <div itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="button">
+            <a href="{{ url('/news/category') }}" itemprop="item">
+                <span itemprop="name" class="label1">{{ trans('ua.news') }}</span>
+                <meta itemprop="position" content="2" />
+                <span class="arrow"><span></span></span>
+            </a>
+        </div>
+        <div itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="button">
+            <a href="{{ route('cat_alias', $title) }}" itemprop="item">
+                <span itemprop="name" class="label1">{{ $title }}</span>
+                <meta itemprop="position" content="3" />
+                <span class="arrow"><span></span></span>
+            </a>
+        </div>
+    </div>
+<!-- End crumbs -->
 <h2>Negative: <span>{{ $title ?: trans('ua.home') }}</span></h2>
 <div class="border-line"></div>
     @if($content)

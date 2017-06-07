@@ -12,6 +12,22 @@
     <div class="inner group">
 <!-- START CONTENT -->
 <div id="content" class="group">
+<!-- Crumbs -->
+    <div id="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <div itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="button">
+            <a href="{{ route('home') }}" itemprop="item">
+                <span itemprop="name" class="label1">{{ trans('ua.home') }}</span>
+                <meta itemprop="position" content="1" />
+                <span class="arrow"><span></span></span>
+            </a>
+        </div>
+        <div itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="button">
+            <span itemprop="name" class="label1">{{ trans('ua.history') }}</span>
+            <meta itemprop="position" content="2" />
+            <span class="arrow"><span></span></span>
+        </div>
+    </div>
+<!-- End crumbs -->
 <h2>Negative: <span>{{ trans('ua.history') }}</span></h2>
 <div class="border-line"></div>
     <ul id="portfolio">

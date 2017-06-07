@@ -1,18 +1,19 @@
 <div id="page_meta" class="home-section">
     <div class="inner group">
         <div class="meta-left">
-            <div id="crumbs">
-                <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
+            <div id="breadcrumbs">
+                <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="button">
                     <a href="{{ route('home') }}" itemprop="url">
-                        <span itemprop="title">{{ trans('ua.home') }}</span>
+                        <span itemprop="title" class="label1">{{ trans('ua.home') }}</span>
+                        <span class="arrow"><span></span></span>
                     </a>
                 </div>
-                <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="crumb">
+                <div itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="button">
                     <a href="{{ route('contacts') }}" itemprop="url">
-                        <span itemprop="title">{{ trans('ua.contacts') }}</span>
+                        <span itemprop="title" class="label1">{{ trans('ua.contacts') }}</span>
+                        <span class="arrow"><span></span></span>
                     </a>
                 </div>
-                </ul>
             </div>
         </div>
         <div class="meta-right">
@@ -23,6 +24,8 @@
         </div>
     </div>
 </div>
+
+
 
 <div id="primary" class="layout-sidebar-right home-section">
     <div class="inner group">

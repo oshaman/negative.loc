@@ -15,7 +15,36 @@
 <div class="inner group">
     <!-- START CONTENT -->
 <div id="content" class="group">
-    
+    <!-- Crumbs -->
+    <div id="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">
+        <div itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="button">
+            <a href="{{ route('home') }}" itemprop="item">
+                <span itemprop="name" class="label1">{{ trans('ua.home') }}</span>
+                <meta itemprop="position" content="1" />
+                <span class="arrow"><span></span></span>
+            </a>
+        </div>
+        <div itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="button">
+            <a href="{{ url('/news/category') }}" itemprop="item">
+                <span itemprop="name" class="label1">{{ trans('ua.news') }}</span>
+                <meta itemprop="position" content="2" />
+                <span class="arrow"><span></span></span>
+            </a>
+        </div>
+        <div itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="button">
+            <a href="{{ route('cat_alias', $content->category->title) }}" itemprop="item">
+                <span itemprop="name" class="label1">{{ trans('categories.' . $content->category->title) }}</span>
+                <meta itemprop="position" content="3" />
+                <span class="arrow"><span></span></span>
+            </a>
+        </div>
+        <div itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="button">
+            <span itemprop="name" class="label1">{{ str_limit($content->title, 32) }}</span>
+            <meta itemprop="position" content="4" />
+            <span class="arrow"><span></span></span>
+        </div>
+    </div>
+<!-- End crumbs -->
     <div class="clear"></div>
     
     <div class="post hentry-post blog-big">

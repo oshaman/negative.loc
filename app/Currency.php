@@ -46,9 +46,9 @@ class Currency extends Model
                     $data['flag'] = 3;
                 }
                 if($this->updateOrCreate(['cc'=>$old->cc],$data)) {
-                    \Log::info('Currency updated - '. date("d-m-Y H:i:s"));
+                    \Log::info('Currency ' . $old->cc . ' updated - '. date("d-m-Y H:i:s"));
                 } else {
-                    \Log::info('Currency error - '. date("d-m-Y H:i:s"));
+                    \Log::info('Currency ' . $old->cc . ' error - '. date("d-m-Y H:i:s"));
                 }
             }
         }
