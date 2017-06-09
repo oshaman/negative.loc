@@ -43,9 +43,25 @@
 <script src="{{ asset(config('settings.theme')) }}/js/superfish.js"></script>
 <script src="{{ asset(config('settings.theme')) }}/js/buttons.min.js"></script>
 <script src="{{ asset(config('settings.theme')) }}/js/jquery.quicksand.js"></script>
+<!-- G+ -->
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'ua'}
+</script>
+<!-- G+ -->
 </head>
 <!-- BODY -->
 <body class="no_js responsive boxed-layout chrome">
+<!-- facebook-->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.9";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- facebook-->
+
 @yield('topbar')
 <div class="wrapper group">
     @yield('header')
@@ -62,13 +78,13 @@
 <div id="copyright" class="group">
   <div class="inner group">
     <div class="left">
-      <p> Copyright <a href="#">Company Name</a> 2045 - Design by: <a target="_blank" rel="nofollow" href="#"><strong>OShaman</strong></a> </p>
+      <p> Copyright <a href="#">Company Name</a> 2017 - Design by: <a target="_blank" rel="nofollow" href="#"><strong>OShaman</strong></a></p>
     </div>
+    <div class="g-plusone" data-annotation="inline" data-width="300"><a href="#" class="socials google" style="font-size:30px;" title="Google"></a></div>
     <div class="right">
-        <a href="#" class="socials facebook" style="font-size:30px;" title="Facebook">F</a>
-        <a href="#" class="socials twitter" style="font-size:30px;" title="Twitter">L</a>
-        <a href="#" class="socials google" style="font-size:30px;" title="Google">G</a>
-        <a href="#" class="socials linkedin" style="font-size:30px;" title="Linkedin">I</a>
+        <div class="fb-share-button" data-href="http://drop-stat.in.ua" data-layout="button" data-size="small" data-mobile-iframe="true">
+            <a class="socials facebook fb-xfbml-parse-ignore" target="_blank" style="font-size:30px;" title="Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdrop-stat.in.ua%2F&amp;src=sdkpreparse">F</a>
+        </div>
   </div>
 </div>
 <script src="{{ asset(config('settings.theme')) }}/js/jquery.custom.js"></script>
