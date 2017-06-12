@@ -52,6 +52,10 @@
 <!-- BODY -->
 <body class="no_js responsive boxed-layout chrome">
 <!-- facebook-->
+<meta property="og:url"           content="{{ url()->current() }}" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="Negative.In.Ua {{ (isset($title)) ? ' : ' . $title : ''}}" />
+  <meta property="og:description"   content="{{ (isset($meta_desc)) ? $meta_desc : ''}}" />
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -82,8 +86,8 @@
     </div>
     <div class="g-plusone" data-annotation="inline" data-width="300"><a href="#" class="socials google" style="font-size:30px;" title="Google"></a></div>
     <div class="right">
-        <div class="fb-share-button" data-href="http://drop-stat.in.ua" data-layout="button" data-size="small" data-mobile-iframe="true">
-            <a class="socials facebook fb-xfbml-parse-ignore" target="_blank" style="font-size:30px;" title="Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdrop-stat.in.ua%2F&amp;src=sdkpreparse">F</a>
+        <div class="fb-share-button" data-href="{{ url()->current() }}" data-layout="button" data-size="small" data-mobile-iframe="true">
+            <a class="socials facebook fb-xfbml-parse-ignore" target="_blank" style="font-size:30px;" href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}%2F&amp;src=sdkpreparse">F</a>
         </div>
   </div>
 </div>
