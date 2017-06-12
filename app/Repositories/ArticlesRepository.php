@@ -150,6 +150,10 @@ class ArticlesRepository extends Repository {
 			return ['error' => trans('admin.alias_in_use')];
 		}
         
+        if (!empty($data['outputtime'])) {
+            $data['created_at'] = $data['outputtime'];
+        }
+        
         if (empty($data['source'])) {
             $data['source'] = 'www.' . config('app.name');
         }
