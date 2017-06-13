@@ -274,7 +274,6 @@ class ArticlesRepository extends Repository {
             case 'author':
                 if (empty($data['param'])) return false;
                 $data['param'] = \Oshaman\Publication\User::select('id')->where('name', $data['param'])->firstOrFail()->id;
-                dd($data['param']);
                 $res = $this->get(['id', 'title', 'description', 'alias', 'img', 'category_id', 'approved'],
                                     false,
                                     true,

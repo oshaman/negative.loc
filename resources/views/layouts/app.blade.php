@@ -82,7 +82,7 @@
 <div id="copyright" class="group">
   <div class="inner group">
     <div class="left">
-      <p> Copyright <a href="#">Company Name</a> 2017 - Design by: <a target="_blank" rel="nofollow" href="#"><strong>OShaman</strong></a></p>
+      <p> Copyright <a href="#">OShaman</a> 2017 </a></p>
     </div>
     <div class="g-plusone" data-annotation="inline" data-width="300"><a href="#" class="socials google" style="font-size:30px;" title="Google"></a></div>
     <div class="right">
