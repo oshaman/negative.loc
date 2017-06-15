@@ -38,13 +38,13 @@ class ArticleRequest extends FormRequest
         	
         });
         
-        $validator->sometimes('keywords',array('string', 'max:255', 'regex:#^[a-zA-zа-яА-Яї0-9_\,\-\s!\']+$#u'), function($input) {
+        $validator->sometimes('keywords',array('string', 'max:255', 'regex:#^[a-zA-zа-яА-Яїі0-9_\,\-\s!\']+$#u'), function($input) {
         	
         	return !empty($input->keywords);
         	
         });
         
-        $validator->sometimes('meta_desc',array('string', 'max:255', 'regex:#^[a-zA-zа-яА-Яї0-9_\,\-\s!\']+$#u'), function($input) {
+        $validator->sometimes('meta_desc',array('string', 'max:255', 'regex:#^[a-zA-zа-яА-Яїі0-9_\,\-\s!\']+$#u'), function($input) {
         	
         	return !empty($input->meta_desc);
         	

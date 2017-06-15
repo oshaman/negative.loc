@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Oshaman\Publication\Repositories\ArticlesRepository;
 
 use Oshaman\Publication\Category;
+use DB;
 
 class ArticlesController extends MainController
 {
@@ -57,7 +58,7 @@ class ArticlesController extends MainController
             if (!$id) {                
                 abort(404);
             }
-            $where = array(['category_id', $id->id], ['approved', true]);
+            $where = array(['category_id', $id->id], ['approved', true], ['created_at', '<=', DB::raw('NOW()')]);
             
             $this->content_vars = $this->a_rep->get(
                     ['title', 'created_at', 'description', 'img', 'alias', 'source'],
@@ -79,7 +80,7 @@ class ArticlesController extends MainController
         $cats = Category::select('*')->whereNotIn('parent_id', [0])->get();
         
         foreach ($cats as $cat) {
-            $where = array(['category_id', $cat->id], ['approved', true]);
+            $where = array(['category_id', $cat->id], ['approved', true], ['created_at', '<=', DB::raw('NOW()')]);
             
             $this->content_vars[$cat->title] = $this->a_rep->get(['title', 'created_at','alias'], 5, false, $where, ['created_at', 'desc']);
             

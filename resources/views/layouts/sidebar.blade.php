@@ -20,9 +20,14 @@
                         @foreach($rates as $rate)
                         <tr>
                             <td>{{ $rate->cc }}</td>
-                            <td>{{  round($rate->rate*0.99, 2)+0.01 }}</td>
-                            <td>{{  round($rate->rate*1.01, 2)-0.01 }}</td>
-                            <td>{{  round($rate->rate, 2) }}
+                            <td>
+                                {{ $rate->cc !== 'RUB' ? round($rate->rate*0.99+0.01, 2) : round($rate->rate*0.96, 4) }}
+                            </td>
+                            <td>
+                                
+                                {{ $rate->cc !== 'RUB' ? round($rate->rate*1.01+0.01, 2) : round($rate->rate*1.04, 4) }}
+                            </td>
+                            <td>{{  round($rate->rate, 4) }}
                                     @if ($rate->flag == 1) <span class="up">&uArr;
                                     @elseif ($rate->flag == 2) <span class="down">&dArr;
                                     @else <span>&hArr;

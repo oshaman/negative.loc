@@ -3,11 +3,8 @@
         <div class="meta-left">
             <h2 class="page-title">Testimonials</h2>
             <div id="slogan">
-                <h2>Our <span>customer</span> say..</h2>
+                <h2>Our <span>customer</span> say..CAT</h2>
             </div>
-        </div>
-        <div class="meta-right">
-            <p id="crumbs" class="theme_breadcumb"><a class="home" href="#">Home Page</a>  //  <a class="no-link" href="#">Portfolio</a>  //  <a class="no-link current" href="#">Full Description</a></p>
         </div>
     </div>
 </div>
@@ -32,7 +29,6 @@
             </a>
         </div>
         <div itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" class="button">
-            <a href="{{ route('cat_alias', $title) }}" itemprop="item">
                 <span itemprop="name" class="label1">{{ $title }}</span>
                 <meta itemprop="position" content="3" />
                 <span class="arrow"><span></span></span>
@@ -57,7 +53,7 @@
                 <p><a href="{{ route('articles', $article->alias) }}" class="btn btn-retro-package-3 btn-more-link">{{ trans('ua.read_more') }}</a></p>
                 <p class="date-cat">
                     <i class="icon-calendar"></i>{{ date("d-m-Y H:i", strtotime($article->created_at)) }}
-                    <i class="icon-external-link"></i> <span>{{ trans('ua.source') }}: <a href="{{ $article->source }}" class="link">{{ $article->source }}</a></span>
+                    <i class="icon-external-link"></i> <span>{{ trans('ua.source') }}: <a href="http://{{ $article->source }}" class="link" rel="nofollow">{{ $article->source }}</a></span>
                 </p>
             </div>
         </div>

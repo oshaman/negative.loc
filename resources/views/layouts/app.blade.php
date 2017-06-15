@@ -61,7 +61,7 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.9";
+  js.src = "//connect.facebook.net/ua_UA/sdk.js#xfbml=1&version=v2.9";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <!-- facebook-->
@@ -84,10 +84,12 @@
     <div class="left">
       <p> Copyright <a href="#">OShaman</a> 2017 </a></p>
     </div>
-    <div class="g-plusone" data-annotation="inline" data-width="300"><a href="#" class="socials google" style="font-size:30px;" title="Google"></a></div>
     <div class="right">
-        <div class="fb-share-button" data-href="{{ url()->current() }}" data-layout="button" data-size="small" data-mobile-iframe="true">
-            <a class="socials facebook fb-xfbml-parse-ignore" target="_blank" style="font-size:30px;" href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}%2F&amp;src=sdkpreparse">F</a>
+        <div class="fb-share-button" data-href="{{ url()->current() }}" data-layout="button" data-size="large" data-mobile-iframe="true">
+            <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ url()->current() }}%2F&amp;src=sdkpreparse">Share</a>
+        </div>
+        <div class="g-plusone" data-annotation="inline" data-width="300">
+            <a href="#" class="socials google" style="font-size:30px;" title="Google"></a>
         </div>
   </div>
 </div>

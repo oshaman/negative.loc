@@ -25,8 +25,6 @@ class UsersRepository extends Repository {
 			$data['password'] = bcrypt($data['password']);
 		} else { array_forget($data, 'password');}
         
-        // dd($data);
-		
 		$user->fill($data)->update();
 		$user->roles()->sync($data['role_id']);
 		

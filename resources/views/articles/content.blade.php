@@ -3,7 +3,7 @@
         <div class="meta-left">
             <h2 class="page-title">Testimonials</h2>
             <div id="slogan">
-                <h2>Our <span>customer</span> say..</h2>
+                <h2>Our <span>customer</span> say..CONTENT</h2>
             </div>
         </div>
         <div class="meta-right">
@@ -54,7 +54,7 @@
             </p>
             <p class="author">
                 <i class="icon-external-link"></i> <span>{{ trans('ua.source') }}:
-                <a href="{{ $content->source ?: route('home') }}"  class="link">{{ $content->source }}</a></span>
+                <a href="http://{{ $content->source ?: route('home') }}"  class="link" rel="nofollow">{{ $content->source }}</a></span>
             </p>
             <p class="categories">
                 <i class="icon-tags"></i> <span>{{ trans('ua.cat') }}: <a href="{{ route('cat_alias', $content->category->alias) }}" class="cats">{{ trans('categories.' . $content->category->title) }}</a></span>

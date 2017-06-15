@@ -20,7 +20,7 @@
                     <i class="icon-tags"></i>
                     <span>{{ trans('ua.cat') }}: <a href="{{ route('cat_alias', $article->category->title) }}">{{ trans('categories.' .$article->category->title) }}</a></span>
                     <i class="icon-external-link"></i>
-                    <span>{{ trans('ua.source') }}: <a href="http://{{ $article->source }}" class="link">{{ $article->source }}</a></span>
+                    <span>{{ trans('ua.source') }}: <a href="http://{{ $article->source }}" class="link" rel="nofollow">{{ $article->source }}</a></span>
                 </p>
             </div>
         </div>

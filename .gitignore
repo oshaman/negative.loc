@@ -13,3 +13,4 @@ artisan
 readme.md
 server.php
 webpack.mix.js
+/config/trusted_moderators.php
